@@ -1,20 +1,14 @@
-import dialogue from '../data/dialogue';
 import ChoiceButton from '../ChoiceButton';
+import dialogue from '../data/dialogue';
+import images from '../data/images';
+import DialogueText from '../DialogueText';
 
-interface Img {
-  name: string;
-  filename: string;
-}
-const images: Img[] = [
-  { name: 'room', filename: 'blank-room.png' },
-];
-
-const choiceTextYStart = 325;
-const choiceTextHeight = 35;
+const choiceTextYStart = 75; // relative to mainText
+const choiceTextHeight = 30;
 
 export class MainScene extends Phaser.Scene {
   private dialogueIndex = 0;
-  private mainText: Phaser.GameObjects.Text;
+  private mainText: DialogueText;
   private choiceTexts: ChoiceButton[] = [];
   private bg: Phaser.GameObjects.Image;
 
@@ -31,16 +25,23 @@ export class MainScene extends Phaser.Scene {
   }
 
   create(): void {
-    this.mainText = this.add.text(400, 200, '', {
-      align: 'center',
-      fontSize: '30px',
+    this.mainText = new DialogueText(this, '');
+
+    // TODO NOTE hardcoded limit of 3 choices
+    const textStyle = {
+      fontSize: '20px',
       stroke: 'black',
       fill: 'white',
-      strokeThickness: 3,
-      wordWrap: {
-        width: +this.game.config.width - 75,
-      },
-    });
+      strokeThickness: 2,
+    };
+    for (let i = 3; i >= 0; i--) {
+      const choiceWidth = 350;
+      const x = +this.game.config.width - (choiceWidth / 2);
+      const y = this.mainText.y - (choiceTextHeight * i) - (this.mainText.height / 2);
+      const choice = new ChoiceButton(this, x, y, '', choiceWidth, textStyle);
+      choice.setVisible(false);
+      this.choiceTexts.push(choice);
+    }
 
     this.bg = this.add.image(0, 0, '');
     this.bg.depth = -1;
@@ -53,32 +54,25 @@ export class MainScene extends Phaser.Scene {
 
     // draw main text
     this.mainText.text = d.text;
-    this.mainText.x = (+this.game.config.width / 2) - (this.mainText.width / 2);
 
     // draw choices
     for (let i = 0; i < d.choices.length; i++) {
-      if (!this.choiceTexts[i]) {
-        const x = 400;
-        const y = choiceTextYStart + (i * choiceTextHeight);
-        const style = {
-          fontSize: '20px',
-          stroke: 'black',
-          fill: 'white',
-          strokeThickness: 2,
-        };
+      // if (!this.choiceTexts[i]) {
+      //   const x = 400;
+      //   const y = (this.mainText.y + choiceTextYStart) + (i * choiceTextHeight);
 
-        this.choiceTexts[i] = new ChoiceButton(this, x, y, '', 450, style);
-        this.add.existing(this.choiceTexts[i]);
-      }
-
+      //   this.choiceTexts[i] = new ChoiceButton(this, x, y, '', 450, style);
+      // }
       this.choiceTexts[i].text = d.choices[i].text;
-      this.choiceTexts[i].x = +this.game.config.width / 2;
+      // this.choiceTexts[i].x = +this.game.config.width / 2;
 
       this.choiceTexts[i].onClick(() => {
         this.dialogueIndex = d.choices[i].targetDialogueIndex;
         this.reset();
         this.drawDialogue();
       });
+
+      this.choiceTexts[i].setVisible(true);
     }
 
     // draw background image
@@ -93,8 +87,7 @@ export class MainScene extends Phaser.Scene {
   reset() {
     this.mainText.text = '';
     for (const c of this.choiceTexts) {
-      c.destroy();
+      c.setVisible(false);
     }
-    this.choiceTexts.length = 0;
   }
 }

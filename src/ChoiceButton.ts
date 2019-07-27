@@ -14,6 +14,7 @@ export default class ChoiceButton extends Phaser.GameObjects.Container {
 		textStyle: Phaser.Types.GameObjects.Text.TextSyle
 	) {
 		super(scene, x, y);
+		scene.add.existing(this);
 
 		textStyle.align = 'center';
 		textStyle.wordWrap = {
@@ -25,10 +26,9 @@ export default class ChoiceButton extends Phaser.GameObjects.Container {
 
 		this.rectObject = new Phaser.GameObjects.Rectangle(scene, 0, 0, targetWidth, 0, 0xffffff);
 		this.textObject = new Phaser.GameObjects.Text(scene, 0, 0, this.textStr, textStyle);
-		this.add(this.rectObject);
-		this.add(this.textObject);
+		this.add([this.rectObject, this.textObject]);
 
-		this.rectObject.fillColor = 0xffffff;
+		this.rectObject.fillColor = 0x000000;
 
 		this.resize();
 
@@ -38,10 +38,10 @@ export default class ChoiceButton extends Phaser.GameObjects.Container {
 			this.onClickListener();
 		});
 		this.rectObject.addListener('pointerover', () => {
-			this.rectObject.fillColor = 0xdddddd;
+			this.rectObject.fillColor = 0x3f3f3f;
 		});
 		this.rectObject.addListener('pointerout', () => {
-			this.rectObject.fillColor = 0xffffff;
+			this.rectObject.fillColor = 0x000000;
 		});
 	}
 
