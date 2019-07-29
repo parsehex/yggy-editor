@@ -1,16 +1,15 @@
-import ChoiceButton from '../ChoiceButton';
 import dialogue from '../data/dialogue';
 import images from '../data/images';
-import DialogueText from '../DialogueText';
-
-const choiceTextYStart = 75; // relative to mainText
-const choiceTextHeight = 30;
+import DialogueText from '../components/DialogueText';
+import ChoicesManager from '../components/ChoicesManager';
+import characters from '../data/characters';
 
 export class MainScene extends Phaser.Scene {
   private dialogueIndex = 0;
   private mainText: DialogueText;
-  private choiceTexts: ChoiceButton[] = [];
   private bg: Phaser.GameObjects.Image;
+  private choices: ChoicesManager;
+  private char: Phaser.GameObjects.Image;
 
   constructor() {
     super({
@@ -19,32 +18,28 @@ export class MainScene extends Phaser.Scene {
   }
 
   preload(): void {
+    // load scene images
     for (const img of images) {
       this.load.image(img.name, `./assets/images/${img.filename}`);
+    }
+
+    // load character images
+    for (const ch of characters) {
+      this.load.image(ch.name, `./assets/images/${ch.imageFilename}`);
     }
   }
 
   create(): void {
-    this.mainText = new DialogueText(this, '');
+    this.mainText = new DialogueText(this);
 
-    // TODO NOTE hardcoded limit of 3 choices
-    const textStyle = {
-      fontSize: '20px',
-      stroke: 'black',
-      fill: 'white',
-      strokeThickness: 2,
-    };
-    for (let i = 3; i >= 0; i--) {
-      const choiceWidth = 350;
-      const x = +this.game.config.width - (choiceWidth / 2);
-      const y = this.mainText.y - (choiceTextHeight * i) - (this.mainText.height / 2);
-      const choice = new ChoiceButton(this, x, y, '', choiceWidth, textStyle);
-      choice.setVisible(false);
-      this.choiceTexts.push(choice);
-    }
+    const baseX = this.game.canvas.width - (350 / 2);
+    const baseY = this.mainText.y - (this.mainText.height / 2);
+    this.choices = new ChoicesManager(this, baseX, baseY);
 
     this.bg = this.add.image(0, 0, '');
-    this.bg.depth = -1;
+    this.char = this.add.image(0, 0, '');
+    this.bg.depth = -2;
+    this.char.depth = -1;
 
     this.drawDialogue();
   }
@@ -54,40 +49,41 @@ export class MainScene extends Phaser.Scene {
 
     // draw main text
     this.mainText.text = d.text;
+    this.mainText.setCharacter(d.character);
+
+    // draw character image
+    this.char.setTexture(d.character);
+
+    const charWidth = this.game.canvas.height * this.char.displayWidth / this.char.displayHeight;
+    this.char.displayHeight = this.game.canvas.height;
+    this.char.displayWidth = charWidth;
+    this.char.y = this.char.displayHeight / 2;
+    this.char.x = this.char.displayWidth / 2;
 
     // draw choices
     for (let i = 0; i < d.choices.length; i++) {
-      // if (!this.choiceTexts[i]) {
-      //   const x = 400;
-      //   const y = (this.mainText.y + choiceTextYStart) + (i * choiceTextHeight);
-
-      //   this.choiceTexts[i] = new ChoiceButton(this, x, y, '', 450, style);
-      // }
-      this.choiceTexts[i].text = d.choices[i].text;
-      // this.choiceTexts[i].x = +this.game.config.width / 2;
-
-      this.choiceTexts[i].onClick(() => {
+      this.choices.addChoice(d.choices[i].text, () => {
         this.dialogueIndex = d.choices[i].targetDialogueIndex;
+        if (!dialogue[this.dialogueIndex]) {
+          throw new Error('Choice leads to non-existent dialogue');
+        }
+
         this.reset();
         this.drawDialogue();
       });
-
-      this.choiceTexts[i].setVisible(true);
     }
 
     // draw background image
     if (d.image) {
       this.bg.setTexture(d.image);
-      this.bg.setDisplaySize(+this.game.config.width, +this.game.config.height);
-      this.bg.x = +this.game.config.width / 2;
-      this.bg.y = +this.game.config.height / 2;
+      this.bg.setDisplaySize(this.game.canvas.width, this.game.canvas.height);
+      this.bg.x = this.game.canvas.width / 2;
+      this.bg.y = this.game.canvas.height / 2;
     }
   }
 
   reset() {
     this.mainText.text = '';
-    for (const c of this.choiceTexts) {
-      c.setVisible(false);
-    }
+    this.choices.clearChoices();
   }
 }

@@ -1,9 +1,11 @@
 dependencies:
   phaser: 3.18.1
 devDependencies:
+  '@types/jquery': 3.3.30
   awesome-typescript-loader: 5.2.1_typescript@3.5.2
   expose-loader: 0.7.5_webpack@4.35.2
   http-server: 0.11.1
+  jointjs: 3.0.3
   ts-loader: 6.0.4_typescript@3.5.2
   typescript: 3.5.2
   webpack: 4.35.2_webpack@4.35.2
@@ -30,6 +32,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-1Bh06cbWJUHMC97acuD6UMG29nMt0Aqz1vF3guLfG+kHHJhy3AyohZFFxYk2f7Q1SQIrNwvncxAE0N/9s70F2w==
+  /@types/jquery/3.3.30:
+    dependencies:
+      '@types/sizzle': 2.3.2
+    dev: true
+    resolution:
+      integrity: sha512-chB+QbLulamShZAFcTJtl8opZwHFBpDOP6nRLrPGkhC6N1aKWrDXg2Nc71tEg6ny6E8SQpRwbWSi9GdstH5VJA==
   /@types/minimatch/3.0.3:
     dev: true
     resolution:
@@ -38,6 +46,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-aX+gFgA5GHcDi89KG5keey2zf0WfZk/HAQotEamsK2kbey+8yGKcson0hbK8E+v0NArlCJQCqMP161YhV6ZXLg==
+  /@types/sizzle/2.3.2:
+    dev: true
+    resolution:
+      integrity: sha512-7EJYyKTL7tFR8+gDbB6Wwz/arpGa0Mywk1TJbNzKzHtzbwVmY4HR9WqS5VV7dsBUKQmPNr192jHr/VpBluj/hg==
   /@webassemblyjs/ast/1.8.5:
     dependencies:
       '@webassemblyjs/helper-module-context': 1.8.5
@@ -377,6 +389,12 @@ packages:
       typescript: ^2.7 || ^3
     resolution:
       integrity: sha512-slv66OAJB8orL+UUaTI3pKlLorwIvS4ARZzYR9iJJyGsEgOqueMfOMdKySWzZ73vIkEe3fcwFgsKMg4d8zyb1g==
+  /backbone/1.4.0:
+    dependencies:
+      underscore: 1.9.1
+    dev: true
+    resolution:
+      integrity: sha512-RLmDrRXkVdouTg38jcgHhyQ/2zjg7a8E6sz2zxfz21Hh17xDJYUHBZimVIt5fUyS8vbfpeSmTL3gUjTEvUV3qQ==
   /balanced-match/1.0.0:
     dev: true
     resolution:
@@ -909,6 +927,13 @@ packages:
     dev: true
     resolution:
       integrity: sha512-m62ShEObQ39CfralilEQRjH6oAMtNCV1xJyEx5LpRYUVN+EviphDgUc/F3hnYbADmkiNs67Y+3ylmlG7Lnu+FA==
+  /dagre/0.8.4:
+    dependencies:
+      graphlib: 2.1.7
+      lodash: 4.17.15
+    dev: true
+    resolution:
+      integrity: sha512-Dj0csFDrWYKdavwROb9FccHfTC4fJbyF/oJdL9LNZJ8WUvl968P6PAKEriGqfbdArVJEmmfA+UyumgWEwcHU6A==
   /date-now/0.1.4:
     dev: true
     resolution:
@@ -1623,6 +1648,12 @@ packages:
   /graceful-fs/4.2.0:
     resolution:
       integrity: sha512-jpSvDPV4Cq/bgtpndIWbI5hmYxhQGHPC4d4cqBPb4DLniCfhJokdXhwhaDuLBGLQdvvRum/UiX6ECVIPvDXqdg==
+  /graphlib/2.1.7:
+    dependencies:
+      lodash: 4.17.15
+    dev: true
+    resolution:
+      integrity: sha512-TyI9jIy2J4j0qgPmOOrHTCtpPqJGN/aurBwc6ZT+bRii+di1I+Wv3obRhVrmBEXet+qkMaEX67dXrwsd3QQM6w==
   /handle-thing/2.0.0:
     dev: true
     resolution:
@@ -2112,6 +2143,20 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
+  /jointjs/3.0.3:
+    dependencies:
+      backbone: 1.4.0
+      dagre: 0.8.4
+      graphlib: 2.1.7
+      jquery: 3.4.1
+      lodash: 4.17.15
+    dev: true
+    resolution:
+      integrity: sha512-T9qs2SwcSBXhVjj1+j5f7QHg8f6uDddrx9yDYEgGODpJ0Z4y7VPeIuCNcpITzwcTLNWkJUMjxe7xsvA/6YKO5g==
+  /jquery/3.4.1:
+    dev: true
+    resolution:
+      integrity: sha512-36+AdBzCL+y6qjw5Tx7HgzeGCzC81MDDgaUP8ld2zhx58HdqXGoBd+tHdrBMiyjGQs0Hxs/MLZTu/eHNJJuWPw==
   /js2xmlparser/4.0.0:
     dependencies:
       xmlcreate: 2.0.1
@@ -3812,7 +3857,6 @@ packages:
     resolution:
       integrity: sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA==
   /underscore/1.9.1:
-    dev: false
     resolution:
       integrity: sha512-5/4etnCkd9c8gwgowi5/om/mYO5ajCaOgdzj/oW+0eQV9WxKBDZw5+ycmKmeaTXjInS/W0BzpGLo2xR2aBwZdg==
   /union-value/1.0.1:
@@ -4229,9 +4273,11 @@ packages:
     resolution:
       integrity: sha512-HG/DWAJa1PAnHT9JAhNa8AbAv3FPaiLzioSjCcmuXXhP8MlpHO5vwls4g4j6n30Z74GVQj8Xa62dWVx1QCGklg==
 specifiers:
+  '@types/jquery': ^3.3.30
   awesome-typescript-loader: ^5.2.1
   expose-loader: 0.7.5
   http-server: ^0.11.1
+  jointjs: ^3.0.3
   phaser: 3.18.1
   ts-loader: 6.0.4
   typescript: 3.5.2

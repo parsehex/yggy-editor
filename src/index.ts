@@ -5,7 +5,13 @@ const config: Phaser.Types.Core.GameConfig = {
   height: 600,
   type: Phaser.AUTO,
   parent: 'game',
+  scale: {
+    mode: Phaser.Scale.RESIZE,
+  },
   scene: MainScene,
+  render: {
+    roundPixels: true,
+  },
 };
 
 export class Game extends Phaser.Game {

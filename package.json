@@ -18,9 +18,11 @@
     "Phaser3-example"
   ],
   "devDependencies": {
+    "@types/jquery": "^3.3.30",
     "awesome-typescript-loader": "^5.2.1",
     "expose-loader": "0.7.5",
     "http-server": "^0.11.1",
+    "jointjs": "^3.0.3",
     "ts-loader": "6.0.4",
     "typescript": "3.5.2",
     "webpack": "4.35.2",
@@ -33,7 +35,9 @@
   "scripts": {
     "dev": "webpack --mode development -w",
     "build": "webpack --mode production",
-    "server": "http-server . -c-1"
+    "test": "echo \"Starting test server...\" && http-server . -p 8081 -c-1",
+    "game": "echo \"Starting game server...\" && http-server . -p 8080 -c-1",
+    "editor": "echo \"Starting editor server...\" && http-server ./editor -p 8082 -c-1"
   },
   "repository": {
     "type": "git",

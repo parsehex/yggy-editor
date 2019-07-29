@@ -1,13 +1,11 @@
-body {
+html, body {
 	font-size: 10px;
 	color: black;
 	background-color: #ffffff;
+	margin: 0;
+	width: 100%;
 }
-body div.container {
+div#game {
 	text-align: center;
-}
-body div.container div#game {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+	width: 100%;
 }
