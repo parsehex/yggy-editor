@@ -1,13 +1,12 @@
-import characters from './data/characters';
-import images from './data/images';
+import data from './data';
 
 export function lookupImage(imgName: string) {
-	for (const i of images) {
+	for (const i of data.images) {
 		if (i.name === imgName) return i;
 	}
 }
 export function lookupCharacter(char: string) {
-	for (const c of characters) {
+	for (const c of data.characters) {
 		if (c.name === char) return c;
 	}
 }

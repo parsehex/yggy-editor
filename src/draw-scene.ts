@@ -1,12 +1,11 @@
-import dialogue from './data/dialogue';
 import state from './state';
 import { lookupImage, lookupCharacter } from './lookup';
-import choices from './data/choices';
 import elements from './elements';
+import data from './data';
 
 /** Draws the curent dialogue */
 export default function drawScene() {
-	const d = dialogue[state.currentDialogueIndex];
+	const d = data.dialogue[state.currentDialogueIndex];
 
 	if (d.image) {
 		const img = lookupImage(d.image);
@@ -23,7 +22,7 @@ export default function drawScene() {
 	resetChoices();
 	for (let i = 0; i < d.choices.length; i++) {
 		const choiceIndex = d.choices[i];
-		const c = choices[choiceIndex];
+		const c = data.choices[choiceIndex];
 		addChoice(c.text, choiceIndex);
 	}
 }

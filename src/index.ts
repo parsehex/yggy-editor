@@ -2,11 +2,13 @@ import './events';
 import state from './state';
 import drawScene from './draw-scene';
 import { initElements } from './elements';
+import { loadData } from './data';
 
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
   // draw the game
-  state.currentDialogueIndex = 0;
+  await loadData();
 
+  state.currentDialogueIndex = 0;
   initElements();
 
   drawScene();
