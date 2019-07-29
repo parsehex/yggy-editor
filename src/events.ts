@@ -1,12 +1,14 @@
 import delegate from './delegate';
 import state from './state';
 import drawScene from './draw-scene';
-import data from './data';
+import lookup from './lookup';
 
-delegate('div#choices button.choice', 'click', (e) => {
-	const target = <HTMLElement>e.target;
-	const choiceIndex = +target.dataset.index;
-	const choice = data.choices[choiceIndex];
-	state.currentDialogueIndex = choice.targetDialogueIndex;
-	drawScene();
-});
+export function initEvents() {
+	delegate('div#choices button.choice', 'click', (e) => {
+		const target = <HTMLElement>e.target;
+		const choiceID = +target.dataset.id;
+		const choice = lookup.choice(choiceID);
+		state.currentDialogueID = choice.targetDialogueID;
+		drawScene();
+	});
+}

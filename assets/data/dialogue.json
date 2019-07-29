@@ -1,7 +1,8 @@
 [
 	{
-		"character": "Green Man",
-		"image": "room",
+		"id": 0,
+		"characterID": 0,
+		"imageID": 0,
 		"text": "Hi, how are you?",
 		"choices": [
 			0,
@@ -11,12 +12,14 @@
 		]
 	},
 	{
-		"character": "Green Man",
+		"id": 1,
+		"characterID": 0,
 		"text": "I don't really have anything else to say to you.",
 		"choices": []
 	},
 	{
-		"character": "Green Man",
+		"id": 2,
+		"characterID": 0,
 		"text": "What does \"ambivalent\" mean?",
 		"choices": [
 			4,
@@ -24,7 +27,8 @@
 		]
 	},
 	{
-		"character": "Green Man",
+		"id": 3,
+		"characterID": 0,
 		"text": "Huh.",
 		"choices": []
 	}

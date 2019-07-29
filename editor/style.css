@@ -13,4 +13,22 @@ iframe {
 	width: 50%;
 	height: 99%;
 	border: 0;
+	/* display: inline-block; */
+	float: left;
+}
+
+#editor {
+	/* display: inline-block; */
+	float: left;
+	width: 50%;
+	padding: 3px;
+}
+#dialogue {
+	display: block;
+}
+#choices {
+	margin-top: 10px;
+}
+#choices > div {
+	margin: 0;
 }

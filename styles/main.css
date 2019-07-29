@@ -60,7 +60,7 @@ div#dialogue-box #character-name {
 	margin-bottom: 2px;
 }
 div#dialogue-box .text {
-	font-size: 2em;
+	font-size: 1.8em;
 }
 div#choices {
 	display: flex;

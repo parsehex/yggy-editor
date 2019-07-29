@@ -1,5 +1,6 @@
 [
 	{
+		"id": 0,
 		"name": "room",
 		"filename": "blank-room.png",
 		"bgColor": "#7b7b7b"

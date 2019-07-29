@@ -1,8 +1,8 @@
 interface State {
-	currentDialogueIndex: number;
+	currentDialogueID: number;
 }
 
 const state: State = {
-	currentDialogueIndex: null,
+	currentDialogueID: null,
 };
 export default state;

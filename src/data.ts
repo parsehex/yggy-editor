@@ -1,4 +1,4 @@
-import { Dialogue, Img, DialogueChoice, Character } from '../types';
+import { Dialogue, Img, DialogueChoice, Character } from './types';
 
 interface Data {
 	dialogue: Dialogue[];

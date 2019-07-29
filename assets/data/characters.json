@@ -1,9 +1,11 @@
 [
 	{
+		"id": 0,
 		"name": "Green Man",
 		"imageFilename": "green-man.png"
 	},
 	{
+		"id": 1,
 		"name": "Red Man",
 		"imageFilename": "red-man.png"
 	}

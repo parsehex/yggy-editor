@@ -1,5 +1,3 @@
-import elements from './elements';
-
 type EventType = 'click' | 'input' | 'change' |
 	'contextmenu' | 'keyup' | 'focusout' |
 	'mouseover' | 'mousemove' | 'mouseout';
@@ -14,7 +12,7 @@ const listeners: Listener[] = [];
 
 let setup = false;
 
-export default function delegate(
+export default function _editorDelegate(
 	selector: string,
 	eventNames: EventType | EventType[],
 	handler: Listener['handler']
@@ -29,15 +27,15 @@ export default function delegate(
 }
 
 function init() {
-	elements.doc.body.addEventListener('click', eventHandler.bind(null, 'click'));
-	elements.doc.body.addEventListener('input', eventHandler.bind(null, 'input'));
-	elements.doc.body.addEventListener('change', eventHandler.bind(null, 'change'));
-	elements.doc.body.addEventListener('contextmenu', eventHandler.bind(null, 'contextmenu'));
-	elements.doc.body.addEventListener('keyup', eventHandler.bind(null, 'keyup'));
-	elements.doc.body.addEventListener('focusout', eventHandler.bind(null, 'focusout'));
-	elements.doc.body.addEventListener('mouseover', eventHandler.bind(null, 'mouseover'));
-	elements.doc.body.addEventListener('mousemove', eventHandler.bind(null, 'mousemove'));
-	elements.doc.body.addEventListener('mouseout', eventHandler.bind(null, 'mouseout'));
+	document.body.addEventListener('click', eventHandler.bind(null, 'click'));
+	document.body.addEventListener('input', eventHandler.bind(null, 'input'));
+	document.body.addEventListener('change', eventHandler.bind(null, 'change'));
+	document.body.addEventListener('contextmenu', eventHandler.bind(null, 'contextmenu'));
+	document.body.addEventListener('keyup', eventHandler.bind(null, 'keyup'));
+	document.body.addEventListener('focusout', eventHandler.bind(null, 'focusout'));
+	document.body.addEventListener('mouseover', eventHandler.bind(null, 'mouseover'));
+	document.body.addEventListener('mousemove', eventHandler.bind(null, 'mousemove'));
+	document.body.addEventListener('mouseout', eventHandler.bind(null, 'mouseout'));
 }
 
 function eventHandler(type: Listener['eventName'], e: Event) {
@@ -49,4 +47,6 @@ function eventHandler(type: Listener['eventName'], e: Event) {
 
 		listener.handler(e, target);
 	}
+
+	e.stopImmediatePropagation();
 }

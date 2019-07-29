@@ -8,8 +8,7 @@ interface Elements {
 }
 
 const elements: Elements = {
-	// this is to make it easier for the editor to hook in
-	doc: document,
+	doc: null,
 	bg: null,
 	charName: null,
 	charImg: null,
@@ -20,6 +19,11 @@ const elements: Elements = {
 export default elements;
 
 export function initElements() {
+	// if there is an iframe on the page then this must be the editor
+	// this is to make it easier for the editor to hook in
+	const iframe = document.querySelector('iframe');
+	elements.doc = iframe ? iframe.contentDocument : document;
+
 	elements.bg = <HTMLDivElement>elements.doc.getElementById('background');
 	elements.charName = <HTMLDivElement>elements.doc.getElementById('character-name');
 	elements.charImg = <HTMLDivElement>elements.doc.getElementById('character');

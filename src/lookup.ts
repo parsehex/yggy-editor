@@ -1,12 +1,24 @@
 import data from './data';
 
-export function lookupImage(imgName: string) {
+function dialogue(id: number) {
+	for (const d of data.dialogue) {
+		if (d.id === id) return d;
+	}
+}
+function choice(id: number) {
+	for (const c of data.choices) {
+		if (c.id === id) return c;
+	}
+}
+function image(id: number) {
 	for (const i of data.images) {
-		if (i.name === imgName) return i;
+		if (i.id === id) return i;
 	}
 }
-export function lookupCharacter(char: string) {
+function character(id: number) {
 	for (const c of data.characters) {
-		if (c.name === char) return c;
+		if (c.id === id) return c;
 	}
 }
+
+export default { dialogue, choice, image, character };
