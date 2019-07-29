@@ -6,5 +6,15 @@ export interface Dialogue {
 	text: string;
 	image?: string;
 	character: string;
-	choices: DialogueChoice[];
+	/** Array of choice indices */
+	choices: number[];
+}
+export interface Character {
+	name: string;
+	imageFilename: string;
+}
+export interface Img {
+	name: string;
+	filename: string;
+	bgColor: string;
 }

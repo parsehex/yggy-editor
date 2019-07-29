@@ -33,11 +33,12 @@
     "phaser": "3.18.1"
   },
   "scripts": {
-    "dev": "webpack --mode development -w",
-    "build": "webpack --mode production",
+    "dev-editor": "webpack --mode development -w --script editor",
+    "dev-game": "webpack --mode development -w --script game",
+    "build": "webpack --mode production --script game",
     "test": "echo \"Starting test server...\" && http-server . -p 8081 -c-1",
     "game": "echo \"Starting game server...\" && http-server . -p 8080 -c-1",
-    "editor": "echo \"Starting editor server...\" && http-server ./editor -p 8082 -c-1"
+    "editor": "echo \"Starting editor server...\" && http-server ./editor -p 8080 -c-1"
   },
   "repository": {
     "type": "git",

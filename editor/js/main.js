@@ -86,18 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./editor/src/buttons.ts":
-/*!*******************************!*\
-  !*** ./editor/src/buttons.ts ***!
-  \*******************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst objects_1 = __webpack_require__(/*! ./objects */ \"./editor/src/objects.ts\");\nconst state_1 = __webpack_require__(/*! ./state */ \"./editor/src/state.ts\");\ndocument.getElementById('dialogue').addEventListener('click', () => {\n    const d = {\n        text: 'Dialogue text',\n        node: null,\n        choices: [],\n    };\n    objects_1.addDialogue(d);\n    state_1.default.dialogue.push(d);\n});\ndocument.getElementById('choice').addEventListener('click', () => {\n    const c = {\n        text: 'Choice text',\n        node: null,\n        nextDialogue: null,\n    };\n    objects_1.addChoice(c);\n    state_1.default.choices.push(c);\n});\n\n\n//# sourceURL=webpack:///./editor/src/buttons.ts?");
-
-/***/ }),
-
 /***/ "./editor/src/index.ts":
 /*!*****************************!*\
   !*** ./editor/src/index.ts ***!
@@ -106,31 +94,103 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\n__webpack_require__(/*! ./buttons */ \"./editor/src/buttons.ts\");\nconst state_1 = __webpack_require__(/*! ./state */ \"./editor/src/state.ts\");\nconst objects_1 = __webpack_require__(/*! ./objects */ \"./editor/src/objects.ts\");\nconst paper = new joint.dia.Paper({\n    // @ts-ignore\n    el: document.getElementById('paper'),\n    width: 850,\n    height: 600,\n    model: state_1.default.graph,\n    gridSize: 1,\n    snapLinks: true,\n    linkPinning: false,\n    embeddingMode: true,\n    clickThreshold: 5,\n    defaultConnectionPoint: { name: 'boundary' },\n    validateConnection: function (sourceView, sourceMagnet, targetView, targetMagnet) {\n        return sourceMagnet != targetMagnet;\n    }\n});\npaper.on('cell:pointerdown', console.log);\nconsole.log(state_1.default.graph);\nconst d = state_1.default.dialogue;\nfor (const dia of d) {\n    objects_1.addDialogue(dia);\n}\nconst c = state_1.default.choices;\nfor (const ch of c) {\n    objects_1.addChoice(ch);\n}\nvar l1 = new joint.shapes.standard.Link({\n    // source: { id: a.id },\n    // target: { id: b.id },\n    attrs: {\n        line: {\n            strokeWidth: 2,\n        },\n    },\n    labels: [{\n            position: {\n                distance: 0.5,\n                offset: ('test'.indexOf('\\n') > -1 || 'test'.length === 1) ? 0 : 10,\n                args: {\n                    keepGradient: true,\n                    ensureLegibility: true\n                },\n            },\n            attrs: {\n                text: { text: 'test' },\n            },\n        }],\n    vertices: [],\n});\n// state.graph.addCells([a, b, c, l1, l2]);\n\n\n//# sourceURL=webpack:///./editor/src/index.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst state_1 = __webpack_require__(/*! ../../src/state */ \"./src/state.ts\");\nconst elements_1 = __webpack_require__(/*! ../../src/elements */ \"./src/elements.ts\");\nconst draw_scene_1 = __webpack_require__(/*! ../../src/draw-scene */ \"./src/draw-scene.ts\");\nwindow.addEventListener('load', () => {\n    state_1.default.currentDialogueIndex = 0;\n    // hook up the elements to the elements within the iframe\n    elements_1.default.doc = document.querySelector('iframe').contentDocument;\n    elements_1.initElements();\n    draw_scene_1.default();\n});\n\n\n//# sourceURL=webpack:///./editor/src/index.ts?");
 
 /***/ }),
 
-/***/ "./editor/src/objects.ts":
-/*!*******************************!*\
-  !*** ./editor/src/objects.ts ***!
-  \*******************************/
+/***/ "./src/data/characters.ts":
+/*!********************************!*\
+  !*** ./src/data/characters.ts ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst state_1 = __webpack_require__(/*! ./state */ \"./editor/src/state.ts\");\nfunction lowestObjectY() {\n    let lowestY = null;\n    for (const o of state_1.default.objects) {\n        // if (lowestY === null) lowestY = o.position.x;\n    }\n}\nfunction addDialogue(d) {\n    for (const o of state_1.default.objects) {\n        // \n    }\n    const a = new joint.shapes.devs.Atomic({\n        position: { x: 50, y: 50 },\n        size: { width: 100, height: 40 },\n        inPorts: ['in'],\n        outPorts: ['out'],\n        attrs: { \".label\": { text: d.text } },\n    });\n    d.node = a;\n    state_1.default.graph.addCells([a]);\n    state_1.default.objects.push(a);\n}\nexports.addDialogue = addDialogue;\nfunction addChoice(c) {\n    const a = new joint.shapes.devs.Atomic({\n        position: { x: 250, y: 50 },\n        size: { width: 100, height: 40 },\n        inPorts: ['in'],\n        outPorts: ['out'],\n        attrs: { \".label\": { text: c.text } },\n    });\n    c.node = a;\n    state_1.default.graph.addCells([a]);\n    state_1.default.objects.push(a);\n}\nexports.addChoice = addChoice;\n\n\n//# sourceURL=webpack:///./editor/src/objects.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst characters = [\n    { name: 'Green Man', imageFilename: 'green-man.png' },\n    { name: 'Red Man', imageFilename: 'red-man.png' },\n];\nexports.default = characters;\n\n\n//# sourceURL=webpack:///./src/data/characters.ts?");
 
 /***/ }),
 
-/***/ "./editor/src/state.ts":
+/***/ "./src/data/choices.ts":
 /*!*****************************!*\
-  !*** ./editor/src/state.ts ***!
+  !*** ./src/data/choices.ts ***!
   \*****************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst dialogue = [\n    {\n        text: 'Hi',\n        choices: [0],\n        node: null,\n    },\n];\nconst choices = [\n    {\n        text: 'no',\n        nextDialogue: null,\n        node: null,\n    },\n    {\n        text: 'yes',\n        nextDialogue: null,\n        node: null,\n    },\n];\nconst graph = new joint.dia.Graph();\nconst objects = [];\nexports.default = {\n    dialogue,\n    choices,\n    graph,\n    objects,\n    adding: false,\n    addingType: null,\n};\n\n\n//# sourceURL=webpack:///./editor/src/state.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst choices = [\n    { text: \"Fine...\", targetDialogueIndex: 1 },\n    { text: \"I'm doing fantastic!\", targetDialogueIndex: 1 },\n    { text: \"I can't remember anything. I woke up today naked.\", targetDialogueIndex: 1 },\n    { text: \"I am ambivalent.\", targetDialogueIndex: 2 },\n    { text: \"I don't know.\", targetDialogueIndex: 0 },\n    { text: \"It means not having any strong feelings one way or another.\", targetDialogueIndex: 3 },\n];\nexports.default = choices;\n\n\n//# sourceURL=webpack:///./src/data/choices.ts?");
+
+/***/ }),
+
+/***/ "./src/data/dialogue.ts":
+/*!******************************!*\
+  !*** ./src/data/dialogue.ts ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst dialogue = [\n    {\n        character: 'Green Man',\n        image: 'room',\n        text: \"Hi, how are you?\",\n        choices: [\n            0,\n            1,\n            2,\n            3,\n        ],\n    },\n    {\n        character: 'Green Man',\n        text: \"I don't really have anything else to say to you.\",\n        choices: [],\n    },\n    {\n        character: 'Green Man',\n        text: \"What does \\\"ambivalent\\\" mean?\",\n        choices: [\n            4,\n            5,\n        ],\n    },\n    {\n        character: 'Green Man',\n        text: \"Huh.\",\n        choices: [],\n    },\n];\nexports.default = dialogue;\n\n\n//# sourceURL=webpack:///./src/data/dialogue.ts?");
+
+/***/ }),
+
+/***/ "./src/data/images.ts":
+/*!****************************!*\
+  !*** ./src/data/images.ts ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst images = [\n    { name: 'room', filename: 'blank-room.png', bgColor: '#7b7b7b' },\n];\nexports.default = images;\n\n\n//# sourceURL=webpack:///./src/data/images.ts?");
+
+/***/ }),
+
+/***/ "./src/draw-scene.ts":
+/*!***************************!*\
+  !*** ./src/draw-scene.ts ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst dialogue_1 = __webpack_require__(/*! ./data/dialogue */ \"./src/data/dialogue.ts\");\nconst state_1 = __webpack_require__(/*! ./state */ \"./src/state.ts\");\nconst lookup_1 = __webpack_require__(/*! ./lookup */ \"./src/lookup.ts\");\nconst choices_1 = __webpack_require__(/*! ./data/choices */ \"./src/data/choices.ts\");\nconst elements_1 = __webpack_require__(/*! ./elements */ \"./src/elements.ts\");\n/** Draws the curent dialogue */\nfunction drawScene() {\n    const d = dialogue_1.default[state_1.default.currentDialogueIndex];\n    if (d.image) {\n        const img = lookup_1.lookupImage(d.image);\n        elements_1.default.bg.style.backgroundImage = `url(/assets/images/${img.filename})`;\n        elements_1.default.bg.style.backgroundColor = img.bgColor;\n    }\n    const char = lookup_1.lookupCharacter(d.character);\n    elements_1.default.charImg.style.backgroundImage = `url(/assets/images/${char.imageFilename})`;\n    elements_1.default.charName.textContent = d.character;\n    elements_1.default.dialogueText.textContent = d.text;\n    resetChoices();\n    for (let i = 0; i < d.choices.length; i++) {\n        const choiceIndex = d.choices[i];\n        const c = choices_1.default[choiceIndex];\n        addChoice(c.text, choiceIndex);\n    }\n}\nexports.default = drawScene;\nfunction resetChoices() {\n    elements_1.default.choicesDiv.innerHTML = '';\n}\nfunction addChoice(text, index) {\n    const btn = document.createElement('button');\n    btn.className = 'choice';\n    btn.type = 'button';\n    btn.textContent = text;\n    btn.dataset.index = index.toString();\n    elements_1.default.choicesDiv.append(btn);\n}\n\n\n//# sourceURL=webpack:///./src/draw-scene.ts?");
+
+/***/ }),
+
+/***/ "./src/elements.ts":
+/*!*************************!*\
+  !*** ./src/elements.ts ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst elements = {\n    // this is to make it easier for the editor to hook in\n    doc: document,\n    bg: null,\n    charName: null,\n    charImg: null,\n    dialogueText: null,\n    choicesDiv: null,\n};\nexports.default = elements;\nfunction initElements() {\n    elements.bg = elements.doc.getElementById('background');\n    elements.charName = elements.doc.getElementById('character-name');\n    elements.charImg = elements.doc.getElementById('character');\n    elements.dialogueText = elements.doc.querySelector('#dialogue-box .text');\n    elements.choicesDiv = elements.doc.getElementById('choices');\n}\nexports.initElements = initElements;\n\n\n//# sourceURL=webpack:///./src/elements.ts?");
+
+/***/ }),
+
+/***/ "./src/lookup.ts":
+/*!***********************!*\
+  !*** ./src/lookup.ts ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst characters_1 = __webpack_require__(/*! ./data/characters */ \"./src/data/characters.ts\");\nconst images_1 = __webpack_require__(/*! ./data/images */ \"./src/data/images.ts\");\nfunction lookupImage(imgName) {\n    for (const i of images_1.default) {\n        if (i.name === imgName)\n            return i;\n    }\n}\nexports.lookupImage = lookupImage;\nfunction lookupCharacter(char) {\n    for (const c of characters_1.default) {\n        if (c.name === char)\n            return c;\n    }\n}\nexports.lookupCharacter = lookupCharacter;\n\n\n//# sourceURL=webpack:///./src/lookup.ts?");
+
+/***/ }),
+
+/***/ "./src/state.ts":
+/*!**********************!*\
+  !*** ./src/state.ts ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst state = {\n    currentDialogueIndex: null,\n};\nexports.default = state;\n\n\n//# sourceURL=webpack:///./src/state.ts?");
 
 /***/ })
 

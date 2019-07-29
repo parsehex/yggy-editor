@@ -1,25 +1,13 @@
-import { MainScene } from './scenes/mainScene';
-
-const config: Phaser.Types.Core.GameConfig = {
-  width: 800,
-  height: 600,
-  type: Phaser.AUTO,
-  parent: 'game',
-  scale: {
-    mode: Phaser.Scale.RESIZE,
-  },
-  scene: MainScene,
-  render: {
-    roundPixels: true,
-  },
-};
-
-export class Game extends Phaser.Game {
-  constructor(config: Phaser.Types.Core.GameConfig) {
-    super(config);
-  }
-}
+import './events';
+import state from './state';
+import drawScene from './draw-scene';
+import { initElements } from './elements';
 
 window.addEventListener('load', () => {
-  new Game(config);
+  // draw the game
+  state.currentDialogueIndex = 0;
+
+  initElements();
+
+  drawScene();
 });

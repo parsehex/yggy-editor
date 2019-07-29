@@ -1,0 +1,10 @@
+[
+	{
+		"name": "Green Man",
+		"imageFilename": "green-man.png"
+	},
+	{
+		"name": "Red Man",
+		"imageFilename": "red-man.png"
+	}
+]
