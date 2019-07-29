@@ -94,55 +94,19 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst state_1 = __webpack_require__(/*! ../../src/state */ \"./src/state.ts\");\nconst elements_1 = __webpack_require__(/*! ../../src/elements */ \"./src/elements.ts\");\nconst draw_scene_1 = __webpack_require__(/*! ../../src/draw-scene */ \"./src/draw-scene.ts\");\nwindow.addEventListener('load', () => {\n    state_1.default.currentDialogueIndex = 0;\n    // hook up the elements to the elements within the iframe\n    elements_1.default.doc = document.querySelector('iframe').contentDocument;\n    elements_1.initElements();\n    draw_scene_1.default();\n});\n\n\n//# sourceURL=webpack:///./editor/src/index.ts?");
+eval("\nvar __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\n    return new (P || (P = Promise))(function (resolve, reject) {\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\n        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\n    });\n};\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst state_1 = __webpack_require__(/*! ../../src/state */ \"./src/state.ts\");\nconst elements_1 = __webpack_require__(/*! ../../src/elements */ \"./src/elements.ts\");\nconst draw_scene_1 = __webpack_require__(/*! ../../src/draw-scene */ \"./src/draw-scene.ts\");\nconst data_1 = __webpack_require__(/*! ../../src/data */ \"./src/data/index.ts\");\nwindow.addEventListener('load', () => __awaiter(this, void 0, void 0, function* () {\n    // the game tries to load the normal js and 404s so clear that\n    console.clear();\n    yield data_1.loadData();\n    state_1.default.currentDialogueIndex = 0;\n    // hook up the elements to the elements within the iframe\n    elements_1.default.doc = document.querySelector('iframe').contentDocument;\n    elements_1.initElements();\n    draw_scene_1.default();\n}));\n\n\n//# sourceURL=webpack:///./editor/src/index.ts?");
 
 /***/ }),
 
-/***/ "./src/data/characters.ts":
-/*!********************************!*\
-  !*** ./src/data/characters.ts ***!
-  \********************************/
+/***/ "./src/data/index.ts":
+/*!***************************!*\
+  !*** ./src/data/index.ts ***!
+  \***************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst characters = [\n    { name: 'Green Man', imageFilename: 'green-man.png' },\n    { name: 'Red Man', imageFilename: 'red-man.png' },\n];\nexports.default = characters;\n\n\n//# sourceURL=webpack:///./src/data/characters.ts?");
-
-/***/ }),
-
-/***/ "./src/data/choices.ts":
-/*!*****************************!*\
-  !*** ./src/data/choices.ts ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst choices = [\n    { text: \"Fine...\", targetDialogueIndex: 1 },\n    { text: \"I'm doing fantastic!\", targetDialogueIndex: 1 },\n    { text: \"I can't remember anything. I woke up today naked.\", targetDialogueIndex: 1 },\n    { text: \"I am ambivalent.\", targetDialogueIndex: 2 },\n    { text: \"I don't know.\", targetDialogueIndex: 0 },\n    { text: \"It means not having any strong feelings one way or another.\", targetDialogueIndex: 3 },\n];\nexports.default = choices;\n\n\n//# sourceURL=webpack:///./src/data/choices.ts?");
-
-/***/ }),
-
-/***/ "./src/data/dialogue.ts":
-/*!******************************!*\
-  !*** ./src/data/dialogue.ts ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst dialogue = [\n    {\n        character: 'Green Man',\n        image: 'room',\n        text: \"Hi, how are you?\",\n        choices: [\n            0,\n            1,\n            2,\n            3,\n        ],\n    },\n    {\n        character: 'Green Man',\n        text: \"I don't really have anything else to say to you.\",\n        choices: [],\n    },\n    {\n        character: 'Green Man',\n        text: \"What does \\\"ambivalent\\\" mean?\",\n        choices: [\n            4,\n            5,\n        ],\n    },\n    {\n        character: 'Green Man',\n        text: \"Huh.\",\n        choices: [],\n    },\n];\nexports.default = dialogue;\n\n\n//# sourceURL=webpack:///./src/data/dialogue.ts?");
-
-/***/ }),
-
-/***/ "./src/data/images.ts":
-/*!****************************!*\
-  !*** ./src/data/images.ts ***!
-  \****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst images = [\n    { name: 'room', filename: 'blank-room.png', bgColor: '#7b7b7b' },\n];\nexports.default = images;\n\n\n//# sourceURL=webpack:///./src/data/images.ts?");
+eval("\nvar __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\n    return new (P || (P = Promise))(function (resolve, reject) {\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\n        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\n    });\n};\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst data = {\n    dialogue: null,\n    images: null,\n    choices: null,\n    characters: null,\n};\nexports.default = data;\nfunction loadData() {\n    return __awaiter(this, void 0, void 0, function* () {\n        console.log('Loading data...');\n        const keys = Object.keys(data);\n        const requests = [];\n        for (const k of keys) {\n            const p = fetch(`/assets/data/${k}.json`);\n            requests.push(p);\n        }\n        const responses = yield Promise.all(requests);\n        for (const res of responses) {\n            const name = res.url.match(/data\\/(.+)\\.json/)[1];\n            const d = yield res.json();\n            data[name] = d;\n        }\n        console.log('Data loaded.');\n    });\n}\nexports.loadData = loadData;\n\n\n//# sourceURL=webpack:///./src/data/index.ts?");
 
 /***/ }),
 
@@ -154,7 +118,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst dialogue_1 = __webpack_require__(/*! ./data/dialogue */ \"./src/data/dialogue.ts\");\nconst state_1 = __webpack_require__(/*! ./state */ \"./src/state.ts\");\nconst lookup_1 = __webpack_require__(/*! ./lookup */ \"./src/lookup.ts\");\nconst choices_1 = __webpack_require__(/*! ./data/choices */ \"./src/data/choices.ts\");\nconst elements_1 = __webpack_require__(/*! ./elements */ \"./src/elements.ts\");\n/** Draws the curent dialogue */\nfunction drawScene() {\n    const d = dialogue_1.default[state_1.default.currentDialogueIndex];\n    if (d.image) {\n        const img = lookup_1.lookupImage(d.image);\n        elements_1.default.bg.style.backgroundImage = `url(/assets/images/${img.filename})`;\n        elements_1.default.bg.style.backgroundColor = img.bgColor;\n    }\n    const char = lookup_1.lookupCharacter(d.character);\n    elements_1.default.charImg.style.backgroundImage = `url(/assets/images/${char.imageFilename})`;\n    elements_1.default.charName.textContent = d.character;\n    elements_1.default.dialogueText.textContent = d.text;\n    resetChoices();\n    for (let i = 0; i < d.choices.length; i++) {\n        const choiceIndex = d.choices[i];\n        const c = choices_1.default[choiceIndex];\n        addChoice(c.text, choiceIndex);\n    }\n}\nexports.default = drawScene;\nfunction resetChoices() {\n    elements_1.default.choicesDiv.innerHTML = '';\n}\nfunction addChoice(text, index) {\n    const btn = document.createElement('button');\n    btn.className = 'choice';\n    btn.type = 'button';\n    btn.textContent = text;\n    btn.dataset.index = index.toString();\n    elements_1.default.choicesDiv.append(btn);\n}\n\n\n//# sourceURL=webpack:///./src/draw-scene.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst state_1 = __webpack_require__(/*! ./state */ \"./src/state.ts\");\nconst lookup_1 = __webpack_require__(/*! ./lookup */ \"./src/lookup.ts\");\nconst elements_1 = __webpack_require__(/*! ./elements */ \"./src/elements.ts\");\nconst data_1 = __webpack_require__(/*! ./data */ \"./src/data/index.ts\");\n/** Draws the curent dialogue */\nfunction drawScene() {\n    const d = data_1.default.dialogue[state_1.default.currentDialogueIndex];\n    if (d.image) {\n        const img = lookup_1.lookupImage(d.image);\n        elements_1.default.bg.style.backgroundImage = `url(/assets/images/${img.filename})`;\n        elements_1.default.bg.style.backgroundColor = img.bgColor;\n    }\n    const char = lookup_1.lookupCharacter(d.character);\n    elements_1.default.charImg.style.backgroundImage = `url(/assets/images/${char.imageFilename})`;\n    elements_1.default.charName.textContent = d.character;\n    elements_1.default.dialogueText.textContent = d.text;\n    resetChoices();\n    for (let i = 0; i < d.choices.length; i++) {\n        const choiceIndex = d.choices[i];\n        const c = data_1.default.choices[choiceIndex];\n        addChoice(c.text, choiceIndex);\n    }\n}\nexports.default = drawScene;\nfunction resetChoices() {\n    elements_1.default.choicesDiv.innerHTML = '';\n}\nfunction addChoice(text, index) {\n    const btn = document.createElement('button');\n    btn.className = 'choice';\n    btn.type = 'button';\n    btn.textContent = text;\n    btn.dataset.index = index.toString();\n    elements_1.default.choicesDiv.append(btn);\n}\n\n\n//# sourceURL=webpack:///./src/draw-scene.ts?");
 
 /***/ }),
 
@@ -178,7 +142,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst characters_1 = __webpack_require__(/*! ./data/characters */ \"./src/data/characters.ts\");\nconst images_1 = __webpack_require__(/*! ./data/images */ \"./src/data/images.ts\");\nfunction lookupImage(imgName) {\n    for (const i of images_1.default) {\n        if (i.name === imgName)\n            return i;\n    }\n}\nexports.lookupImage = lookupImage;\nfunction lookupCharacter(char) {\n    for (const c of characters_1.default) {\n        if (c.name === char)\n            return c;\n    }\n}\nexports.lookupCharacter = lookupCharacter;\n\n\n//# sourceURL=webpack:///./src/lookup.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst data_1 = __webpack_require__(/*! ./data */ \"./src/data/index.ts\");\nfunction lookupImage(imgName) {\n    for (const i of data_1.default.images) {\n        if (i.name === imgName)\n            return i;\n    }\n}\nexports.lookupImage = lookupImage;\nfunction lookupCharacter(char) {\n    for (const c of data_1.default.characters) {\n        if (c.name === char)\n            return c;\n    }\n}\nexports.lookupCharacter = lookupCharacter;\n\n\n//# sourceURL=webpack:///./src/lookup.ts?");
 
 /***/ }),
 
