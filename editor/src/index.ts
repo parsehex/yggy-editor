@@ -1,6 +1,6 @@
 import gameState from 'game/state';
 import { initElements } from 'game/elements';
-import { loadData } from 'game/data';
+import loadData from 'game/data/load';
 import { initEvents as initGameEvents } from 'game/events';
 import { initEventHooks } from './event-hooks';
 import draw from './draw';

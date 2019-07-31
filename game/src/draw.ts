@@ -1,17 +1,15 @@
 import state from './state';
-import lookup from './lookup';
+import lookupData from './data/lookup';
 import elements from './elements';
 
 /** Draws whatever the current state is */
 export default function drawScene() {
-	const dia = lookup.dialogue(state.currentDialogueID);
-	const char = lookup.character(dia.characterID);
+	const dia = lookupData.dialogue(state.currentDialogueID);
+	const char = lookupData.character(dia.characterID);
 
-	if (dia.imageID !== undefined) {
-		const img = lookup.image(dia.imageID);
-		elements.bg.style.backgroundImage = `url(/assets/images/${img.filename})`;
-		elements.bg.style.backgroundColor = img.bgColor;
-	}
+	const img = lookupData.image(dia.imageID);
+	elements.bg.style.backgroundImage = `url(/assets/images/${img.filename})`;
+	elements.bg.style.backgroundColor = img.bgColor;
 
 	elements.charImg.style.backgroundImage = `url(/assets/images/${char.imageFilename})`;
 	elements.charName.textContent = char.name
@@ -20,7 +18,7 @@ export default function drawScene() {
 	resetChoices();
 	for (let i = 0; i < dia.choices.length; i++) {
 		const choiceID = dia.choices[i];
-		const c = lookup.choice(choiceID);
+		const c = lookupData.choice(choiceID);
 		addChoice(c.text, choiceID);
 	}
 }

@@ -6,7 +6,7 @@ export interface DialogueChoice {
 export interface Dialogue {
 	id: number;
 	text: string;
-	imageID?: number;
+	imageID: number;
 	characterID: number;
 	/** Array of choice IDs */
 	choices: number[];

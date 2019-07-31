@@ -35,6 +35,7 @@ button#game-size {
 }
 #dialogue {
 	display: block;
+	margin: 10px 0;
 }
 #choices {
 	margin-top: 10px;
@@ -48,6 +49,9 @@ button#game-size {
 	margin: 5px 0;
 }
 
+div#tabs-list {
+	cursor: default;
+}
 span.link {
 	cursor: pointer;
 	margin: 0 3px;

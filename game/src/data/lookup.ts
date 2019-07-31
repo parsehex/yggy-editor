@@ -1,4 +1,4 @@
-import data from './data';
+import data from './index';
 
 function dialogue(id: number) {
 	for (const d of data.dialogue) {
@@ -21,4 +21,5 @@ function character(id: number) {
 	}
 }
 
-export default { dialogue, choice, image, character };
+const lookupData = { dialogue, choice, image, character };
+export default lookupData;

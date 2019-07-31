@@ -4,5 +4,11 @@
 		"name": "room",
 		"filename": "blank-room.png",
 		"bgColor": "#7b7b7b"
+	},
+	{
+		"id": 1,
+		"name": "main menu",
+		"filename": "start-screen.png",
+		"bgColor": "#7b7b7b"
 	}
 ]

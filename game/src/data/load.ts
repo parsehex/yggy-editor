@@ -1,22 +1,6 @@
-import { Dialogue, Img, DialogueChoice, Character } from './types';
+import data from './index';
 
-interface Data {
-	dialogue: Dialogue[];
-	images: Img[];
-	choices: DialogueChoice[];
-	characters: Character[];
-}
-
-const data: Data = {
-	dialogue: null,
-	images: null,
-	choices: null,
-	characters: null,
-};
-
-export default data;
-
-export async function loadData() {
+export default async function loadData() {
 	console.log('Loading data...');
 	const keys = Object.keys(data);
 	const requests: Promise<Response>[] = [];

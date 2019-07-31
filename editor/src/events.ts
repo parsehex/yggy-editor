@@ -1,6 +1,6 @@
 import data from 'game/data';
 import gameState from 'game/state';
-import lookup from 'game/lookup';
+import lookupData from 'game/data/lookup';
 import _editorDelegate from './delegate';
 import draw from './draw';
 import { goToPrev, goToNext } from './navigation';
@@ -10,7 +10,7 @@ import { getFreeID } from './id-service';
 export function initEditorEvents() {
 	// update dialogue
 	_editorDelegate('textarea#dialogue', 'change', (e, t: HTMLTextAreaElement) => {
-		const d = lookup.dialogue(gameState.currentDialogueID);
+		const d = lookupData.dialogue(gameState.currentDialogueID);
 		d.text = t.value;
 		draw();
 	});
@@ -18,7 +18,7 @@ export function initEditorEvents() {
 	// update choice
 	_editorDelegate('div#choices .choice', 'change', (e, t: HTMLTextAreaElement) => {
 		const id = +t.dataset.id;
-		const c = lookup.choice(id);
+		const c = lookupData.choice(id);
 		c.text = t.value;
 		draw();
 	});
@@ -40,7 +40,7 @@ export function initEditorEvents() {
 			text: 'Choice text',
 			targetDialogueID: null,
 		});
-		const d = lookup.dialogue(gameState.currentDialogueID);
+		const d = lookupData.dialogue(gameState.currentDialogueID);
 		d.choices.push(id);
 		draw();
 	});
@@ -67,5 +67,21 @@ export function initEditorEvents() {
 			editorDiv.classList.add('hidden');
 			t.innerHTML = '&lt;';
 		}
+	});
+
+	// change dialogue character
+	_editorDelegate('select#character', 'click', (e, t: HTMLSelectElement) => {
+		const charId = +t.value;
+		const d = lookupData.dialogue(gameState.currentDialogueID);
+		d.characterID = charId;
+		draw();
+	});
+
+	// change dialogue background
+	_editorDelegate('select#background', 'click', (e, t: HTMLSelectElement) => {
+		const bgId = +t.value;
+		const d = lookupData.dialogue(gameState.currentDialogueID);
+		d.imageID = bgId;
+		draw();
 	});
 }

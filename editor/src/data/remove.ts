@@ -1,8 +1,8 @@
-import lookup from 'game/lookup';
+import lookupData from 'game/data/lookup';
 import data from 'game/data';
 
 function choice(id: number) {
-	const c = lookup.choice(id);
+	const c = lookupData.choice(id);
 	data.choices.splice(data.choices.indexOf(c), 1);
 
 	// remove id from all choices lists
