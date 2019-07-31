@@ -1,11 +1,13 @@
 const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
-module.exports = (env, argv) => {
-  const base = path.resolve(__dirname, argv.script);
+module.exports = (env, { script }) => {
+  const base = path.resolve(__dirname, script);
   const entry = path.join(base, 'src/index.ts');
-  const outputPath = path.join(base, 'assets/js');
+  let outputPath = path.join(base, 'assets/js');
   const tsconfigPath = path.join(base, 'tsconfig.json');
+
+  if (script === 'editor-server') outputPath = base;
 
   const config = {
     entry,
@@ -28,8 +30,15 @@ module.exports = (env, argv) => {
     },
   };
 
-  if (argv.script === 'editor') {
+  if (script === 'editor') {
     config.resolve.plugins.push(new TsconfigPathsPlugin({ configFile: tsconfigPath }));
+  }
+
+  if (script) {
+    config.target = 'node';
+    config.node = {
+      __dirname: false,
+    };
   }
 
   return config;

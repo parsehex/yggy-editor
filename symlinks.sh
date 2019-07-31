@@ -1,3 +1,6 @@
+rm -rf ./editor-assets
+mkdir ./editor-assets ./editor-assets/data ./editor-assets/images
+
 cd game
 rm -rf ./assets
 mkdir ./assets ./assets/js ./assets/css
@@ -16,3 +19,4 @@ ln -s ../../assets/data ./data
 ln -s ../../assets/images ./images
 cd ./css
 ln -s ../../../game/assets/css/main.css ./main.css
+ln -s ../../../game/assets/css/main.css.map ./main.css.map

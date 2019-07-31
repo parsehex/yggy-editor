@@ -71,3 +71,12 @@ div.tab-content {
 		display: block;
 	}
 }
+
+button#save {
+	border: 0;
+	
+	&.active {
+		background-color: #212121;
+		color: #9E9E9E;
+	}
+}

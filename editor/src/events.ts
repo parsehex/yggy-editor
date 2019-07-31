@@ -84,4 +84,30 @@ export function initEditorEvents() {
 		d.imageID = bgId;
 		draw();
 	});
+
+	// save
+	_editorDelegate('button#save', 'click', async (e, t: HTMLButtonElement) => {
+		t.classList.add('active');
+		t.disabled = true;
+		t.textContent = 'Saving...';
+
+		const keys = Object.keys(data);
+		for (const k of keys) {
+			await fetch('/api/save', {
+				method: 'post',
+				body: JSON.stringify({
+					type: k,
+					data: data[k],
+				}),
+			});
+		}
+
+		t.classList.remove('active');
+		t.textContent = 'Saved';
+
+		setTimeout(() => {
+			t.disabled = false;
+			t.textContent = 'Save';
+		}, 750);
+	});
 }

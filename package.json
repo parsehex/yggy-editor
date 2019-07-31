@@ -2,6 +2,7 @@
   "name": "title-22-game",
   "version": "1.0.0",
   "devDependencies": {
+    "@types/fs-extra": "^8.0.0",
     "awesome-typescript-loader": "^5.2.1",
     "http-server": "^0.11.1",
     "ts-loader": "6.0.4",
@@ -12,17 +13,19 @@
   },
   "scripts": {
     "init": "sh symlinks.sh",
-    "dev-editor": "webpack --mode development -w --script editor",
-    "dev-game": "webpack --mode development -w --script game",
+    "dev": "webpack --mode development -w --script",
     "sass-editor": "sass editor/scss/main.scss editor/assets/css/editor.css",
     "sass-game": "sass game/scss/main.scss game/assets/css/main.css",
     "sass": "npm run sass-game && npm run sass-editor",
     "build": "webpack --mode production --script game",
     "game": "http-server ./game -p 8080 -c-1",
-    "editor": "http-server ./editor -p 8080 -c-1"
+    "editor": "node editor-server/main.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/digitsensitive/phaser3-typescript.git"
+  },
+  "dependencies": {
+    "fs-extra": "^8.1.0"
   }
 }
