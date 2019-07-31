@@ -7,6 +7,7 @@ import draw from './draw';
 import { initEditorEvents } from './events';
 import editorState from './state';
 import { initIDService } from './id-service';
+import { initTabs } from 'tabs';
 
 window.addEventListener('load', async () => {
 	if (window !== window.top) {
@@ -25,6 +26,7 @@ window.addEventListener('load', async () => {
 	initEventHooks();
 	initGameEvents();
 	initEditorEvents();
+	initTabs();
 
 	draw()
 });

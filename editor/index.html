@@ -24,12 +24,21 @@
 			<button type="button" id="nav-next">&gt;</button>
 		</div>
 		<div id="tabs-list">
-			<span class="link" data-target="dialogue">Dialogue</span>
+			<span class="link active" data-target="dialogue">Dialogue</span>
 			<span class="link" data-target="characters">Characters</span>
 			<span class="link" data-target="background">Backgrounds</span>
 		</div>
-		<textarea type="text" id="dialogue" cols="40" rows="3" placeholder="Dialogue text"></textarea>
-		<div id="choices"></div>
+
+		<div class="tab-content active" id="dialogue-tab">
+			<textarea type="text" id="dialogue" cols="40" rows="3" placeholder="Dialogue text"></textarea>
+			<div id="choices"></div>
+		</div>
+		<div class="tab-content" id="characters-tab">
+			List of characters
+		</div>
+		<div class="tab-content" id="background-tab">
+			Background images
+		</div>
 	</div>
 
 	<script src="assets/js/main.js"></script>

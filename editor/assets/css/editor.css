@@ -26,7 +26,6 @@ button#game-size {
   left: 0;
   opacity: 0.5;
 }
-
 button#game-size:hover {
   opacity: 1;
 }
@@ -44,9 +43,30 @@ button#game-size:hover {
 #choices {
   margin-top: 10px;
 }
-
 #choices > div {
   margin: 0;
+}
+
+#tabs-list {
+  margin: 5px 0;
+}
+
+span.link {
+  cursor: pointer;
+  margin: 0 3px;
+}
+span.link:hover, span.link.active {
+  text-decoration: underline;
+}
+span.link.active {
+  font-weight: bold;
+}
+
+div.tab-content {
+  display: none;
+}
+div.tab-content.active {
+  display: block;
 }
 
 /*# sourceMappingURL=editor.css.map */

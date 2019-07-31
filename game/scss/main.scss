@@ -7,7 +7,6 @@ html, body {
 	box-sizing: border-box;
 }
 div#game {
-	// text-align: center;
 	width: 100%;
 	height: 100%;
 }
@@ -37,9 +36,10 @@ div#bottom {
 	display: flex;
 	flex-direction: column-reverse;
 	align-items: flex-end;
-}
-div#bottom > * {
-	z-index: 2;
+	
+	& > * {
+		z-index: 2;
+	}
 }
 div#dialogue-box {
 	height: 25%;
@@ -51,41 +51,45 @@ div#dialogue-box {
 	border: 1px solid white;
 	margin: 7px;
 	align-self: stretch;
+	
+	#character-name {
+		border-bottom: 1px solid white;
+		margin-bottom: 2px;
+	}
+	
+	.text {
+		font-size: 1.8em;
+	}
 }
-div#dialogue-box #character-name {
-	border-bottom: 1px solid white;
-	margin-bottom: 2px;
-}
-div#dialogue-box .text {
-	font-size: 1.8em;
-}
+
 div#choices {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	width: 35%;
 	margin-right: 7px;
-	// margin-bottom: 7px;
-}
-div#choices .choice {
-	margin: 2px 0;
-	width: 100%;
-	min-height: 25px;
-	padding: 6px;
-	text-align: left;
-	font-family: 'Times New Roman', Times, serif;
-	font-size: 1em;
 	
-	background-color: #212121;
-	color: #FAFAFA;
-	border: 0;
-}
-div#choices .choice:hover {
-	background-color: #424242;
-}
-div#choices .choice:focus {
-	outline-color: white;
-}
-div#choices .choice:last-of-type {
-	margin-bottom: 0;
+	.choice {
+		margin: 2px 0;
+		width: 100%;
+		min-height: 25px;
+		padding: 6px;
+		text-align: left;
+		font-family: 'Times New Roman', Times, serif;
+		font-size: 1em;
+		
+		background-color: #212121;
+		color: #FAFAFA;
+		border: 0;
+		
+		&:hover {
+			background-color: #424242;
+		}
+		&:focus {
+			outline-color: white;
+		}
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
 }
