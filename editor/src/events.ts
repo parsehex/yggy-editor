@@ -51,4 +51,21 @@ export function initEditorEvents() {
 		remove.choice(id);
 		draw();
 	});
+
+	// resize the game to take the whole screen
+	_editorDelegate('button#game-size', 'click', (e, t: HTMLButtonElement) => {
+		const iframe = document.querySelector('iframe');
+		const editorDiv = document.getElementById('editor');
+		const isHidden = editorDiv.classList.contains('hidden');
+
+		if (isHidden) {
+			iframe.style.width = '';
+			editorDiv.classList.remove('hidden');
+			t.innerHTML = '&gt;';
+		} else {
+			iframe.style.width = '100%';
+			editorDiv.classList.add('hidden');
+			t.innerHTML = '&lt;';
+		}
+	});
 }

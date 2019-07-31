@@ -12,10 +12,20 @@
 <body>
 
 	<iframe src="/game.html"></iframe>
+	<button type="button" id="game-size" title="Toggle the game full-size">
+		&gt;
+	</button>
 
 	<div id="editor">
-		<button type="button" id="nav-back" title="Previously-viewed dialogue">&lt;</button>
-		<button type="button" id="nav-next">&gt;</button>
+		<div id="history">
+			<button type="button" id="nav-back" title="Previously-viewed dialogue">&lt;</button>
+			<button type="button" id="nav-next">&gt;</button>
+		</div>
+		<div id="tabs-list">
+			<span class="link" data-target="dialogue">Dialogue</span>
+			<span class="link" data-target="characters">Characters</span>
+			<span class="link" data-target="background">Backgrounds</span>
+		</div>
 		<textarea type="text" id="dialogue" cols="40" rows="3" placeholder="Dialogue text"></textarea>
 		<div id="choices"></div>
 	</div>

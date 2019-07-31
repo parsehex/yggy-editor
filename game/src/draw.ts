@@ -1,9 +1,8 @@
 import state from './state';
 import lookup from './lookup';
 import elements from './elements';
-import data from './data';
 
-/** Draws the curent dialogue */
+/** Draws whatever the current state is */
 export default function drawScene() {
 	const dia = lookup.dialogue(state.currentDialogueID);
 	const char = lookup.character(dia.characterID);

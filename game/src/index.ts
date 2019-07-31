@@ -1,5 +1,5 @@
 import state from './state';
-import drawScene from './draw-scene';
+import gameDraw from './draw';
 import { initElements } from './elements';
 import { loadData } from './data';
 import { initEvents } from './events';
@@ -13,5 +13,5 @@ window.addEventListener('load', async () => {
   initElements();
   initEvents();
 
-  drawScene();
+  gameDraw();
 });
