@@ -14,9 +14,7 @@ html, body {
 iframe {
 	width: 50%;
 	height: 100%;
-	/* height: 99%; */
 	border: 0;
-	/* display: inline-block; */
 	float: left;
 }
 button#game-size {
@@ -30,7 +28,6 @@ button#game-size:hover {
 }
 
 #editor {
-	/* display: inline-block; */
 	float: left;
 	width: 50%;
 	padding: 3px;

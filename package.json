@@ -11,8 +11,12 @@
     "webpack-cli": "3.3.5"
   },
   "scripts": {
+    "init": "sh symlinks.sh",
     "dev-editor": "webpack --mode development -w --script editor",
     "dev-game": "webpack --mode development -w --script game",
+    "sass-editor": "sass editor/scss/main.scss editor/assets/css/editor.css",
+    "sass-game": "sass game/scss/main.scss game/assets/css/main.css",
+    "sass": "npm run sass-game && npm run sass-editor",
     "build": "webpack --mode production --script game",
     "game": "http-server ./game -p 8080 -c-1",
     "editor": "http-server ./editor -p 8080 -c-1"

@@ -1,13 +1,6 @@
-#OSX
-#-------------------------------------------------------------------------------
 .DS_STORE
-
-
-#General
-#-------------------------------------------------------------------------------
-dist
 node_modules
-*.tsx
 yarn.lock
 package-lock.json
-editor/js
+game/assets
+ediotr/assets
