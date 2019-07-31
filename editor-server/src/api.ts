@@ -10,7 +10,7 @@ interface SaveBody {
 }
 
 export default async function routeAPI(req: http.IncomingMessage, res: http.ServerResponse) {
-	if (req.url.indexOf('api') === -1) return false;
+	if (req.url.indexOf('api') === -1) return;
 
 	if (/api\/save/i.test(req.url)) {
 		const body: SaveBody = await parseBody(req);
@@ -20,7 +20,16 @@ export default async function routeAPI(req: http.IncomingMessage, res: http.Serv
 		res.writeHead(200);
 		res.write('OK');
 		res.end();
-		return true;
+	}
+
+	if (/api\/get/i.test(req.url)) {
+		// the api is fragile, please don't hurt it
+		const type = req.url.match(/type=(.+)$/i)[1];
+		const p = path.join(editorAssetsBase, `data/${type}.json`);
+		const c = await fs.readFile(p, 'utf8');
+		res.writeHead(200, { 'content-type': 'application/json' });
+		res.write(c);
+		res.end();
 	}
 }
 

@@ -1,6 +1,5 @@
 import gameState from 'game/state';
 import { initElements } from 'game/elements';
-import loadData from 'game/data/load';
 import { initEvents as initGameEvents } from 'game/events';
 import { initEventHooks } from './event-hooks';
 import draw from './draw';
@@ -8,6 +7,7 @@ import { initEditorEvents } from './events';
 import editorState from './state';
 import { initIDService } from './id-service';
 import { initTabs } from 'tabs';
+import _editorLoadData from 'data/load';
 
 window.addEventListener('load', async () => {
 	if (window !== window.top) {
@@ -15,7 +15,7 @@ window.addEventListener('load', async () => {
 		return;
 	}
 
-	await loadData();
+	await _editorLoadData();
 	initIDService();
 
 	gameState.currentDialogueID = 0;
@@ -28,5 +28,5 @@ window.addEventListener('load', async () => {
 	initEditorEvents();
 	initTabs();
 
-	draw()
+	draw();
 });

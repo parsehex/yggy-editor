@@ -39,12 +39,11 @@ export default async function routeStatic(req: http.IncomingMessage, res: http.S
 		}
 	}
 
-	if (!content) return false;
+	if (!content) return;
 
 	res.writeHead(status, { 'content-type': fileType });
 	res.write(content);
 	res.end();
-	return true;
 }
 
 function mimeFromExtension(ext: string) {

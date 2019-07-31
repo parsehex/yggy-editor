@@ -3,11 +3,11 @@ import routeStatic from './static-router';
 import routeAPI from './api';
 
 const server = http.createServer(async (req, res) => {
-	const tryStatic = await routeStatic(req, res);
-	if (tryStatic) return;
+	await routeStatic(req, res);
+	if (res.finished) return;
 
-	const tryAPI = await routeAPI(req, res);
-	if (tryAPI) return;
+	await routeAPI(req, res);
+	if (res.finished) return;
 
 	res.writeHead(404);
 	res.write('Unknown endpoint');

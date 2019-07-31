@@ -1,10 +1,12 @@
 import editorElements from 'editor-elements';
 import lookupData from 'game/data/lookup';
 import { Dialogue } from 'game/types';
+import * as morph from 'nanomorph';
 
+const tmp = <HTMLDivElement>editorElements.choices.cloneNode();
 export default function updateChoices(d: Dialogue) {
 	const c = d.choices;
-	editorElements.choices.innerHTML = '';
+	tmp.innerHTML = '';
 
 	for (const id of c) {
 		const choice = lookupData.choice(id);
@@ -27,7 +29,7 @@ export default function updateChoices(d: Dialogue) {
 		btnDelete.title = 'Delete choice';
 		div.append(btnDelete);
 
-		editorElements.choices.append(div);
+		tmp.append(div);
 	}
 
 	const divAdd = document.createElement('div');
@@ -39,5 +41,7 @@ export default function updateChoices(d: Dialogue) {
 	btnAdd.title = 'Add choice';
 	divAdd.append(btnAdd);
 
-	editorElements.choices.append(divAdd);
+	tmp.append(divAdd);
+
+	morph(editorElements.choices, tmp);
 }

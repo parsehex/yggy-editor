@@ -6,3 +6,4 @@ game/assets
 editor/assets
 editor-server/main.js
 editor-assets
+*.log

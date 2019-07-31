@@ -4,6 +4,10 @@
 	box-sizing: border-box;
 }
 
+select {
+	font-size: 1em;
+}
+
 html, body {
 	margin: 0;
 	padding: 0;
@@ -46,7 +50,7 @@ button#game-size {
 }
 
 #tabs-list {
-	margin: 5px 0;
+	margin: 9px 0;
 }
 
 div#tabs-list {
@@ -55,8 +59,10 @@ div#tabs-list {
 span.link {
 	cursor: pointer;
 	margin: 0 3px;
+	padding: 3px;
+	border: 1px solid;
 	
-	&:hover, &.active {
+	&:hover {
 		text-decoration: underline;
 	}
 	&.active {
@@ -72,11 +78,15 @@ div.tab-content {
 	}
 }
 
-button#save {
+button#save, button#push, button#pull, button#clear {
 	border: 0;
 	
 	&.active {
 		background-color: #212121;
 		color: #9E9E9E;
+	}
+	&[disabled] {
+		background-color: #EEEEEE;
+		color: #BDBDBD;
 	}
 }

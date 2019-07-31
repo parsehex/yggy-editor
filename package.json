@@ -19,13 +19,15 @@
     "sass": "npm run sass-game && npm run sass-editor",
     "build": "webpack --mode production --script game",
     "game": "http-server ./game -p 8080 -c-1",
-    "editor": "node editor-server/main.js"
+    "editor": "node editor-server/main.js",
+    "reset-editor": "rm -rf editor-assets && mkdir -p editor-assets/data editor-assets/images"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/digitsensitive/phaser3-typescript.git"
   },
   "dependencies": {
-    "fs-extra": "^8.1.0"
+    "fs-extra": "^8.1.0",
+    "nanomorph": "^5.4.0"
   }
 }

@@ -6,17 +6,18 @@ import draw from './draw';
 import { goToPrev, goToNext } from './navigation';
 import remove from './data/remove';
 import { getFreeID } from './id-service';
+import editorElements from 'editor-elements';
 
 export function initEditorEvents() {
 	// update dialogue
-	_editorDelegate('textarea#dialogue', 'change', (e, t: HTMLTextAreaElement) => {
+	_editorDelegate('textarea#dialogue', 'input', (e, t: HTMLTextAreaElement) => {
 		const d = lookupData.dialogue(gameState.currentDialogueID);
 		d.text = t.value;
 		draw();
 	});
 
 	// update choice
-	_editorDelegate('div#choices .choice', 'change', (e, t: HTMLTextAreaElement) => {
+	_editorDelegate('div#choices .choice', 'input', (e, t: HTMLTextAreaElement) => {
 		const id = +t.dataset.id;
 		const c = lookupData.choice(id);
 		c.text = t.value;
@@ -85,11 +86,11 @@ export function initEditorEvents() {
 		draw();
 	});
 
-	// save
-	_editorDelegate('button#save', 'click', async (e, t: HTMLButtonElement) => {
+	// push to server
+	_editorDelegate('button#push', 'click', async (e, t: HTMLButtonElement) => {
 		t.classList.add('active');
 		t.disabled = true;
-		t.textContent = 'Saving...';
+		t.textContent = 'Pushing...';
 
 		const keys = Object.keys(data);
 		for (const k of keys) {
@@ -103,11 +104,67 @@ export function initEditorEvents() {
 		}
 
 		t.classList.remove('active');
-		t.textContent = 'Saved';
-
+		t.textContent = 'Pushed';
 		setTimeout(() => {
 			t.disabled = false;
-			t.textContent = 'Save';
+			t.textContent = 'Push changes';
 		}, 750);
 	});
+
+	// pull from server
+	_editorDelegate('button#pull', 'click', async (e, t: HTMLButtonElement) => {
+		t.classList.add('active');
+		t.disabled = true;
+		t.textContent = 'Pulling...';
+
+		const keys = Object.keys(data);
+		for (const k of keys) {
+			const r = await fetch('/api/get?type=' + k);
+			const d = r.json();
+			data[k] = d;
+		}
+
+		save(editorElements.btnSave);
+		draw();
+
+		t.classList.remove('active');
+		t.textContent = 'Pulled';
+		setTimeout(() => {
+			t.disabled = false;
+			t.textContent = 'Pull changes';
+		}, 750);
+	});
+
+	// save to localstorage
+	_editorDelegate('button#save', 'click', async (e, t: HTMLButtonElement) => {
+		save(t);
+	});
+
+	let noAutoSave = false;
+	// clear localstorage
+	_editorDelegate('button#clear', 'click', async (e, t: HTMLButtonElement) => {
+		noAutoSave = true;
+		localStorage.clear();
+		t.textContent = 'Cleared';
+		setTimeout(() => {
+			location.reload();
+		}, 500);
+	});
+
+	setInterval(save.bind(null, editorElements.btnSave, true), 15000);
+	window.addEventListener('beforeunload', save.bind(null, editorElements.btnSave, true));
+	function save(btn: HTMLButtonElement, auto?: boolean) {
+		if (auto && noAutoSave) return;
+
+		const keys = Object.keys(data);
+		for (const k of keys) {
+			localStorage.setItem('editor-' + k, JSON.stringify(data[k]));
+		}
+		btn.disabled = true;
+		btn.textContent = 'Saved';
+		setTimeout(() => {
+			btn.disabled = false;
+			btn.textContent = 'Save';
+		}, 2500);
+	}
 }
