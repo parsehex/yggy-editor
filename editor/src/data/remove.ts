@@ -1,5 +1,5 @@
-import lookup from '../../../src/lookup';
-import data from '../../../src/data';
+import lookup from 'game/lookup';
+import data from 'game/data';
 
 function choice(id: number) {
 	const c = lookup.choice(id);

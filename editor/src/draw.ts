@@ -1,5 +1,5 @@
 import update from './update';
-import drawScene from '../../src/draw-scene';
+import drawScene from 'game/draw-scene';
 
 export default function draw() {
 	drawScene();

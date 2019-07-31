@@ -1,18 +1,22 @@
 const path = require('path');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = (env, argv) => {
+  let base;
   let entry;
   let outputPath;
+  let tsconfigPath;
 
   if (argv.script === 'editor') {
-    entry = './editor/src/index.ts';
-    outputPath = path.resolve(__dirname, 'editor/js');
+    base = path.resolve(__dirname, 'editor');
   } else if (argv.script === 'game') {
-    entry = './src/index.ts';
-    outputPath = path.resolve(__dirname, 'dist');
+    base = path.resolve(__dirname, 'game');
   }
+  entry = path.join(base, 'src/index.ts');
+  outputPath = path.join(base, 'dist');
+  tsconfigPath = path.join(base, 'tsconfig.json');
 
-  return {
+  const config = {
     entry,
     output: {
       path: outputPath,
@@ -20,11 +24,22 @@ module.exports = (env, argv) => {
     },
     module: {
       rules: [
-        { test: /\.ts$/, loader: 'ts-loader', exclude: '/node_modules/' },
-      ]
+        {
+          test: /\.ts$/,
+          loader: 'ts-loader',
+          exclude: '/node_modules/',
+        },
+      ],
     },
     resolve: {
       extensions: ['.ts', '.js'],
+      plugins: [],
     },
   };
+
+  if (argv.script === 'editor') {
+    config.resolve.plugins.push(new TsconfigPathsPlugin({ configFile: tsconfigPath }));
+  }
+
+  return config;
 };

@@ -1,4 +1,4 @@
-import data from '../../src/data';
+import data from 'game/data';
 
 interface IDs {
 	dialogue: number[];

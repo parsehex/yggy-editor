@@ -1,12 +1,12 @@
+import gameState from 'game/state';
 import editorState from './state';
-import state from '../../src/state';
 
 /** Call `draw()` afterwards */
 export function goToNext() {
 	const nextHistoryIndex = editorState.currentHistoryIndex + 1;
 	if (nextHistoryIndex >= editorState.history.length) return;
 
-	state.currentDialogueID = editorState.history[nextHistoryIndex];
+	gameState.currentDialogueID = editorState.history[nextHistoryIndex];
 	editorState.currentHistoryIndex++;
 }
 /** Call `draw()` afterwards */
@@ -14,7 +14,7 @@ export function goToPrev() {
 	const prevHistoryIndex = editorState.currentHistoryIndex - 1;
 	if (prevHistoryIndex < 0) return;
 
-	state.currentDialogueID = editorState.history[prevHistoryIndex];
+	gameState.currentDialogueID = editorState.history[prevHistoryIndex];
 	editorState.currentHistoryIndex--;
 }
 
@@ -30,7 +30,7 @@ export function push(dialogueID: number) {
 		editorState.history.length = editorState.currentHistoryIndex + 1;
 	}
 
-	state.currentDialogueID = dialogueID;
+	gameState.currentDialogueID = dialogueID;
 	editorState.history.push(dialogueID);
 	editorState.currentHistoryIndex++;
 }

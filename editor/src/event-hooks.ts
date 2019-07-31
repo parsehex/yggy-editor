@@ -1,7 +1,7 @@
-import del from '../../src/delegate';
+import del from 'game/delegate';
+import gameState from 'game/state';
 import update from './update';
 import { push } from './navigation';
-import state from '../../src/state';
 
 export function initEventHooks() {
 	/*
@@ -24,7 +24,7 @@ export function initEventHooks() {
 	// update editor stuff on choice click
 	delegate('div#choices button.choice', 'click', (e) => {
 		// drawScene() already called
-		push(state.currentDialogueID);
+		push(gameState.currentDialogueID);
 		update();
 	});
 }

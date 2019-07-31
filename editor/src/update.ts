@@ -1,8 +1,7 @@
-import data from '../../src/data';
-import state from '../../src/state';
+import gameState from 'game/state';
+import lookup from 'game/lookup';
 import { disabled } from './dom-util';
 import editorState from './state';
-import lookup from '../../src/lookup';
 
 const btnBack = <HTMLButtonElement>document.getElementById('nav-back');
 const btnNext = <HTMLButtonElement>document.getElementById('nav-next');
@@ -10,7 +9,7 @@ const dialogue = <HTMLTextAreaElement>document.getElementById('dialogue');
 const choices = <HTMLDivElement>document.getElementById('choices');
 
 export default function update() {
-	const d = lookup.dialogue(state.currentDialogueID);
+	const d = lookup.dialogue(gameState.currentDialogueID);
 
 	dialogue.value = d.text;
 	updateChoices(d.choices);

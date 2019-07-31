@@ -1,16 +1,16 @@
+import data from 'game/data';
+import gameState from 'game/state';
+import lookup from 'game/lookup';
 import _editorDelegate from './delegate';
-import data from '../../src/data';
-import state from '../../src/state';
 import draw from './draw';
 import { goToPrev, goToNext } from './navigation';
-import lookup from '../../src/lookup';
 import remove from './data/remove';
 import { getFreeID } from './id-service';
 
 export function initEditorEvents() {
 	// update dialogue
 	_editorDelegate('textarea#dialogue', 'change', (e, t: HTMLTextAreaElement) => {
-		const d = lookup.dialogue(state.currentDialogueID);
+		const d = lookup.dialogue(gameState.currentDialogueID);
 		d.text = t.value;
 		draw();
 	});
@@ -40,7 +40,7 @@ export function initEditorEvents() {
 			text: 'Choice text',
 			targetDialogueID: null,
 		});
-		const d = lookup.dialogue(state.currentDialogueID);
+		const d = lookup.dialogue(gameState.currentDialogueID);
 		d.choices.push(id);
 		draw();
 	});
