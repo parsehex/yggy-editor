@@ -8,7 +8,7 @@ import updateCharacter from './character';
 import updateBackground from './background';
 
 export default function update() {
-	console.time('update')
+	// console.time('update')
 	const d = lookupData.dialogue(gameState.currentDialogueID);
 
 	editorElements.dialogue.value = d.text;
@@ -19,5 +19,5 @@ export default function update() {
 	// update history buttons
 	disabled(editorElements.btnBack, editorState.currentHistoryIndex === 0);
 	disabled(editorElements.btnNext, editorState.currentHistoryIndex === editorState.history.length - 1);
-	console.timeEnd('update');
+	// console.timeEnd('update');
 }

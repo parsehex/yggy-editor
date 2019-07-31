@@ -120,7 +120,7 @@ export function initEditorEvents() {
 		const keys = Object.keys(data);
 		for (const k of keys) {
 			const r = await fetch('/api/get?type=' + k);
-			const d = r.json();
+			const d = await r.json();
 			data[k] = d;
 		}
 

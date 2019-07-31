@@ -35,7 +35,9 @@ button#game-size {
 #editor {
 	float: left;
 	width: 50%;
+	height: 100%;
 	padding: 3px;
+	overflow-y: auto;
 }
 #dialogue {
 	display: block;
@@ -76,6 +78,10 @@ div.tab-content {
 	&.active {
 		display: block;
 	}
+}
+
+button#push {
+	margin-left: 10px;
 }
 
 button#save, button#push, button#pull, button#clear {
