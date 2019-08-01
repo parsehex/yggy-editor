@@ -1,12 +1,30 @@
+import { querySelector } from 'dom-util';
+
 export default {
-	btnBack: <HTMLButtonElement>document.querySelector('button#nav-back'),
-	btnNext: <HTMLButtonElement>document.querySelector('button#nav-next'),
-	btnPush: <HTMLButtonElement>document.querySelector('button#push'),
-	btnPull: <HTMLButtonElement>document.querySelector('button#pull'),
-	btnSave: <HTMLButtonElement>document.querySelector('button#save'),
-	btnClear: <HTMLButtonElement>document.querySelector('button#clear'),
-	dialogue: <HTMLTextAreaElement>document.querySelector('textarea#dialogue'),
-	choices: <HTMLDivElement>document.querySelector('div#choices'),
-	character: <HTMLSelectElement>document.querySelector('select#character'),
-	background: <HTMLSelectElement>document.querySelector('select#background'),
+	btnBack: <HTMLButtonElement>querySelector('button#nav-back'),
+	btnNext: <HTMLButtonElement>querySelector('button#nav-next'),
+	btnPush: <HTMLButtonElement>querySelector('button#push'),
+	btnPull: <HTMLButtonElement>querySelector('button#pull'),
+	btnSave: <HTMLButtonElement>querySelector('button#save'),
+	btnClear: <HTMLButtonElement>querySelector('button#clear'),
+	dialogueTab: {
+		dialogue: <HTMLTextAreaElement>querySelector('textarea#dialogue'),
+		choices: <HTMLDivElement>querySelector('div#choices'),
+		character: <HTMLSelectElement>querySelector('select#character'),
+		background: <HTMLSelectElement>querySelector('select#background'),
+	},
+	charactersTab: {
+		list: <HTMLDivElement>querySelector('#characters-tab div.list'),
+	},
+	backgroundsTab: {
+		list: <HTMLDivElement>querySelector('#backgrounds-tab div.list'),
+	},
+	imagesTab: {
+		list: <HTMLDivElement>querySelector('#images-tab div.list'),
+		previewSelect: <HTMLSelectElement>querySelector('#images-tab #image-file-preview-select'),
+		previewImage: <HTMLImageElement>querySelector('#images-tab #image-file-preview'),
+		uploadFileName: <HTMLInputElement>querySelector('#images-tab #upload input.name'),
+		fileInput: <HTMLInputElement>querySelector('#images-tab input[type="file"]'),
+		uploadButton: <HTMLButtonElement>querySelector('#images-tab #upload button.submit'),
+	},
 };

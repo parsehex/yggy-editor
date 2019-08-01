@@ -12,5 +12,49 @@ function choice(id: number) {
 		}
 	}
 }
+function character(id: number) {
+	const ch = lookupData.character(id);
+	data.characters.splice(data.characters.indexOf(ch), 1);
 
-export default { choice };
+	const defaultID = data.characters[0].id;
+
+	// remove id from all dialogue
+	for (const d of data.dialogue) {
+		if (d.characterID === id) {
+			d.characterID = defaultID;
+		}
+	}
+}
+function background(id: number) {
+	const bg = lookupData.background(id);
+	data.backgrounds.splice(data.backgrounds.indexOf(bg), 1);
+
+	const defaultID = data.backgrounds[0].id;
+
+	// remove id from all dialogue
+	for (const d of data.dialogue) {
+		if (d.backgroundID === id) {
+			d.backgroundID = defaultID;
+		}
+	}
+}
+function image(id: number) {
+	const img = lookupData.image(id);
+	data.images.splice(data.images.indexOf(img), 1);
+
+	const defaultID = data.images[0].id;
+
+	// remove id from all characters, backgrounds
+	for (const bg of data.backgrounds) {
+		if (bg.imageID === id) {
+			bg.imageID = defaultID;
+		}
+	}
+	for (const bg of data.characters) {
+		if (bg.imageID === id) {
+			bg.imageID = defaultID;
+		}
+	}
+}
+
+export default { choice, character, background, image };

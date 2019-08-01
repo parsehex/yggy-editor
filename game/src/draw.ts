@@ -14,7 +14,7 @@ export default function drawScene() {
 
 	const charImg = lookupData.image(char.imageID);
 	elements.charImg.style.backgroundImage = `url(/assets/images/${charImg.filename})`;
-	elements.charName.textContent = char.name
+	elements.charName.textContent = char.name;
 	elements.dialogueText.textContent = dia.text;
 
 	resetChoices();

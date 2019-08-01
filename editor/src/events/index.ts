@@ -1,71 +1,28 @@
 import data from 'game/data';
-import gameState from 'game/state';
-import lookupData from 'game/data/lookup';
-import _editorDelegate from './delegate';
-import draw from './draw';
-import { goToPrev, goToNext } from './navigation';
-import remove from './data/remove';
-import { getFreeID } from './id-service';
+import _editorDelegate from 'delegate';
+import draw from 'draw';
+import { goToPrev, goToNext } from 'navigation';
 import editorElements from 'editor-elements';
+import { initDialogueTabEvents } from './dialogue';
+import initCharactersTabEvents from './characters';
+import initBackgroundsTabEvents from './background';
+import initImagesTabEvents from './images';
 
 export function initEditorEvents() {
-	// update dialogue
-	_editorDelegate('textarea#dialogue', 'input', (e, t: HTMLTextAreaElement) => {
-		const d = lookupData.dialogue(gameState.currentDialogueID);
-		d.text = t.value;
-		draw();
-	});
+	initDialogueTabEvents();
+	initCharactersTabEvents();
+	initBackgroundsTabEvents();
+	initImagesTabEvents();
 
-	// update choice
-	_editorDelegate('div#choices .choice', 'input', (e, t: HTMLTextAreaElement) => {
-		const id = +t.dataset.id;
-		const c = lookupData.choice(id);
-		c.text = t.value;
-		draw();
-	});
-
+	// history previous
 	_editorDelegate('button#nav-back', 'click', () => {
 		goToPrev();
 		draw();
 	});
+
+	// history next
 	_editorDelegate('button#nav-next', 'click', () => {
 		goToNext();
-		draw();
-	});
-
-	// add choice (to current dialogue)
-	_editorDelegate('#choices button.add', 'click', () => {
-		const id = getFreeID('choices');
-		data.choices.push({
-			id,
-			text: 'Choice text',
-			targetDialogueID: null,
-		});
-		const d = lookupData.dialogue(gameState.currentDialogueID);
-		d.choices.push(id);
-		draw();
-	});
-
-	// delete choice
-	_editorDelegate('#choices button.delete', 'click', (e, t) => {
-		const id = +t.dataset.id;
-		remove.choice(id);
-		draw();
-	});
-
-	// create dialogue from choice
-	_editorDelegate('#choices button.create-dialogue', 'click', (e, t) => {
-		const choiceId = +t.dataset.id;
-		const choice = lookupData.choice(choiceId);
-		const dialogueId = getFreeID('dialogue');
-		data.dialogue.push({
-			id: dialogueId,
-			text: 'Dialogue text',
-			choices: [],
-			backgroundID: 0, // TODO
-			characterID: 0, // TODO
-		});
-		choice.targetDialogueID = dialogueId;
 		draw();
 	});
 
@@ -84,22 +41,6 @@ export function initEditorEvents() {
 			editorDiv.classList.add('hidden');
 			t.innerHTML = '&lt;';
 		}
-	});
-
-	// change dialogue character
-	_editorDelegate('select#character', 'click', (e, t: HTMLSelectElement) => {
-		const charId = +t.value;
-		const d = lookupData.dialogue(gameState.currentDialogueID);
-		d.characterID = charId;
-		draw();
-	});
-
-	// change dialogue background
-	_editorDelegate('select#background', 'click', (e, t: HTMLSelectElement) => {
-		const bgId = +t.value;
-		const d = lookupData.dialogue(gameState.currentDialogueID);
-		d.backgroundID = bgId;
-		draw();
 	});
 
 	// push to server

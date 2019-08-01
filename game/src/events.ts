@@ -8,6 +8,8 @@ export function initEvents() {
 		const target = <HTMLElement>e.target;
 		const choiceID = +target.dataset.id;
 		const choice = lookupData.choice(choiceID);
+		// bandaid fix; don't try to navigate to null dialogue
+		if (choice.targetDialogueID === null) return;
 		state.currentDialogueID = choice.targetDialogueID;
 		draw();
 	});

@@ -30,24 +30,42 @@
 		<div id="tabs-list">
 			<span class="link active" data-target="dialogue">Dialogue</span>
 			<span class="link" data-target="characters">Characters</span>
-			<span class="link" data-target="background">Backgrounds</span>
-			<span class="link" data-target="images">Imagess</span>
+			<span class="link" data-target="backgrounds">Backgrounds</span>
+			<span class="link" data-target="images">Images</span>
 		</div>
 
-		<div class="tab-content active" id="dialogue-tab">
+		<div class="tab active" id="dialogue-tab">
 			<select id="character"></select>
 			<select id="background"></select>
 			<textarea type="text" id="dialogue" cols="40" rows="3" placeholder="Dialogue text"></textarea>
 			<div id="choices"></div>
 		</div>
-		<div class="tab-content" id="characters-tab">
-			List of characters
+		<div class="tab" id="characters-tab">
+			<button type="button" class="create">Create character</button>
+			<div class="list"></div>
 		</div>
-		<div class="tab-content" id="background-tab">
-			Background images
+		<div class="tab" id="backgrounds-tab">
+			<button type="button" class="create">Create background</button>
+			<div class="list"></div>
 		</div>
-		<div class="tab-content" id="images-tab">
-			List of all images
+		<div class="tab" id="images-tab">
+			<div id="upload">
+				<div>
+					Upload image file
+					<br>
+					<input type="text" class="name" placeholder="Image file name (or leave blank)">
+					<input type="file">
+					<button type="button" class="submit">Upload</button>
+					<br><br>
+					Preview
+					<select id="image-file-preview-select"></select>
+				</div>
+				<div>
+					<img id="image-file-preview">
+				</div>
+			</div>
+			<button type="button" class="create">Create image</button>
+			<div class="list"></div>
 		</div>
 	</div>
 

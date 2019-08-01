@@ -2,8 +2,9 @@ import editorElements from 'editor-elements';
 import lookupData from 'game/data/lookup';
 import { Dialogue } from 'game/types';
 import * as morph from 'nanomorph';
+import { createElement } from 'dom-util';
 
-const tmp = <HTMLDivElement>editorElements.choices.cloneNode();
+const tmp = <HTMLDivElement>editorElements.dialogueTab.choices.cloneNode();
 export default function updateChoices(d: Dialogue) {
 	const c = d.choices;
 	tmp.innerHTML = '';
@@ -11,9 +12,9 @@ export default function updateChoices(d: Dialogue) {
 	for (const id of c) {
 		const choice = lookupData.choice(id);
 
-		const div = document.createElement('div');
+		const div = createElement('div');
 
-		const textarea = document.createElement('textarea');
+		const textarea = createElement('textarea');
 		textarea.className = 'choice';
 		textarea.cols = 30;
 		textarea.placeholder = 'Choice text';
@@ -21,7 +22,7 @@ export default function updateChoices(d: Dialogue) {
 		textarea.dataset.id = choice.id.toString();
 		div.append(textarea);
 
-		const btnDelete = document.createElement('button');
+		const btnDelete = createElement('button');
 		btnDelete.className = 'delete';
 		btnDelete.type = 'button';
 		btnDelete.textContent = 'X';
@@ -30,7 +31,7 @@ export default function updateChoices(d: Dialogue) {
 		div.append(btnDelete);
 
 		if (choice.targetDialogueID === null) {
-			const btnNewDialogue = document.createElement('button');
+			const btnNewDialogue = createElement('button');
 			btnNewDialogue.className = 'create-dialogue';
 			btnNewDialogue.type = 'button';
 			btnNewDialogue.textContent = 'Create dialogue';
@@ -41,9 +42,9 @@ export default function updateChoices(d: Dialogue) {
 		tmp.append(div);
 	}
 
-	const divAdd = document.createElement('div');
+	const divAdd = createElement('div');
 
-	const btnAdd = document.createElement('button');
+	const btnAdd = createElement('button');
 	btnAdd.className = 'add';
 	btnAdd.type = 'button';
 	btnAdd.textContent = '+';
@@ -52,5 +53,5 @@ export default function updateChoices(d: Dialogue) {
 
 	tmp.append(divAdd);
 
-	morph(editorElements.choices, tmp);
+	morph(editorElements.dialogueTab.choices, tmp);
 }

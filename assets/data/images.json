@@ -28,5 +28,15 @@
 		"id": 5,
 		"name": " char - Red Man",
 		"filename": "red-man.png"
+	},
+	{
+		"id": 6,
+		"name": " char - Cat Guy",
+		"filename": "cat-guy.png"
+	},
+	{
+		"id": 7,
+		"name": " char - Angry Man",
+		"filename": "angry-man.png"
 	}
 ]

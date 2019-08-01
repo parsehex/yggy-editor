@@ -1,6 +1,6 @@
 import del from 'game/delegate';
 import gameState from 'game/state';
-import update from './update';
+import updateActiveTab from './update-tab';
 import { push } from './navigation';
 
 export function initEventHooks() {
@@ -25,6 +25,6 @@ export function initEventHooks() {
 	delegate('div#choices button.choice', 'click', (e) => {
 		// drawScene() already called
 		push(gameState.currentDialogueID);
-		update();
+		updateActiveTab();
 	});
 }

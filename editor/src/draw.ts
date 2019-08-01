@@ -1,7 +1,7 @@
-import update from './update';
+import updateActiveTab from './update-tab';
 import drawScene from 'game/draw';
 
 export default function draw() {
 	drawScene();
-	update();
+	updateActiveTab();
 }
