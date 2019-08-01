@@ -13,7 +13,7 @@ export default function initCharactersTabEvents() {
 		data.characters.push({
 			id: charId,
 			name: 'New Character',
-			imageID: 1, // ID of default character image
+			imageID: data.images[0].id, // ID of default character image
 		});
 		updateActiveTab();
 	});

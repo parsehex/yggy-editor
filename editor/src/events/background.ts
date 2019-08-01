@@ -13,7 +13,7 @@ export default function initBackgroundsTabEvents() {
 		data.backgrounds.push({
 			id: bgId,
 			name: 'New Background',
-			imageID: 0, // ID of default background image,
+			imageID: data.images[0].id,
 			bgColor: '#FFFFFF',
 		});
 		updateActiveTab();

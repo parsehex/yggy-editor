@@ -51,8 +51,8 @@ export function initDialogueTabEvents() {
 			id: dialogueId,
 			text: 'Dialogue text',
 			choices: [],
-			backgroundID: 0, // TODO
-			characterID: 0, // TODO
+			backgroundID: data.backgrounds[0].id,
+			characterID: data.characters[0].id,
 		});
 		choice.targetDialogueID = dialogueId;
 		draw();
