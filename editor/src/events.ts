@@ -53,6 +53,22 @@ export function initEditorEvents() {
 		draw();
 	});
 
+	// create dialogue from choice
+	_editorDelegate('#choices button.create-dialogue', 'click', (e, t) => {
+		const choiceId = +t.dataset.id;
+		const choice = lookupData.choice(choiceId);
+		const dialogueId = getFreeID('dialogue');
+		data.dialogue.push({
+			id: dialogueId,
+			text: 'Dialogue text',
+			choices: [],
+			backgroundID: 0, // TODO
+			characterID: 0, // TODO
+		});
+		choice.targetDialogueID = dialogueId;
+		draw();
+	});
+
 	// resize the game to take the whole screen
 	_editorDelegate('button#game-size', 'click', (e, t: HTMLButtonElement) => {
 		const iframe = document.querySelector('iframe');

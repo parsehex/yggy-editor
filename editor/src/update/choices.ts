@@ -29,6 +29,15 @@ export default function updateChoices(d: Dialogue) {
 		btnDelete.title = 'Delete choice';
 		div.append(btnDelete);
 
+		if (choice.targetDialogueID === null) {
+			const btnNewDialogue = document.createElement('button');
+			btnNewDialogue.className = 'create-dialogue';
+			btnNewDialogue.type = 'button';
+			btnNewDialogue.textContent = 'Create dialogue';
+			btnNewDialogue.dataset.id = choice.id.toString();
+			div.append(btnNewDialogue);
+		}
+
 		tmp.append(div);
 	}
 
