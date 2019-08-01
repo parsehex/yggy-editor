@@ -82,7 +82,7 @@ export function initEditorEvents() {
 	_editorDelegate('select#background', 'click', (e, t: HTMLSelectElement) => {
 		const bgId = +t.value;
 		const d = lookupData.dialogue(gameState.currentDialogueID);
-		d.imageID = bgId;
+		d.backgroundID = bgId;
 		draw();
 	});
 

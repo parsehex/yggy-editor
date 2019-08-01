@@ -1,0 +1,11 @@
+#choices {
+	margin-top: 10px;
+	
+	& > div:not(:last-of-type) {
+		padding-bottom: 4px;
+		margin: 2px 0;
+		border-bottom: 1px solid lightgray;
+		
+		display: flex;
+	}
+}

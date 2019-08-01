@@ -5,9 +5,10 @@ interface IDs {
 	choices: number[];
 	images: number[];
 	characters: number[];
+	backgrounds: number[];
 }
 
-const ids: IDs = { dialogue: [], choices: [], characters: [], images: [] };
+const ids: IDs = { dialogue: [], choices: [], characters: [], images: [], backgrounds: [], };
 
 export function getFreeID(type: keyof IDs) {
 	let id = Math.floor(Math.random() * 9999999999);

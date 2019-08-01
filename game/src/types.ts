@@ -6,7 +6,7 @@ export interface DialogueChoice {
 export interface Dialogue {
 	id: number;
 	text: string;
-	imageID: number;
+	backgroundID: number;
 	characterID: number;
 	/** Array of choice IDs */
 	choices: number[];
@@ -14,11 +14,16 @@ export interface Dialogue {
 export interface Character {
 	id: number;
 	name: string;
-	imageFilename: string;
+	imageID: number;
 }
-export interface Img {
+export interface Image {
 	id: number;
 	name: string;
 	filename: string;
+}
+export interface Background {
+	id: number;
+	name: string;
+	imageID: number;
 	bgColor: string;
 }

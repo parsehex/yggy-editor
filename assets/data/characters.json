@@ -2,11 +2,11 @@
 	{
 		"id": 0,
 		"name": "Green Man",
-		"imageFilename": "green-man.png"
+		"imageID": 4
 	},
 	{
 		"id": 1,
 		"name": "Red Man",
-		"imageFilename": "red-man.png"
+		"imageID": 5
 	}
 ]

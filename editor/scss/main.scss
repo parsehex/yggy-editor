@@ -1,3 +1,5 @@
+@import './choices.scss';
+
 .hidden { display: none; }
 
 * {
@@ -42,13 +44,6 @@ button#game-size {
 #dialogue {
 	display: block;
 	margin: 10px 0;
-}
-#choices {
-	margin-top: 10px;
-	
-	& > div {
-		margin: 0;
-	}
 }
 
 #tabs-list {

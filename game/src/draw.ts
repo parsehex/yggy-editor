@@ -6,12 +6,14 @@ import elements from './elements';
 export default function drawScene() {
 	const dia = lookupData.dialogue(state.currentDialogueID);
 	const char = lookupData.character(dia.characterID);
+	const bg = lookupData.background(dia.backgroundID);
 
-	const img = lookupData.image(dia.imageID);
-	elements.bg.style.backgroundImage = `url(/assets/images/${img.filename})`;
-	elements.bg.style.backgroundColor = img.bgColor;
+	const bgImg = lookupData.image(bg.imageID);
+	elements.bg.style.backgroundImage = `url(/assets/images/${bgImg.filename})`;
+	elements.bg.style.backgroundColor = bg.bgColor;
 
-	elements.charImg.style.backgroundImage = `url(/assets/images/${char.imageFilename})`;
+	const charImg = lookupData.image(char.imageID);
+	elements.charImg.style.backgroundImage = `url(/assets/images/${charImg.filename})`;
 	elements.charName.textContent = char.name
 	elements.dialogueText.textContent = dia.text;
 

@@ -1,14 +1,32 @@
 [
 	{
 		"id": 0,
-		"name": "room",
-		"filename": "blank-room.png",
-		"bgColor": "#7b7b7b"
+		"name": "bg - default",
+		"filename": "default-bg.png"
 	},
 	{
 		"id": 1,
-		"name": "main menu",
-		"filename": "start-screen.png",
-		"bgColor": "#7b7b7b"
+		"name": "char - default",
+		"filename": "default-char.png"
+	},
+	{
+		"id": 2,
+		"name": "bg - room",
+		"filename": "blank-room.png"
+	},
+	{
+		"id": 3,
+		"name": "bg - main menu",
+		"filename": "start-screen.png"
+	},
+	{
+		"id": 4,
+		"name": "char - Green Man",
+		"filename": "green-man.png"
+	},
+	{
+		"id": 5,
+		"name": " char - Red Man",
+		"filename": "red-man.png"
 	}
 ]

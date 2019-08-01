@@ -20,6 +20,11 @@ function character(id: number) {
 		if (c.id === id) return c;
 	}
 }
+function background(id: number) {
+	for (const bg of data.backgrounds) {
+		if (bg.id === id) return bg;
+	}
+}
 
-const lookupData = { dialogue, choice, image, character };
+const lookupData = { dialogue, choice, image, character, background };
 export default lookupData;

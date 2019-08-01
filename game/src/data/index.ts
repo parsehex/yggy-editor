@@ -1,10 +1,11 @@
-import { Dialogue, Img, DialogueChoice, Character } from '../types';
+import { Dialogue, Image, DialogueChoice, Character, Background } from '../types';
 
 interface Data {
 	dialogue: Dialogue[];
-	images: Img[];
+	images: Image[];
 	choices: DialogueChoice[];
 	characters: Character[];
+	backgrounds: Background[];
 }
 
 const data: Data = {
@@ -12,6 +13,7 @@ const data: Data = {
 	images: null,
 	choices: null,
 	characters: null,
+	backgrounds: null,
 };
 
 export default data;

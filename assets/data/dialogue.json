@@ -2,7 +2,7 @@
 	{
 		"id": 0,
 		"characterID": 0,
-		"imageID": 0,
+		"backgroundID": 0,
 		"text": "Hi, how are you?",
 		"choices": [
 			0,
@@ -14,14 +14,14 @@
 	{
 		"id": 1,
 		"characterID": 0,
-		"imageID": 0,
+		"backgroundID": 0,
 		"text": "I don't really have anything else to say to you.",
 		"choices": []
 	},
 	{
 		"id": 2,
 		"characterID": 0,
-		"imageID": 0,
+		"backgroundID": 0,
 		"text": "What does \"ambivalent\" mean?",
 		"choices": [
 			4,
@@ -31,7 +31,7 @@
 	{
 		"id": 3,
 		"characterID": 0,
-		"imageID": 0,
+		"backgroundID": 0,
 		"text": "Huh.",
 		"choices": []
 	}
