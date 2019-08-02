@@ -1,16 +1,17 @@
-#tree-tab {
+div#tree-tab {
 	font-family: sans-serif;
-	height: 85%;
-	overflow:	auto;
 	
+	$headerHeight: 30px;
 	& > div {
 		position: fixed;
 		background-color: rgba(255, 255, 255, 0.75);
-		width: 48.5%;
+		width: 10em;
+		text-align: center;
 		padding: 5px;
+		height: $headerHeight;
 	}
 	& > ul {
-		margin-top: 40px;
+		margin-top: $headerHeight !important;
 	}
 	
 	ul {
