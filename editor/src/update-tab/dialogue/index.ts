@@ -14,8 +14,4 @@ export default function updateDialogueTab() {
 	updateChoices(d);
 	updateCharacter(d);
 	updateBackground(d);
-
-	// update history buttons
-	disabled(editorElements.btnBack, editorState.currentHistoryIndex === 0);
-	disabled(editorElements.btnNext, editorState.currentHistoryIndex === editorState.history.length - 1);
 }

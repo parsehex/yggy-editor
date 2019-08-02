@@ -27,4 +27,5 @@ export default {
 		fileInput: <HTMLInputElement>querySelector('#images-tab input[type="file"]'),
 		uploadButton: <HTMLButtonElement>querySelector('#images-tab #upload button.submit'),
 	},
+	tree: <HTMLDivElement>querySelector('#tree-tab > ul'),
 };

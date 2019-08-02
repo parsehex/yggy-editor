@@ -1,0 +1,84 @@
+#tree-tab {
+	font-family: sans-serif;
+	height: 85%;
+	// width: 95%;
+	overflow:	auto;
+	padding-right: 15px;
+	
+	& > ul {
+		// width: 90%;
+		// display: inline-block;
+	}
+	& > div.padding {
+		// float: right;
+		// width: 5%;
+		// height: 100%;
+		// display: inline-block;
+	}
+	
+	ul {
+		list-style-type: none;
+		padding-left: 15px;
+		border-left: 1px solid gray;
+		
+		// &.choices {
+		// 	border-color: blue;
+		// }
+	}
+	ul, li {
+		// margin-top: 3px;
+	}
+	
+	li.dialogue {
+		&.active > span.text {
+			font-weight: bold;
+		}
+		&.highlight > span.text {
+			color: white;;
+			background-color: #1E88E5;
+			// border: 1px solid #263238;
+		}
+		&.reference > span.text {
+			font-style: italic;
+			// color: #424242;
+		}
+	}
+	
+	li {
+		white-space: nowrap;
+		
+		& > *:not(ul) {
+			// required to be able to set span width (which is required for text overflow)
+			display: inline-block;
+		}
+		& > span.text {
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+			max-width: 275px;
+			padding: 2px;
+		}
+		&.collapsed {
+			& > span.text {
+				border-bottom: 1px solid;
+			}
+			& > ul {
+				display: none;
+			}
+		}
+		
+		&:not(.dialogue) > span.text {
+			color: #0D47A1;
+		}
+		
+		&.dialogue > span.character {
+			font-size: 0.85em;
+			padding: 2px;
+			margin: 0 4px;
+			border: 1px solid gray;
+		}
+		&.dialogue > button.go-to {
+			margin-right: 15px;
+		}
+	}
+}

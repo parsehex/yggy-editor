@@ -1,5 +1,6 @@
 import lookupData from 'game/data/lookup';
 import data from 'game/data';
+import editorState from 'state';
 
 function choice(id: number) {
 	const c = lookupData.choice(id);
@@ -11,6 +12,10 @@ function choice(id: number) {
 			d.choices.splice(d.choices.indexOf(id), 1);
 		}
 	}
+
+	// remove from tree state just in case
+	const ti = editorState.tree.collapsed.choices.indexOf(c.id);
+	if (ti > -1) editorState.tree.collapsed.choices.splice(ti, 1);
 }
 function character(id: number) {
 	const ch = lookupData.character(id);

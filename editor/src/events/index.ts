@@ -7,12 +7,14 @@ import { initDialogueTabEvents } from './dialogue';
 import initCharactersTabEvents from './characters';
 import initBackgroundsTabEvents from './background';
 import initImagesTabEvents from './images';
+import initTreeTabEvents from './tree';
 
 export function initEditorEvents() {
 	initDialogueTabEvents();
 	initCharactersTabEvents();
 	initBackgroundsTabEvents();
 	initImagesTabEvents();
+	initTreeTabEvents();
 
 	// history previous
 	_editorDelegate('button#nav-back', 'click', () => {
