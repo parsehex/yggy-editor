@@ -10,7 +10,7 @@ import createData from 'data/create';
 
 export default function initTreeTabEvents() {
 	// toggle item collapse
-	_editorDelegate('#tree-tab li > span.text', 'click', (e, t) => {
+	_editorDelegate('#tree-tab li > div.content > span.text', 'click', (e, t) => {
 		const li = <HTMLLIElement>t.closest('li');
 		const newState = li.classList.toggle('collapsed');
 		const id = +li.dataset.id;
@@ -26,7 +26,7 @@ export default function initTreeTabEvents() {
 	});
 
 	// go to dialogue
-	_editorDelegate('#tree-tab li.dialogue > button.go-to', 'click', (e, t) => {
+	_editorDelegate('#tree-tab li.dialogue > div.content > button.go-to', 'click', (e, t) => {
 		const li = <HTMLLIElement>t.closest('li');
 		const id = +li.dataset.id;
 		if (gameState.currentDialogueID === id) return;
@@ -36,13 +36,13 @@ export default function initTreeTabEvents() {
 	});
 
 	// highlight referenced dialogue
-	_editorDelegate('#tree-tab li.dialogue.reference > span.text', 'mouseover', (e, t) => {
+	_editorDelegate('#tree-tab li.dialogue.reference > div.content > span.text', 'mouseover', (e, t) => {
 		const li = <HTMLLIElement>t.closest('li.dialogue');
 		const id = +li.dataset.id;
 		const dEl = querySelector(`#tree-tab li.dialogue:not(.reference)[data-id="${id}"]`);
 		dEl.classList.add('highlight');
 	});
-	_editorDelegate('#tree-tab li.dialogue.reference > span.text', 'mouseout', (e, t) => {
+	_editorDelegate('#tree-tab li.dialogue.reference > div.content > span.text', 'mouseout', (e, t) => {
 		const li = <HTMLLIElement>t.closest('li.dialogue');
 		const id = +li.dataset.id;
 		const dEl = querySelector(`#tree-tab li.dialogue:not(.reference)[data-id="${id}"]`);
@@ -50,7 +50,7 @@ export default function initTreeTabEvents() {
 	});
 
 	// dialogue link button
-	_editorDelegate('#tree-tab li.dialogue > button.link', 'click', (e, t) => {
+	_editorDelegate('#tree-tab li.dialogue > div.content > button.link', 'click', (e, t) => {
 		if (editorState.tree.linking.finalized) resetLinkMemory();
 
 		const li = <HTMLLIElement>t.closest('li');
@@ -67,7 +67,7 @@ export default function initTreeTabEvents() {
 	});
 
 	// choice link button
-	_editorDelegate('#tree-tab li.choice > button.link', 'click', (e, t) => {
+	_editorDelegate('#tree-tab li.choice > div.content > button.link', 'click', (e, t) => {
 		if (editorState.tree.linking.finalized) resetLinkMemory();
 
 		const li = <HTMLLIElement>t.closest('li');
@@ -124,7 +124,7 @@ export default function initTreeTabEvents() {
 	});
 
 	// unlink choice from its dialogue
-	_editorDelegate('#tree-tab li.choice > button.unlink', 'click', (e, t) => {
+	_editorDelegate('#tree-tab li.choice > div.content > button.unlink', 'click', (e, t) => {
 		const li = <HTMLLIElement>t.closest('li');
 		const id = +li.dataset.id;
 		const c = lookupData.choice(id);
@@ -133,7 +133,7 @@ export default function initTreeTabEvents() {
 	});
 
 	// create dialogue from choice
-	_editorDelegate('#tree-tab li.choice > button.create-dialogue', 'click', (e, t) => {
+	_editorDelegate('#tree-tab li.choice > div.content > button.create-dialogue', 'click', (e, t) => {
 		const dialogueLi = <HTMLLIElement>t.closest('li.dialogue');
 		const parentDialogueId = +dialogueLi.dataset.id;
 		const choiceLi = <HTMLLIElement>t.closest('li.choice');

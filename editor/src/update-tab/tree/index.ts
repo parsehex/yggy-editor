@@ -39,17 +39,21 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 	if (editorState.tree.collapsed.dialogue.indexOf(d.id) > -1) li.classList.add('collapsed');
 	target.append(li);
 
+	const contentDiv = createElement('div');
+	contentDiv.className = 'content';
+	li.append(contentDiv);
+
 	const dialogueSpan = createElement('span');
 	dialogueSpan.className = 'text';
 	dialogueSpan.textContent = d.text;
 	dialogueSpan.title = title;
-	li.append(dialogueSpan);
+	contentDiv.append(dialogueSpan);
 
 	const ch = lookupData.character(d.characterID);
 	const charSpan = createElement('span');
 	charSpan.className = 'character';
 	charSpan.textContent = ch.name;
-	li.append(charSpan);
+	contentDiv.append(charSpan);
 
 	// end branch on references
 	if (isReference) return;
@@ -59,7 +63,7 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 	btnGo.type = 'button';
 	btnGo.title = 'Go to dialogue in preview';
 	btnGo.textContent = 'Go';
-	li.append(btnGo);
+	contentDiv.append(btnGo);
 
 	const btnLink = createElement('button');
 	btnLink.className = 'link';
@@ -70,7 +74,7 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 	if (!editorState.tree.linking.finalized && editorState.tree.linking.dialogueID === d.id) {
 		btnLink.classList.add('active');
 	}
-	li.append(btnLink);
+	contentDiv.append(btnLink);
 
 	// end branch if there are no choices
 	if (d.choices.length === 0) return;
@@ -90,11 +94,15 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 		if (c.text.length === 0) choiceLi.classList.add('cycle-dialogue');
 		choicesUl.append(choiceLi);
 
+		const choiceContentDiv = createElement('div');
+		choiceContentDiv.className = 'content';
+		choiceLi.append(choiceContentDiv);
+
 		const textSpan = createElement('span');
 		textSpan.className = 'text';
 		textSpan.textContent = cText;
 		textSpan.title = title;
-		choiceLi.append(textSpan);
+		choiceContentDiv.append(textSpan);
 
 		const choiceBtnLink = createElement('button');
 		choiceBtnLink.className = 'link';
@@ -104,7 +112,7 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 		if (!editorState.tree.linking.finalized && editorState.tree.linking.choiceID === c.id) {
 			choiceBtnLink.classList.add('active');
 		}
-		choiceLi.append(choiceBtnLink);
+		choiceContentDiv.append(choiceBtnLink);
 
 		// end choice-branch if choice doesn't point to a dialogue
 		if (c.targetDialogueID === null) {
@@ -112,7 +120,7 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 			choiceBtnCreateDialogue.className = 'create-dialogue';
 			choiceBtnCreateDialogue.type = 'button';
 			choiceBtnCreateDialogue.textContent = '+ Dialogue';
-			choiceLi.append(choiceBtnCreateDialogue);
+			choiceContentDiv.append(choiceBtnCreateDialogue);
 			continue;
 		} else {
 			const choiceBtnUnlink = createElement('button');
@@ -120,7 +128,7 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 			choiceBtnUnlink.type = 'button';
 			choiceBtnUnlink.title = 'Remove dialogue link';
 			choiceBtnUnlink.textContent = 'Unlink';
-			choiceLi.append(choiceBtnUnlink);
+			choiceContentDiv.append(choiceBtnUnlink);
 		}
 
 		const cd = lookupData.dialogue(c.targetDialogueID);

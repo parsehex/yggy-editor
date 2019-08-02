@@ -4,7 +4,7 @@ div#tree-tab {
 	$headerHeight: 30px;
 	& > div {
 		position: fixed;
-		background-color: rgba(255, 255, 255, 0.75);
+		background-color: rgba(255, 255, 255, 0.8);
 		width: 10em;
 		text-align: center;
 		padding: 5px;
@@ -18,23 +18,27 @@ div#tree-tab {
 		list-style-type: none;
 		padding-left: 15px;
 		border-left: 1px solid gray;
+		margin: 6px 0;
+		
+		// makes it easier to pick a branch in devtools:
+		background-color: white;
 	}
 	
 	li.dialogue {
-		&.active > span.text {
+		&.active > div.content > span.text {
 			font-weight: bold;
 		}
-		&.highlight > span.text {
+		&.highlight > div.content > span.text {
 			color: white;;
 			background-color: #1E88E5;
 		}
-		&.reference > span.text {
+		&.reference > div.content > span.text {
 			font-style: italic;
 		}
 	}
 	
 	li.choice {
-		&.cycle-dialogue > span.text {
+		&.cycle-dialogue > div.content > span.text {
 			font-style: italic;
 			color: #263238;
 		}
@@ -42,6 +46,24 @@ div#tree-tab {
 	
 	li {
 		white-space: nowrap;
+		background-color: white;
+		
+		div.content {
+			display: flex;
+			margin: 0 2px;
+			
+			* {
+				// required to be able to set span width (which is required for text overflow)
+				display: inline-block;
+			}
+			span.text {
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+				max-width: 275px;
+				padding: 2px;
+			}
+		}
 		
 		button {
 			margin: 0 7px;
@@ -57,19 +79,8 @@ div#tree-tab {
 			}
 		}
 		
-		& > *:not(ul) {
-			// required to be able to set span width (which is required for text overflow)
-			display: inline-block;
-		}
-		& > span.text {
-			text-overflow: ellipsis;
-			white-space: nowrap;
-			overflow: hidden;
-			max-width: 275px;
-			padding: 2px;
-		}
 		&.collapsed {
-			& > span.text {
+			& > div.content > span.text {
 				border-bottom: 1px solid;
 			}
 			& > ul {
@@ -77,11 +88,11 @@ div#tree-tab {
 			}
 		}
 		
-		&:not(.dialogue) > span.text {
+		&:not(.dialogue) > div.content > span.text {
 			color: #0D47A1;
 		}
 		
-		&.dialogue > span.character {
+		&.dialogue > div.content > span.character {
 			font-size: 0.85em;
 			padding: 2px;
 			margin: 0 4px;
