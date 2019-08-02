@@ -44,6 +44,7 @@ export function initDialogueTabEvents() {
 
 	// create dialogue from choice
 	_editorDelegate('#choices button.create-dialogue', 'click', (e, t) => {
+		const d = lookupData.dialogue(gameState.currentDialogueID);
 		const choiceId = +t.dataset.id;
 		const choice = lookupData.choice(choiceId);
 		const dialogueId = getFreeID('dialogue');
@@ -51,8 +52,9 @@ export function initDialogueTabEvents() {
 			id: dialogueId,
 			text: 'Dialogue text',
 			choices: [],
-			backgroundID: data.backgrounds[0].id,
-			characterID: data.characters[0].id,
+			// use same background and character by default
+			backgroundID: d.backgroundID,
+			characterID: d.characterID,
 		});
 		choice.targetDialogueID = dialogueId;
 		draw();
