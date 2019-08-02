@@ -17,13 +17,6 @@
 		list-style-type: none;
 		padding-left: 15px;
 		border-left: 1px solid gray;
-		
-		// &.choices {
-		// 	border-color: blue;
-		// }
-	}
-	ul, li {
-		// margin-top: 3px;
 	}
 	
 	li.dialogue {
@@ -33,11 +26,16 @@
 		&.highlight > span.text {
 			color: white;;
 			background-color: #1E88E5;
-			// border: 1px solid #263238;
 		}
 		&.reference > span.text {
 			font-style: italic;
-			// color: #424242;
+		}
+	}
+	
+	li.choice {
+		&.cycle-dialogue > span.text {
+			font-style: italic;
+			color: #263238;
 		}
 	}
 	
@@ -49,7 +47,7 @@
 			font-size: 0.7em;
 			
 			// add some space to whichever button is last
-			&.link {
+			&.unlink {
 				margin-right: 15px;
 			}
 			

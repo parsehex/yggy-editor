@@ -81,12 +81,13 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 
 	for (const cId of d.choices) {
 		const c = lookupData.choice(cId);
-		const cText = c.text.length > 0 ? c.text : '(no text)';
+		const cText = c.text.length > 0 ? c.text : '(cycle dialogue)';
 
 		const choiceLi = createElement('li');
 		choiceLi.className = 'choice';
 		choiceLi.dataset.id = cId.toString();
 		if (editorState.tree.collapsed.choices.indexOf(c.id) > -1) choiceLi.classList.add('collapsed');
+		if (c.text.length === 0) choiceLi.classList.add('cycle-dialogue');
 		choicesUl.append(choiceLi);
 
 		const textSpan = createElement('span');
@@ -105,6 +106,13 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 		}
 		choiceLi.append(choiceBtnLink);
 
+		const choiceBtnUnlink = createElement('button');
+		choiceBtnUnlink.className = 'unlink';
+		choiceBtnUnlink.type = 'button';
+		choiceBtnUnlink.title = 'Remove dialogue link';
+		choiceBtnUnlink.textContent = 'Unlink';
+		choiceLi.append(choiceBtnUnlink);
+
 		// end choice-branch if choice doesn't point to a dialogue
 		if (c.targetDialogueID === null) continue;
 
@@ -114,35 +122,3 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 		makeDialogueBranch(cd, dUl);
 	}
 }
-
-// function makeDialogueItem(d: Dialogue) {
-// 	// if this dialogue has already been drawn then don't recursively draw it
-// 	if (!tmp.querySelector(`li.dialogue[data-id="${cd.id}"]`)) {
-// 		const dUl = createElement('ul');
-// 		choiceLi.append(dUl);
-// 		makeDialogueBranch(cd, dUl);
-// 	} else {
-// 		// create just a single line denoting a reference
-// 		const dUl = createElement('ul');
-// 		choiceLi.append(dUl);
-
-// 		const dLi = createElement('li');
-// 		dLi.className = 'dialogue reference';
-// 		dLi.dataset.id = cd.id.toString();
-// 		dUl.append(dLi);
-
-// 		console.log(gameState.currentDialogueID, cd);
-
-// 		// TODO why is this activating on some other random dialogue?
-// 		if (gameState.currentDialogueID === cd.id) li.classList.add('active');
-
-// 		const dSpan = createElement('span');
-// 		dSpan.textContent = cd.text;
-// 		dSpan.className = 'text';
-// 		dLi.append(dSpan);
-// 	}
-// }
-
-// function makeChoicesList() {
-// 	// 
-// }

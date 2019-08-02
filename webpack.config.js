@@ -28,6 +28,7 @@ module.exports = (env, { script }) => {
       extensions: ['.ts', '.js'],
       plugins: [],
     },
+    devtool: 'cheap-source-map',
   };
 
   if (script === 'editor') {

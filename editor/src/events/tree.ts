@@ -50,6 +50,8 @@ export default function initTreeTabEvents() {
 
 	// dialogue link button
 	_editorDelegate('#tree-tab li.dialogue > button.link', 'click', (e, t) => {
+		if (editorState.tree.linking.finalized) resetLinkMemory();
+
 		const li = <HTMLLIElement>t.closest('li');
 		const id = +li.dataset.id;
 
@@ -65,6 +67,8 @@ export default function initTreeTabEvents() {
 
 	// choice link button
 	_editorDelegate('#tree-tab li.choice > button.link', 'click', (e, t) => {
+		if (editorState.tree.linking.finalized) resetLinkMemory();
+
 		const li = <HTMLLIElement>t.closest('li');
 		const choiceId = +li.dataset.id;
 		const c = lookupData.choice(choiceId);
@@ -84,20 +88,18 @@ export default function initTreeTabEvents() {
 		finalizeLink();
 	});
 
+	function resetLinkMemory() {
+		editorState.tree.linking.choiceID = null;
+		editorState.tree.linking.dialogueID = null;
+		editorState.tree.linking.srcDialogueID = null;
+	}
+
 	function finalizeLink() {
 		// do nothing if choiceID and dialogueID are set
 		if (editorState.tree.linking.choiceID === null || editorState.tree.linking.dialogueID === null) {
 			editorState.tree.linking.finalized = false;
 			updateActiveTab();
 			return;
-		}
-
-		if (editorState.tree.linking.finalized) {
-			// already finalized which means that this is a new link
-			// forget previous link
-			editorState.tree.linking.choiceID = null;
-			editorState.tree.linking.dialogueID = null;
-			editorState.tree.linking.srcDialogueID = null;
 		}
 
 		const c = lookupData.choice(editorState.tree.linking.choiceID);
@@ -117,6 +119,15 @@ export default function initTreeTabEvents() {
 		const c = lookupData.choice(last.choiceID);
 		c.targetDialogueID = last.srcDialogueID;
 
+		draw();
+	});
+
+	// unlink choice from its dialogue
+	_editorDelegate('#tree-tab li.choice > button.unlink', 'click', (e, t) => {
+		const li = <HTMLLIElement>t.closest('li');
+		const id = +li.dataset.id;
+		const c = lookupData.choice(id);
+		c.targetDialogueID = null;
 		draw();
 	});
 }
