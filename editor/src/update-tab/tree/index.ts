@@ -2,19 +2,26 @@ import { Dialogue } from 'game/types';
 import data from 'game/data';
 import * as morph from 'nanomorph';
 import editorElements from 'editor-elements';
-import { createElement, querySelector } from 'dom-util';
+import { createElement, querySelector, disabled } from 'dom-util';
 import lookupData from 'game/data/lookup';
 import gameState from 'game/state';
 import editorState from 'state';
 
 let tmp: HTMLUListElement;
 export default function updateTreeTab() {
-	tmp = <HTMLUListElement>editorElements.tree.cloneNode();
+	tmp = <HTMLUListElement>editorElements.tree.list.cloneNode();
 
 	// TODO need a way to set certain dialogue as "first"
 	const d = data.dialogue[0];
 	makeDialogueBranch(d, tmp);
-	morph(editorElements.tree, tmp);
+	morph(editorElements.tree.list, tmp);
+
+	// enable undo only if finalized and dialogue/choice ids are set
+	disabled(editorElements.tree.btnUndo, (
+		!editorState.tree.linking.finalized ||
+		editorState.tree.linking.dialogueID === null ||
+		editorState.tree.linking.choiceID === null
+	));
 }
 
 const title = 'Click to toggle collapse';
@@ -38,10 +45,10 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 	dialogueSpan.title = title;
 	li.append(dialogueSpan);
 
-	const c = lookupData.character(d.characterID);
+	const ch = lookupData.character(d.characterID);
 	const charSpan = createElement('span');
 	charSpan.className = 'character';
-	charSpan.textContent = c.name;
+	charSpan.textContent = ch.name;
 	li.append(charSpan);
 
 	// end branch on references
@@ -54,6 +61,17 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 	btnGo.textContent = 'Go';
 	li.append(btnGo);
 
+	const btnLink = createElement('button');
+	btnLink.className = 'link';
+	btnLink.type = 'button';
+	btnLink.title = 'Link dialogue to choice';
+	btnLink.textContent = 'Link';
+	// don't highlight button if link is already finalized
+	if (!editorState.tree.linking.finalized && editorState.tree.linking.dialogueID === d.id) {
+		btnLink.classList.add('active');
+	}
+	li.append(btnLink);
+
 	// end branch if there are no choices
 	if (d.choices.length === 0) return;
 
@@ -63,6 +81,7 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 
 	for (const cId of d.choices) {
 		const c = lookupData.choice(cId);
+		const cText = c.text.length > 0 ? c.text : '(no text)';
 
 		const choiceLi = createElement('li');
 		choiceLi.className = 'choice';
@@ -72,9 +91,19 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 
 		const textSpan = createElement('span');
 		textSpan.className = 'text';
-		textSpan.textContent = c.text;
+		textSpan.textContent = cText;
 		textSpan.title = title;
 		choiceLi.append(textSpan);
+
+		const choiceBtnLink = createElement('button');
+		choiceBtnLink.className = 'link';
+		choiceBtnLink.type = 'button';
+		choiceBtnLink.title = 'Link choice to dialogue';
+		choiceBtnLink.textContent = 'Link';
+		if (!editorState.tree.linking.finalized && editorState.tree.linking.choiceID === c.id) {
+			choiceBtnLink.classList.add('active');
+		}
+		choiceLi.append(choiceBtnLink);
 
 		// end choice-branch if choice doesn't point to a dialogue
 		if (c.targetDialogueID === null) continue;

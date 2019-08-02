@@ -7,6 +7,12 @@ interface EditorState {
 			dialogue: number[];
 			choices: number[]
 		};
+		linking: {
+			dialogueID: number;
+			srcDialogueID: number;
+			choiceID: number;
+			finalized: boolean;
+		};
 	};
 }
 
@@ -15,6 +21,12 @@ const editorState: EditorState = {
 	currentHistoryIndex: -1,
 	tree: {
 		collapsed: { dialogue: [], choices: [] },
+		linking: {
+			dialogueID: null,
+			srcDialogueID: null,
+			choiceID: null,
+			finalized: false,
+		},
 	},
 };
 
