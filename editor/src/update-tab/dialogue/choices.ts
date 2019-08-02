@@ -47,7 +47,7 @@ export default function updateChoices(d: Dialogue) {
 	const btnAdd = createElement('button');
 	btnAdd.className = 'add';
 	btnAdd.type = 'button';
-	btnAdd.textContent = '+';
+	btnAdd.textContent = '+ Choice';
 	btnAdd.title = 'Add choice';
 	divAdd.append(btnAdd);
 

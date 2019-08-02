@@ -106,15 +106,22 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 		}
 		choiceLi.append(choiceBtnLink);
 
-		const choiceBtnUnlink = createElement('button');
-		choiceBtnUnlink.className = 'unlink';
-		choiceBtnUnlink.type = 'button';
-		choiceBtnUnlink.title = 'Remove dialogue link';
-		choiceBtnUnlink.textContent = 'Unlink';
-		choiceLi.append(choiceBtnUnlink);
-
 		// end choice-branch if choice doesn't point to a dialogue
-		if (c.targetDialogueID === null) continue;
+		if (c.targetDialogueID === null) {
+			const choiceBtnCreateDialogue = createElement('button');
+			choiceBtnCreateDialogue.className = 'create-dialogue';
+			choiceBtnCreateDialogue.type = 'button';
+			choiceBtnCreateDialogue.textContent = '+ Dialogue';
+			choiceLi.append(choiceBtnCreateDialogue);
+			continue;
+		} else {
+			const choiceBtnUnlink = createElement('button');
+			choiceBtnUnlink.className = 'unlink';
+			choiceBtnUnlink.type = 'button';
+			choiceBtnUnlink.title = 'Remove dialogue link';
+			choiceBtnUnlink.textContent = 'Unlink';
+			choiceLi.append(choiceBtnUnlink);
+		}
 
 		const cd = lookupData.dialogue(c.targetDialogueID);
 		const dUl = createElement('ul');

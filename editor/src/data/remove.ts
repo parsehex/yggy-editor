@@ -61,5 +61,9 @@ function image(id: number) {
 		}
 	}
 }
+function dialogue(id: number) {
+	const d = lookupData.dialogue(id);
+	data.dialogue.splice(data.dialogue.indexOf(d), 1);
+}
 
-export default { choice, character, background, image };
+export default { choice, character, background, image, dialogue };

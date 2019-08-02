@@ -6,6 +6,7 @@ import draw from 'draw';
 import { push } from 'navigation';
 import { querySelector } from 'dom-util';
 import updateActiveTab from 'update-tab';
+import createData from 'data/create';
 
 export default function initTreeTabEvents() {
 	// toggle item collapse
@@ -128,6 +129,22 @@ export default function initTreeTabEvents() {
 		const id = +li.dataset.id;
 		const c = lookupData.choice(id);
 		c.targetDialogueID = null;
+		draw();
+	});
+
+	// create dialogue from choice
+	_editorDelegate('#tree-tab li.choice > button.create-dialogue', 'click', (e, t) => {
+		const dialogueLi = <HTMLLIElement>t.closest('li.dialogue');
+		const parentDialogueId = +dialogueLi.dataset.id;
+		const choiceLi = <HTMLLIElement>t.closest('li.choice');
+		const choiceId = +choiceLi.dataset.id;
+
+		const parentDialogue = lookupData.dialogue(parentDialogueId);
+		const thisChoice = lookupData.choice(choiceId);
+
+		// use same background and character as parent dialogue by default
+		const newD = createData.dialogue(parentDialogue.backgroundID, parentDialogue.characterID);
+		thisChoice.targetDialogueID = newD.id;
 		draw();
 	});
 }
