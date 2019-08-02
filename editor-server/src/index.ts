@@ -2,6 +2,9 @@ import * as http from 'http';
 import routeStatic from './static-router';
 import routeAPI from './api';
 
+let port: any = process.argv[2];
+if (!port) port = 8081;
+
 const ipWhitelist = ['127.0.0.1', '75.71.190.242'];
 const server = http.createServer(async (req, res) => {
 	let foundIp = false;
@@ -27,4 +30,4 @@ const server = http.createServer(async (req, res) => {
 	res.end();
 });
 
-server.listen(8080, () => console.log('Editor server running on 8080'));
+server.listen(port, () => console.log(`Editor server running on ${port}`));
