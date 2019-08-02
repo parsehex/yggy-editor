@@ -5,6 +5,7 @@ interface Elements {
 	charImg: HTMLDivElement;
 	dialogueText: HTMLDivElement;
 	choicesDiv: HTMLDivElement;
+	continueInd: HTMLDivElement;
 }
 
 const elements: Elements = {
@@ -14,6 +15,7 @@ const elements: Elements = {
 	charImg: null,
 	dialogueText: null,
 	choicesDiv: null,
+	continueInd: null,
 };
 
 export default elements;
@@ -29,4 +31,5 @@ export function initElements() {
 	elements.charImg = <HTMLDivElement>elements.doc.getElementById('character');
 	elements.dialogueText = <HTMLDivElement>elements.doc.querySelector('#dialogue-box .text');
 	elements.choicesDiv = <HTMLDivElement>elements.doc.getElementById('choices');
+	elements.continueInd = <HTMLDivElement>elements.doc.getElementById('continue-indicator');
 }

@@ -18,10 +18,22 @@ export default function drawScene() {
 	elements.dialogueText.textContent = dia.text;
 
 	resetChoices();
+	let allHidden = true;
 	for (let i = 0; i < dia.choices.length; i++) {
 		const choiceID = dia.choices[i];
 		const c = lookupData.choice(choiceID);
 		addChoice(c.text, choiceID);
+		if (c.text.length > 0) allHidden = false;
+	}
+
+	// if all choices are hidden then show a "continue" indicator
+	if (allHidden) {
+		if (dia.choices.length > 1) {
+			throw new Error(`All ${dia.choices.length} dialogue choices are hidden`);
+		}
+		elements.continueInd.classList.remove('hidden');
+	} else {
+		elements.continueInd.classList.add('hidden');
 	}
 }
 
@@ -35,6 +47,11 @@ function addChoice(text: string, id: number) {
 	btn.type = 'button';
 	btn.textContent = text;
 	btn.dataset.id = id.toString();
+	if (text.length === 0) {
+		// for convenience, just hide blank choices
+		// (maybe there's a reason they're blank)
+		btn.classList.add('hidden');
+	}
 
 	elements.choicesDiv.append(btn);
 }

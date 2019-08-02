@@ -1,3 +1,5 @@
+.hidden { display: none; }
+
 html, body {
 	margin: 0;
 	width: 100%;
@@ -58,7 +60,16 @@ div#dialogue-box {
 	}
 	
 	.text {
-		font-size: 1.8em;
+		font-size: 1.5em;
+	}
+	
+	#continue-indicator {
+		position: absolute;
+		right: 30px;
+		bottom: 20px;
+		font-size: 1.5em;
+		font-weight: bold;
+		cursor: default;
 	}
 }
 
