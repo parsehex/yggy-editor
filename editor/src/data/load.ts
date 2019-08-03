@@ -2,7 +2,6 @@ import data from 'game/data';
 import loadData from 'game/data/load';
 
 export default async function _editorLoadData() {
-	console.log('Loading data...');
 	const keys = Object.keys(data);
 	let loadedData: any = {};
 
@@ -13,10 +12,15 @@ export default async function _editorLoadData() {
 		loadedData[k] = JSON.parse(v);
 	}
 
-	if (broken) {
+	// server runs on 80 now (reverse proxy)
+	const devMode = location.href.includes('8080');
+	if (broken || devMode) {
+		console.log('Allowing game to load data...');
 		await loadData();
 	} else {
 		Object.assign(data, loadedData);
-		console.log('Data loaded from local storage.');
+		console.log('Loaded data from local storage.');
 	}
+	console.log('Game data:', data);
+	(<any>window).data = data;
 }

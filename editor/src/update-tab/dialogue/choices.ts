@@ -1,16 +1,16 @@
 import editorElements from 'editor-elements';
-import lookupData from 'game/data/lookup';
+import getData from 'game/data/get';
 import { Dialogue } from 'game/types';
 import * as morph from 'nanomorph';
 import { createElement } from 'dom-util';
 
 const tmp = <HTMLDivElement>editorElements.dialogueTab.choices.cloneNode();
 export default function updateChoices(d: Dialogue) {
-	const c = d.choices;
+	const { choices } = d;
 	tmp.innerHTML = '';
 
-	for (const id of c) {
-		const choice = lookupData.choice(id);
+	for (const id of choices) {
+		const c = getData('choices', id);
 
 		const div = createElement('div');
 
@@ -18,24 +18,24 @@ export default function updateChoices(d: Dialogue) {
 		textarea.className = 'choice';
 		textarea.cols = 30;
 		textarea.placeholder = 'Choice text';
-		textarea.value = choice.text;
-		textarea.dataset.id = choice.id.toString();
+		textarea.value = c.text;
+		textarea.dataset.id = c.id.toString();
 		div.append(textarea);
 
 		const btnDelete = createElement('button');
 		btnDelete.className = 'delete';
 		btnDelete.type = 'button';
 		btnDelete.textContent = 'X';
-		btnDelete.dataset.id = choice.id.toString();
+		btnDelete.dataset.id = c.id.toString();
 		btnDelete.title = 'Delete choice';
 		div.append(btnDelete);
 
-		if (choice.targetDialogueID === null) {
+		if (c.targetDialogueID === null) {
 			const btnNewDialogue = createElement('button');
 			btnNewDialogue.className = 'create-dialogue';
 			btnNewDialogue.type = 'button';
 			btnNewDialogue.textContent = 'Create dialogue';
-			btnNewDialogue.dataset.id = choice.id.toString();
+			btnNewDialogue.dataset.id = c.id.toString();
 			div.append(btnNewDialogue);
 		}
 

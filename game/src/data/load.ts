@@ -1,7 +1,7 @@
 import data from './index';
 
 export default async function loadData() {
-	console.log('Loading data...');
+	// console.log('Loading data...');
 	const keys = Object.keys(data);
 	const requests: Promise<Response>[] = [];
 
@@ -18,5 +18,5 @@ export default async function loadData() {
 		data[name] = d;
 	}
 
-	console.log('Data loaded.');
+	// console.log('Data loaded.');
 }

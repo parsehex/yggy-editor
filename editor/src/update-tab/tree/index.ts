@@ -3,7 +3,7 @@ import data from 'game/data';
 import * as morph from 'nanomorph';
 import editorElements from 'editor-elements';
 import { createElement, querySelector, disabled } from 'dom-util';
-import lookupData from 'game/data/lookup';
+import getData from 'game/data/get';
 import gameState from 'game/state';
 import editorState from 'state';
 
@@ -49,7 +49,7 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 	dialogueSpan.title = title;
 	contentDiv.append(dialogueSpan);
 
-	const ch = lookupData.character(d.characterID);
+	const ch = getData('characters', d.characterID);
 	const charSpan = createElement('span');
 	charSpan.className = 'character';
 	charSpan.textContent = ch.name;
@@ -84,7 +84,7 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 	li.append(choicesUl);
 
 	for (const cId of d.choices) {
-		const c = lookupData.choice(cId);
+		const c = getData('choices', cId);
 		const cText = c.text.length > 0 ? c.text : '(cycle dialogue)';
 
 		const choiceLi = createElement('li');
@@ -131,7 +131,7 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 			choiceContentDiv.append(choiceBtnUnlink);
 		}
 
-		const cd = lookupData.dialogue(c.targetDialogueID);
+		const cd = getData('dialogue', c.targetDialogueID);
 		const dUl = createElement('ul');
 		choiceLi.append(dUl);
 		makeDialogueBranch(cd, dUl);

@@ -1,14 +1,14 @@
-import data from 'game/data';
+import data, { GameData } from 'game/data';
 
-interface IDs {
-	dialogue: number[];
-	choices: number[];
-	images: number[];
-	characters: number[];
-	backgrounds: number[];
-}
+type IDs = { [D in keyof GameData]: number[] };
 
-const ids: IDs = { dialogue: [], choices: [], characters: [], images: [], backgrounds: [], };
+const ids: IDs = <any>{};
+(() => {
+	const keys = Object.keys(data);
+	for (const k of keys) {
+		ids[k] = [];
+	}
+})();
 
 export function getFreeID(type: keyof IDs) {
 	let id = Math.floor(Math.random() * 9999999999);

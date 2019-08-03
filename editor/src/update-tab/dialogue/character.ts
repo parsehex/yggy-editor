@@ -1,11 +1,11 @@
 import { Dialogue } from 'game/types';
-import lookupData from 'game/data/lookup';
+import getData from 'game/data/get';
 import data from 'game/data';
 import editorElements from 'editor-elements';
 import { createElement } from 'dom-util';
 
 export default function updateCharacter(d: Dialogue) {
-	const c = lookupData.character(d.characterID);
+	const c = getData('characters', d.characterID);
 
 	editorElements.dialogueTab.character.innerHTML = '';
 	const chars = data.characters;

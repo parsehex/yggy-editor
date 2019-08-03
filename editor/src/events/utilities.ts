@@ -27,5 +27,7 @@ export default function initUtilitiesTabEvents() {
 		for (const oid of orphanChoiceIds) {
 			remove.choice(oid);
 		}
+
+		// TODO remove orphan frames
 	});
 }

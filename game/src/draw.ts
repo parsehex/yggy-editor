@@ -1,19 +1,20 @@
 import state from './state';
-import lookupData from './data/lookup';
+import getData from './data/get';
 import elements from './elements';
 
 /** Draws whatever the current state is */
 export default function drawScene() {
-	const dia = lookupData.dialogue(state.currentDialogueID);
-	const char = lookupData.character(dia.characterID);
-	const bg = lookupData.background(dia.backgroundID);
+	const dia = getData('dialogue', state.currentDialogueID);
+	const char = getData('characters', dia.characterID);
+	const frame = getData('frames', char.frames[dia.characterFrameIndex]);
+	const bg = getData('backgrounds', dia.backgroundID);
+	const bgImg = getData('images', bg.imageID);
+	const frameImg = getData('images', frame.imageID);
 
-	const bgImg = lookupData.image(bg.imageID);
 	elements.bg.style.backgroundImage = `url(/assets/images/${bgImg.filename})`;
 	elements.bg.style.backgroundColor = bg.bgColor;
 
-	const charImg = lookupData.image(char.imageID);
-	elements.charImg.style.backgroundImage = `url(/assets/images/${charImg.filename})`;
+	elements.charImg.style.backgroundImage = `url(/assets/images/${frameImg.filename})`;
 	elements.charName.textContent = char.name;
 	elements.dialogueText.textContent = dia.text;
 
@@ -21,7 +22,7 @@ export default function drawScene() {
 	let allHidden = true;
 	for (let i = 0; i < dia.choices.length; i++) {
 		const choiceID = dia.choices[i];
-		const c = lookupData.choice(choiceID);
+		const c = getData('choices', choiceID);
 		addChoice(c.text, choiceID);
 		if (c.text.length > 0) allHidden = false;
 	}

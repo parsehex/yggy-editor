@@ -1,5 +1,5 @@
 import _editorDelegate from 'delegate';
-import lookupData from 'game/data/lookup';
+import getData from 'game/data/get';
 import draw from 'draw';
 import { getFreeID } from 'id-service';
 import data from 'game/data';
@@ -29,7 +29,7 @@ export default function initImagesTabEvents() {
 	// change image name
 	_editorDelegate('#images-tab .list input.name', 'input', (e, t: HTMLInputElement) => {
 		const id = +t.dataset.id;
-		const img = lookupData.image(id);
+		const img = getData('images', id);
 		img.name = t.value;
 		draw();
 	});
@@ -37,7 +37,7 @@ export default function initImagesTabEvents() {
 	// change image file
 	_editorDelegate('#images-tab .list select.image-file', 'change', (e, t: HTMLSelectElement) => {
 		const imgId = +t.dataset.id;
-		const img = lookupData.image(imgId);
+		const img = getData('images', imgId);
 		img.filename = t.value;
 		draw();
 	});

@@ -1,19 +1,21 @@
-import { Dialogue, Image, DialogueChoice, Character, Background } from '../types';
+import { Dialogue, Image, Choice, Character, Background, Frame } from '../types';
 
-interface Data {
+export interface GameData {
 	dialogue: Dialogue[];
 	images: Image[];
-	choices: DialogueChoice[];
+	choices: Choice[];
 	characters: Character[];
 	backgrounds: Background[];
+	frames: Frame[];
 }
 
-const data: Data = {
+const data: GameData = {
 	dialogue: null,
 	images: null,
 	choices: null,
 	characters: null,
 	backgrounds: null,
+	frames: null,
 };
 
 export default data;

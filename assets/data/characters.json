@@ -2,11 +2,16 @@
 	{
 		"id": 0,
 		"name": "Green Man",
-		"imageID": 4
+		"frames": [
+			0
+		]
 	},
 	{
 		"id": 1,
 		"name": "Red Man",
-		"imageID": 5
+		"imageID": 5,
+		"frames": [
+			1
+		]
 	}
 ]

@@ -1,44 +1,59 @@
 import _editorDelegate from 'delegate';
-import lookupData from 'game/data/lookup';
+import getData from 'game/data/get';
 import draw from 'draw';
-import { getFreeID } from 'id-service';
-import data from 'game/data';
 import updateActiveTab from 'update-tab';
 import remove from 'data/remove';
+import createData from 'data/create';
 
 export default function initCharactersTabEvents() {
 	// create character
-	_editorDelegate('#characters-tab button.create', 'click', () => {
-		const charId = getFreeID('characters');
-		data.characters.push({
-			id: charId,
-			name: 'New Character',
-			imageID: data.images[0].id, // ID of default character image
-		});
+	_editorDelegate('#characters-tab div.character > button.create', 'click', () => {
+		createData.character();
 		updateActiveTab();
 	});
 
 	// delete character
-	_editorDelegate('#characters-tab .list button.delete', 'click', (e, t: HTMLButtonElement) => {
-		const charId = +t.dataset.id;
-		remove.character(charId);
+	_editorDelegate('#characters-tab div.character > button.delete', 'click', (e, t: HTMLButtonElement) => {
+		const div = <HTMLDivElement>t.closest('div.character');
+		const id = +div.dataset.id;
+		remove.character(id);
 		draw();
 	});
 
 	// change character name
-	_editorDelegate('#characters-tab .list input.name', 'input', (e, t: HTMLInputElement) => {
-		const id = +t.dataset.id;
-		const ch = lookupData.character(id);
+	_editorDelegate('#characters-tab div.character > input.name', 'input', (e, t: HTMLInputElement) => {
+		const div = <HTMLDivElement>t.closest('div.character');
+		const id = +div.dataset.id;
+		const ch = getData('characters', id);
 		ch.name = t.value;
 		draw();
 	});
 
-	// change character image
-	_editorDelegate('#characters-tab .list select.image', 'change', (e, t: HTMLSelectElement) => {
-		const charId = +t.dataset.id;
+	// create frame
+	_editorDelegate('#characters-tab div.frame > button.create', 'click', (e, t) => {
+		const charDiv = <HTMLDivElement>t.closest('div.character');
+		const charId = +charDiv.dataset.id;
+		const ch = getData('characters', charId);
+		const f = createData.frame('New frame');
+		ch.frames.push(f.id);
+		draw();
+	});
+
+	// change frame image
+	_editorDelegate('#characters-tab div.frame > select.image', 'change', (e, t: HTMLSelectElement) => {
+		const fDiv = <HTMLDivElement>t.closest('div.frame');
+		const fId = +fDiv.dataset.id;
 		const imgId = +t.value;
-		const char = lookupData.character(charId);
-		char.imageID = imgId;
+		const f = getData('frames', fId);
+		f.imageID = imgId;
+		draw();
+	});
+
+	// delete frame
+	_editorDelegate('#characters-tab div.frame > button.delete', 'click', (e, t: HTMLButtonElement) => {
+		const div = <HTMLDivElement>t.closest('div.frame');
+		const id = +div.dataset.id;
+		remove.frame(id);
 		draw();
 	});
 }

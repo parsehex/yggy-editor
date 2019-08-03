@@ -2,12 +2,14 @@ import * as morph from 'nanomorph';
 import editorElements from 'editor-elements';
 import data from 'game/data';
 import { createElement } from 'dom-util';
-import getImagesSelect from 'update-tab/common/images-select';
+import select from 'update-tab/common/select';
 
 export default function updateBackgroundsTab() {
 	const tmp = <HTMLDivElement>editorElements.backgroundsTab.list.cloneNode();
 	const bgs = data.backgrounds;
 	tmp.innerHTML = '';
+
+	const imageOptions = data.images.map(i => ({ text: i.name, value: i.id.toString() }));
 
 	for (const b of bgs) {
 		const div = createElement('div');
@@ -19,7 +21,7 @@ export default function updateBackgroundsTab() {
 		inputName.value = b.name;
 		div.append(inputName);
 
-		const imageSelect = getImagesSelect(b.id, b.imageID);
+		const imageSelect = select('image', b.id, imageOptions, b.imageID);
 		div.append(imageSelect);
 
 		const bgColor = createElement('input');

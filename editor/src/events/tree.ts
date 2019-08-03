@@ -1,5 +1,5 @@
 import _editorDelegate from 'delegate';
-import lookupData from 'game/data/lookup';
+import getData from 'game/data/get';
 import editorState from 'state';
 import gameState from 'game/state';
 import draw from 'draw';
@@ -72,7 +72,7 @@ export default function initTreeTabEvents() {
 
 		const li = <HTMLLIElement>t.closest('li');
 		const choiceId = +li.dataset.id;
-		const c = lookupData.choice(choiceId);
+		const c = getData('choices', choiceId);
 
 		if (editorState.tree.linking.choiceID === choiceId) {
 			editorState.tree.linking.choiceID = null;
@@ -103,7 +103,7 @@ export default function initTreeTabEvents() {
 			return;
 		}
 
-		const c = lookupData.choice(editorState.tree.linking.choiceID);
+		const c = getData('choices', editorState.tree.linking.choiceID);
 		c.targetDialogueID = editorState.tree.linking.dialogueID;
 		editorState.tree.linking.finalized = true;
 
@@ -117,7 +117,7 @@ export default function initTreeTabEvents() {
 		editorState.tree.linking.dialogueID = last.srcDialogueID;
 		editorState.tree.linking.srcDialogueID = last.dialogueID;
 
-		const c = lookupData.choice(last.choiceID);
+		const c = getData('choices', last.choiceID);
 		c.targetDialogueID = last.srcDialogueID;
 
 		draw();
@@ -127,7 +127,7 @@ export default function initTreeTabEvents() {
 	_editorDelegate('#tree-tab li.choice > div.content > button.unlink', 'click', (e, t) => {
 		const li = <HTMLLIElement>t.closest('li');
 		const id = +li.dataset.id;
-		const c = lookupData.choice(id);
+		const c = getData('choices', id);
 		c.targetDialogueID = null;
 		draw();
 	});
@@ -139,8 +139,8 @@ export default function initTreeTabEvents() {
 		const choiceLi = <HTMLLIElement>t.closest('li.choice');
 		const choiceId = +choiceLi.dataset.id;
 
-		const parentDialogue = lookupData.dialogue(parentDialogueId);
-		const thisChoice = lookupData.choice(choiceId);
+		const parentDialogue = getData('dialogue', parentDialogueId);
+		const thisChoice = getData('choices', choiceId);
 
 		// use same background and character as parent dialogue by default
 		const newD = createData.dialogue(parentDialogue.backgroundID, parentDialogue.characterID);

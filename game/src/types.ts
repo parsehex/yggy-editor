@@ -1,4 +1,4 @@
-export interface DialogueChoice {
+export interface Choice {
 	id: number;
 	text: string;
 	targetDialogueID: number;
@@ -8,10 +8,17 @@ export interface Dialogue {
 	text: string;
 	backgroundID: number;
 	characterID: number;
+	characterFrameIndex: number;
 	/** Array of choice IDs */
 	choices: number[];
 }
 export interface Character {
+	id: number;
+	name: string;
+	/** Array of frame IDs */
+	frames: number[];
+}
+export interface Frame {
 	id: number;
 	name: string;
 	imageID: number;

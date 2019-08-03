@@ -1,7 +1,8 @@
-@import './header.scss';
-@import './tabs/dialogue.scss';
-@import './tabs/images.scss';
-@import './tabs/tree.scss';
+@import './header';
+@import './tabs/characters';
+@import './tabs/dialogue';
+@import './tabs/images';
+@import './tabs/tree';
 
 .hidden { display: none; }
 .error {
