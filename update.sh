@@ -21,7 +21,7 @@ chmod +x ./start-server.sh
 chmod +x ./update.sh
 
 echo Updating systemd service file
-sudo cp ./systemd /etc/systemd/system/title-22-editor.service
+sudo cp ./systemd.service /etc/systemd/system/title-22-editor.service
 sudo systemctl daemon-reload
 
 echo npm install
