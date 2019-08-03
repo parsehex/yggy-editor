@@ -12,6 +12,8 @@ div#tree-tab {
 	}
 	& > ul {
 		margin-top: $headerHeight !important;
+		padding-left: 0 !important;
+		border-left: 0 !important;
 	}
 	
 	ul {
@@ -57,6 +59,7 @@ div#tree-tab {
 				display: inline-block;
 			}
 			span.text {
+				// TODO text is cut off after less and less space the farther right you go
 				text-overflow: ellipsis;
 				white-space: nowrap;
 				overflow: hidden;
