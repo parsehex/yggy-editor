@@ -6,16 +6,23 @@ import elements from './elements';
 export default function drawScene() {
 	const dia = getData('dialogue', state.currentDialogueID);
 	const char = getData('characters', dia.characterID);
-	const frame = getData('frames', char.frames[dia.characterFrameIndex]);
 	const bg = getData('backgrounds', dia.backgroundID);
 	const bgImg = getData('images', bg.imageID);
-	const frameImg = getData('images', frame.imageID);
 
 	elements.bg.style.backgroundImage = `url(/assets/images/${bgImg.filename})`;
 	elements.bg.style.backgroundColor = bg.bgColor;
 
-	elements.charImg.style.backgroundImage = `url(/assets/images/${frameImg.filename})`;
+	if (dia.characterFrameIndex === null) {
+		// hide character image
+		elements.charImg.classList.add('hidden');
+	} else {
+		const frame = getData('frames', char.frames[dia.characterFrameIndex]);
+		const frameImg = getData('images', frame.imageID);
+		elements.charImg.style.backgroundImage = `url(/assets/images/${frameImg.filename})`;
+		elements.charImg.classList.remove('hidden');
+	}
 	elements.charName.textContent = char.name;
+
 	elements.dialogueText.textContent = dia.text;
 
 	resetChoices();
