@@ -18,7 +18,7 @@ echo Clone master branch of title-22
 git clone -b master git@github.com:parsehex/title-22.git
 
 # put editor assets back
-mv ./title-22-backup/editor-assets_temp ./title-22/editor-assets
+mv $HOME/title-22-backup/editor-assets_temp ./title-22/editor-assets
 
 echo Script setup
 cd ./title-22
