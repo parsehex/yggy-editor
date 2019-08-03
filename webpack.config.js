@@ -1,7 +1,7 @@
 const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
-module.exports = (env, { script }) => {
+module.exports = (env, { script, mode }) => {
   const base = path.resolve(__dirname, script);
   const entry = path.join(base, 'src/index.ts');
   let outputPath = path.join(base, 'assets/js');
@@ -28,7 +28,7 @@ module.exports = (env, { script }) => {
       extensions: ['.ts', '.js'],
       plugins: [],
     },
-    devtool: 'cheap-source-map',
+    devtool: mode === 'production' ? 'source-map' : 'cheap-source-map',
   };
 
   if (script === 'editor') {
