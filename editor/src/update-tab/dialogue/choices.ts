@@ -13,9 +13,11 @@ export default function updateChoices(d: Dialogue) {
 		const c = getData('choices', id);
 
 		const div = createElement('div');
+		div.className = 'choice';
+		div.dataset.id = id.toString();
 
 		const textarea = createElement('textarea');
-		textarea.className = 'choice';
+		textarea.className = 'text';
 		textarea.cols = 30;
 		textarea.placeholder = 'Choice text';
 		textarea.value = c.text;

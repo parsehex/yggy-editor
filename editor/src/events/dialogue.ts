@@ -18,7 +18,7 @@ export function initDialogueTabEvents() {
 	});
 
 	// update choice
-	_editorDelegate(`${tab} div.choices .choice`, 'input', (e, t: HTMLTextAreaElement) => {
+	_editorDelegate(`${tab} div.choices textarea.text`, 'input', (e, t: HTMLTextAreaElement) => {
 		const id = +t.closest('div.choice').dataset.id;
 		const c = getData('choices', id);
 		c.text = t.value;
