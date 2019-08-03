@@ -1,5 +1,4 @@
-rm -rf ./editor-assets
-mkdir ./editor-assets ./editor-assets/data ./editor-assets/images
+mkdir -p ./editor-assets ./editor-assets/data ./editor-assets/images
 
 cd game
 rm -rf ./assets
