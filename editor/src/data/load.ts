@@ -13,7 +13,8 @@ export default async function _editorLoadData() {
 	}
 
 	// server runs on 80 now (reverse proxy)
-	const devMode = location.href.includes('8080');
+	const devMode = false;
+	// const devMode = location.href.includes('8080');
 	if (broken || devMode) {
 		console.log('Allowing game to load data...');
 		await loadData();
