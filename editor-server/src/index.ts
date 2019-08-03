@@ -5,7 +5,7 @@ import routeAPI from './api';
 let port: any = process.argv[2];
 if (!port) port = 8081;
 
-const ipWhitelist = ['127.0.0.1', '75.71.190.242'];
+const ipWhitelist = ['127.0.0.1', '75.71.190.242', '174.101.110.149'];
 const server = http.createServer(async (req, res) => {
 	let foundIp = false;
 	for (const ip of ipWhitelist) {
