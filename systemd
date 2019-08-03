@@ -1,0 +1,12 @@
+[Unit]
+Description=Title 22 Editor Server
+After=network.target
+
+[Service]
+User=thomas
+Group=thomas
+ExecStart=/home/thomas/title-22/start-server.sh
+WorkingDirectory=/home/thomas/title-22
+
+[Install]
+WantedBy=multi-user.target

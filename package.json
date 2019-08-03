@@ -17,7 +17,7 @@
     "sass-editor": "sass editor/scss/main.scss editor/assets/css/editor.css",
     "sass-game": "sass game/scss/main.scss game/assets/css/main.css",
     "sass": "npm run sass-game && npm run sass-editor",
-    "build": "webpack --mode production --script game",
+    "build": "webpack --mode production --script",
     "game": "http-server ./game -p 8081 -c-1",
     "editor": "node editor-server/main.js",
     "reset-editor": "rm -rf editor-assets && mkdir -p editor-assets/data editor-assets/images"
