@@ -7,13 +7,11 @@ interface SelectOption {
 }
 export default function select(
 	className: string,
-	datasetID: number,
 	options: SelectOption[],
 	initialValue?: number
 ) {
 	const select = createElement('select');
 	select.className = className;
-	select.dataset.id = datasetID.toString();
 
 	for (const o of options) {
 		const option = createElement('option');

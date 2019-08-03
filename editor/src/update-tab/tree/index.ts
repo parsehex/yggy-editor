@@ -2,7 +2,7 @@ import { Dialogue } from 'game/types';
 import data from 'game/data';
 import * as morph from 'nanomorph';
 import editorElements from 'editor-elements';
-import { createElement, querySelector, disabled } from 'dom-util';
+import { createElement, disabled } from 'dom-util';
 import getData from 'game/data/get';
 import gameState from 'game/state';
 import editorState from 'state';

@@ -13,21 +13,21 @@ export default function updateBackgroundsTab() {
 
 	for (const b of bgs) {
 		const div = createElement('div');
+		div.className = 'background';
+		div.dataset.id = b.id.toString();
 
 		const inputName = createElement('input');
 		inputName.className = 'name';
 		inputName.type = 'text';
-		inputName.dataset.id = b.id.toString();
 		inputName.value = b.name;
 		div.append(inputName);
 
-		const imageSelect = select('image', b.id, imageOptions, b.imageID);
+		const imageSelect = select('image', imageOptions, b.imageID);
 		div.append(imageSelect);
 
 		const bgColor = createElement('input');
 		bgColor.className = 'bg-color';
 		bgColor.type = 'text';
-		bgColor.dataset.id = b.id.toString();
 		bgColor.value = b.bgColor;
 		bgColor.title = 'Color of the background behind image';
 		div.append(bgColor);
@@ -38,7 +38,6 @@ export default function updateBackgroundsTab() {
 			btnDelete.type = 'button';
 			btnDelete.textContent = 'X';
 			btnDelete.title = 'Delete background';
-			btnDelete.dataset.id = b.id.toString();
 			div.append(btnDelete);
 		}
 

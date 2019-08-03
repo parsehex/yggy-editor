@@ -8,8 +8,10 @@ import remove from 'data/remove';
 import editorElements from 'editor-elements';
 
 export default function initImagesTabEvents() {
+	const tab = '#images-tab';
+
 	// create image
-	_editorDelegate('#images-tab button.create', 'click', () => {
+	_editorDelegate(`${tab} button.create`, 'click', () => {
 		const imgId = getFreeID('images');
 		data.images.push({
 			id: imgId,
@@ -20,30 +22,30 @@ export default function initImagesTabEvents() {
 	});
 
 	// delete image
-	_editorDelegate('#images-tab .list button.delete', 'click', (e, t: HTMLButtonElement) => {
-		const imgId = +t.dataset.id;
+	_editorDelegate(`${tab} .list button.delete`, 'click', (e, t: HTMLButtonElement) => {
+		const imgId = +t.closest('div.image').dataset.id;
 		remove.image(imgId);
 		draw();
 	});
 
 	// change image name
-	_editorDelegate('#images-tab .list input.name', 'input', (e, t: HTMLInputElement) => {
-		const id = +t.dataset.id;
+	_editorDelegate(`${tab} .list input.name`, 'input', (e, t: HTMLInputElement) => {
+		const id = +t.closest('div.image').dataset.id;
 		const img = getData('images', id);
 		img.name = t.value;
 		draw();
 	});
 
 	// change image file
-	_editorDelegate('#images-tab .list select.image-file', 'change', (e, t: HTMLSelectElement) => {
-		const imgId = +t.dataset.id;
+	_editorDelegate(`${tab} .list select.image-file`, 'change', (e, t: HTMLSelectElement) => {
+		const imgId = +t.closest('div.image').dataset.id;
 		const img = getData('images', imgId);
 		img.filename = t.value;
 		draw();
 	});
 
 	// change preview image
-	_editorDelegate('#images-tab select#image-file-preview-select', 'change', (e, t: HTMLSelectElement) => {
+	_editorDelegate(`${tab} select#image-file-preview-select`, 'change', (e, t: HTMLSelectElement) => {
 		let val = t.value;
 		if (val === 'None') {
 			val = '';
@@ -54,7 +56,7 @@ export default function initImagesTabEvents() {
 	});
 
 	// upload image
-	_editorDelegate('#images-tab #upload button.submit', 'click', async () => {
+	_editorDelegate(`${tab} #upload button.submit`, 'click', async () => {
 		if (editorElements.imagesTab.fileInput.files.length === 0) {
 			uploadError();
 			return;

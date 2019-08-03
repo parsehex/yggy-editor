@@ -7,6 +7,8 @@ interface EditorState {
 			dialogue: number[];
 			choices: number[]
 		};
+
+		// TODO link history
 		linking: {
 			dialogueID: number;
 			srcDialogueID: number;

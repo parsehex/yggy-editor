@@ -3,9 +3,11 @@ import data from 'game/data';
 import remove from 'data/remove';
 
 export default function initUtilitiesTabEvents() {
+	const tab = '#utilities-tab';
+
 	// remove orphans
-	_editorDelegate('#utilities-tab button.remove-orphans', 'click', () => {
-		// TODO i believe this won't clear branches that aren't accessible
+	_editorDelegate(`${tab} button.remove-orphans`, 'click', () => {
+		// TODO this won't clear branches that aren't accessible
 		// without having to run multiple times
 		const orphanDialogueIds = data.dialogue.map(d => d.id);
 		orphanDialogueIds.splice(0, 1);

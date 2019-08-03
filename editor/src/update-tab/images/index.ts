@@ -13,6 +13,8 @@ export default async function updateImagesTab() {
 
 	for (const img of imgs) {
 		const div = createElement('div');
+		div.className = 'image';
+		div.dataset.id = img.id.toString();
 
 		const preview = createElement('img');
 		preview.className = 'image-preview';
@@ -22,10 +24,10 @@ export default async function updateImagesTab() {
 		const inputName = createElement('input');
 		inputName.className = 'name';
 		inputName.type = 'text';
-		inputName.dataset.id = img.id.toString();
 		inputName.value = img.name;
 		div.append(inputName);
 
+		// TODO convert to common select
 		const fileSelect = imageFileSelect(imageList, img.id, img.filename);
 		div.append(fileSelect);
 
@@ -35,7 +37,6 @@ export default async function updateImagesTab() {
 			btnDelete.type = 'button';
 			btnDelete.textContent = 'X';
 			btnDelete.title = 'Delete image';
-			btnDelete.dataset.id = img.id.toString();
 			div.append(btnDelete);
 		}
 

@@ -1,16 +1,22 @@
-#dialogue {
-	display: block;
-	margin: 10px 0;
-}
-
-#choices {
-	margin-top: 10px;
+#dialogue-tab {
+	div.characters {
+		margin-bottom: 5px;
+	}
 	
-	& > div:not(:last-of-type) {
-		padding-bottom: 4px;
-		margin: 2px 0;
-		border-bottom: 1px solid lightgray;
+	textarea.dialogue {
+		display: block;
+		margin: 10px 0;
+	}
+	
+	div.choices {
+		margin-top: 10px;
 		
-		display: flex;
+		& > div:not(:last-of-type) {
+			padding-bottom: 4px;
+			margin: 2px 0;
+			border-bottom: 1px solid lightgray;
+			
+			display: flex;
+		}
 	}
 }

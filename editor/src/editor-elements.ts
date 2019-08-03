@@ -8,10 +8,10 @@ export default {
 	btnSave: <HTMLButtonElement>querySelector('button#save'),
 	btnClear: <HTMLButtonElement>querySelector('button#clear'),
 	dialogueTab: {
-		dialogue: <HTMLTextAreaElement>querySelector('textarea#dialogue'),
-		choices: <HTMLDivElement>querySelector('div#choices'),
-		character: <HTMLSelectElement>querySelector('select#character'),
-		background: <HTMLSelectElement>querySelector('select#background'),
+		dialogue: <HTMLTextAreaElement>querySelector('#dialogue-tab textarea.dialogue'),
+		choices: <HTMLDivElement>querySelector('#dialogue-tab div.choices'),
+		characters: <HTMLDivElement>querySelector('#dialogue-tab div.characters'),
+		background: <HTMLSelectElement>querySelector('#dialogue-tab select.background'),
 	},
 	charactersTab: {
 		list: <HTMLDivElement>querySelector('#characters-tab div.list'),

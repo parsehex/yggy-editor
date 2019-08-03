@@ -59,7 +59,7 @@ export default function updateCharactersTab() {
 			frameName.className = 'name';
 			fDiv.append(frameName);
 
-			const imageSelect = select('image', fid, imageOptions, f.imageID);
+			const imageSelect = select('image', imageOptions, f.imageID);
 			fDiv.append(imageSelect);
 
 			// skip delete button on default frame
