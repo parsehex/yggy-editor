@@ -1,14 +1,14 @@
-echo Remove old editor-assets.bak
-rm -rf $HOME/title-22-backup/editor-assets.bak
-
-echo Backup editor-assets
-cp -r editor-assets $HOME/title-22-backup/editor-assets.bak
+now=$(date +"%m_%d_%Y")
+cd $HOME
 
 echo Stop editor server service
 sudo systemctl stop title-22-editor.service
 
-echo Clear trilium install directory
-cd $HOME
+echo Backup editor-assets
+# ignore error (probably editor-assets doesn't exist)
+cp -r ./title-22/editor-assets "./title-22-backup/editor-assets-$now" 2>/dev/null
+
+echo Clear title-22 directory
 rm -rf ./title-22
 
 echo Clone stable branch of trilium
