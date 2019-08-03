@@ -2,6 +2,7 @@ import * as morph from 'nanomorph';
 import editorElements from 'editor-elements';
 import data from 'game/data';
 import { createElement } from 'dom-util';
+import select from 'update-tab/common/select';
 
 export default async function updateImagesTab() {
 	const r = await fetch('/api/get-images');
@@ -28,7 +29,9 @@ export default async function updateImagesTab() {
 		div.append(inputName);
 
 		// TODO convert to common select
-		const fileSelect = imageFileSelect(imageList, img.id, img.filename);
+		const fileOptions = imageList.map(f => ({ text: f }));
+
+		const fileSelect = select('image-file', fileOptions, img.filename);
 		div.append(fileSelect);
 
 		if (imgs.length > 1) {
@@ -65,20 +68,4 @@ export default async function updateImagesTab() {
 	}
 
 	morph(editorElements.imagesTab.list, tmp);
-}
-
-function imageFileSelect(images: string[], datasetID: number, initialValue?: string) {
-	const select = createElement('select');
-	select.className = 'image-file';
-	select.dataset.id = datasetID.toString();
-
-	for (const img of images) {
-		const option = createElement('option');
-		option.value = img;
-		option.textContent = img;
-		select.append(option);
-	}
-
-	if (initialValue !== undefined) select.value = initialValue;
-	return select;
 }

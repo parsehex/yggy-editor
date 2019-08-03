@@ -8,7 +8,7 @@ interface SelectOption {
 export default function select(
 	className: string,
 	options: SelectOption[],
-	initialValue?: number
+	initialValue?: number | string
 ) {
 	const select = createElement('select');
 	select.className = className;
@@ -20,6 +20,6 @@ export default function select(
 		select.append(option);
 	}
 
-	if (initialValue !== undefined) select.value = initialValue.toString();
+	if (initialValue !== undefined) select.value = initialValue + '';
 	return select;
 }
