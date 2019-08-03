@@ -8,8 +8,9 @@ if (!port) port = 8081;
 const ipWhitelist = ['127.0.0.1', '75.71.190.242', '174.101.110.149'];
 const server = http.createServer(async (req, res) => {
 	let foundIp = false;
+	const reqIp = req.headers['x-real-ip'] || req.connection.remoteAddress;
 	for (const ip of ipWhitelist) {
-		if (req.connection.remoteAddress.indexOf(ip) > -1) foundIp = true;
+		if (reqIp.indexOf(ip) > -1) foundIp = true;
 	}
 
 	if (!foundIp) {

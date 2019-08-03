@@ -2,17 +2,21 @@ now=$(date +"%m_%d_%Y")
 cd $HOME
 
 echo Stop editor server service
-sudo systemctl stop title-22-editor.service
+sudo systemctl stop title-22-editor.service 2>/dev/null
 
 echo Backup editor-assets
-# ignore error (probably editor-assets doesn't exist)
+# ignore error (probably just saying something doesn't exist)
+mkdir ./title-22-backup 2>/dev/null
 cp -r ./title-22/editor-assets "./title-22-backup/editor-assets-$now" 2>/dev/null
 
 echo Clear title-22 directory
 rm -rf ./title-22
 
-echo Clone stable branch of trilium
+echo Clone master branch of title-22
 git clone -b master git@github.com:parsehex/title-22.git
+
+echo Script setup
+cd ./title-22
 chmod +x ./start-server.sh
 chmod +x ./update.sh
 
@@ -21,7 +25,6 @@ sudo cp ./systemd /etc/systemd/system/title-22-editor.service
 sudo systemctl daemon-reload
 
 echo npm install
-cd ./title-22
 pnpm install
 
 echo Building game
