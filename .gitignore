@@ -7,3 +7,4 @@ editor/assets
 editor-server/main.js
 editor-assets
 *.log
+*.map
