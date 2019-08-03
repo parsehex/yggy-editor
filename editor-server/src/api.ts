@@ -2,6 +2,12 @@ import * as http from 'http';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 
+let version = 'Error';
+(async () => {
+	const pkg = await fs.readFile(path.resolve(__dirname, '../package.json'), 'utf8');
+	version = JSON.parse(pkg).version;
+})();
+
 const assetsBase = path.resolve(__dirname, '../assets');
 const editorAssetsBase = path.resolve(__dirname, '../editor-assets');
 
@@ -61,6 +67,12 @@ export default async function routeAPI(req: http.IncomingMessage, res: http.Serv
 		req.pipe(ws);
 		res.writeHead(200);
 		res.write('OK');
+		res.end();
+	}
+
+	if (/api\/version/i.test(req.url)) {
+		res.writeHead(200, { 'content-type': 'text/plain' });
+		res.write(version);
 		res.end();
 	}
 }

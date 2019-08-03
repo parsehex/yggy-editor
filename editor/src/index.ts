@@ -29,4 +29,7 @@ window.addEventListener('load', async () => {
 	initTabs();
 
 	draw();
+
+	const editorVersion = await (await fetch('/api/version')).text();
+	document.getElementById('version').textContent = 'v' + editorVersion;
 });
