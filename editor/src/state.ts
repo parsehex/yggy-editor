@@ -1,4 +1,5 @@
 interface EditorState {
+	devMode: boolean;
 	/** History of dialogue navigation */
 	history: number[];
 	currentHistoryIndex: number;
@@ -19,6 +20,8 @@ interface EditorState {
 }
 
 const editorState: EditorState = {
+	// prod server runs on 80 (reverse proxy)
+	devMode: location.href.includes('8080'),
 	history: [],
 	currentHistoryIndex: -1,
 	tree: {

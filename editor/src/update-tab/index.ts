@@ -8,7 +8,7 @@ import editorState from 'state';
 import { disabled } from 'dom-util';
 
 export default function updateActiveTab() {
-	// console.time('update');
+	const updateStart = performance.now();
 
 	// only update whichever tab is active
 	const activeTab = document.querySelector('.tab.active');
@@ -30,5 +30,8 @@ export default function updateActiveTab() {
 	disabled(editorElements.btnBack, editorState.currentHistoryIndex === 0);
 	disabled(editorElements.btnNext, editorState.currentHistoryIndex === editorState.history.length - 1);
 
-	// console.timeEnd('update');
+	if (editorState.devMode) {
+		const updateTime = performance.now() - updateStart;
+		document.getElementById('update-time').textContent = `${updateTime.toFixed(3)}ms`
+	}
 }

@@ -67,15 +67,20 @@ div#editor > div.tab {
 	}
 }
 
-div#version {
+div#version, div#update-time {
 	position: absolute;
 	right: 0;
 	top: 0;
 	background-color: #ECEFF1;
-	padding: 5px;
+	padding: 7px;
 	font-size: 1.1em;
 	opacity: 0.5;
 	pointer-events: none;
 	cursor: default;
-	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+div#update-time {
+	opacity: 0.8;
+	padding: 7px;
+	font-size: 0.85em;
 }

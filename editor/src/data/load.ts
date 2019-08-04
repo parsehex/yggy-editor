@@ -1,5 +1,6 @@
 import data from 'game/data';
 import loadData from 'game/data/load';
+import editorState from 'state';
 
 export default async function _editorLoadData() {
 	const keys = Object.keys(data);
@@ -12,9 +13,7 @@ export default async function _editorLoadData() {
 		loadedData[k] = JSON.parse(v);
 	}
 
-	// server runs on 80 now (reverse proxy)
-	const devMode = false;
-	// const devMode = location.href.includes('8080');
+	const devMode = editorState.devMode && false;
 	if (broken || devMode) {
 		console.log('Allowing game to load data...');
 		await loadData();

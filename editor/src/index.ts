@@ -32,4 +32,8 @@ window.addEventListener('load', async () => {
 
 	const editorVersion = await (await fetch('/api/version')).text();
 	document.getElementById('version').textContent = 'v' + editorVersion;
+
+	if (editorState.devMode) {
+		document.getElementById('update-time').classList.remove('hidden');
+	}
 });
