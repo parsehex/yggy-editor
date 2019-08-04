@@ -5,7 +5,7 @@ interface SelectOption {
 	/** If none provided then `text` value is used */
 	value?: string;
 }
-export default function select(
+export default function createSelect(
 	className: string,
 	options: SelectOption[],
 	initialValue?: number | string

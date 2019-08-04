@@ -21,7 +21,7 @@ export default {
 	},
 	imagesTab: {
 		list: <HTMLDivElement>querySelector('#images-tab div.list'),
-		previewSelect: <HTMLSelectElement>querySelector('#images-tab #image-file-preview-select'),
+		previewSelect: <HTMLSelectElement>querySelector('#images-tab .image-file-preview-select'),
 		previewImage: <HTMLImageElement>querySelector('#images-tab #image-file-preview'),
 		uploadFileName: <HTMLInputElement>querySelector('#images-tab #upload input.name'),
 		fileInput: <HTMLInputElement>querySelector('#images-tab input[type="file"]'),

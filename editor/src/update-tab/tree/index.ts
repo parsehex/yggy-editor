@@ -6,6 +6,7 @@ import { createElement, disabled } from 'dom-util';
 import getData from 'game/data/get';
 import gameState from 'game/state';
 import editorState from 'state';
+import createButton from 'update-tab/common/button';
 
 let tmp: HTMLUListElement;
 export default function updateTreeTab() {
@@ -58,18 +59,12 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 	// end branch on references
 	if (isReference) return;
 
-	const btnGo = createElement('button');
-	btnGo.className = 'go-to';
-	btnGo.type = 'button';
+	const btnGo = createButton('go-to', 'Go');
 	btnGo.title = 'Go to dialogue in preview';
-	btnGo.textContent = 'Go';
 	contentDiv.append(btnGo);
 
-	const btnLink = createElement('button');
-	btnLink.className = 'link';
-	btnLink.type = 'button';
+	const btnLink = createButton('link', 'Link');
 	btnLink.title = 'Link dialogue to choice';
-	btnLink.textContent = 'Link';
 	// don't highlight button if link is already finalized
 	if (!editorState.tree.linking.finalized && editorState.tree.linking.dialogueID === d.id) {
 		btnLink.classList.add('active');
@@ -77,12 +72,14 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 	contentDiv.append(btnLink);
 
 	// end branch if there are no choices
+	// TODO remove if we use the "+ Choice" buttons
 	if (d.choices.length === 0) return;
 
 	const choicesUl = createElement('ul');
 	choicesUl.className = 'choices';
 	li.append(choicesUl);
 
+	// let isCycleDialogue = false;
 	for (const cId of d.choices) {
 		const c = getData('choices', cId);
 		const cText = c.text.length > 0 ? c.text : '(cycle dialogue)';
@@ -91,7 +88,10 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 		choiceLi.className = 'choice';
 		choiceLi.dataset.id = cId.toString();
 		if (editorState.tree.collapsed.choices.indexOf(c.id) > -1) choiceLi.classList.add('collapsed');
-		if (c.text.length === 0) choiceLi.classList.add('cycle-dialogue');
+		if (c.text.length === 0) {
+			// isCycleDialogue = true;
+			choiceLi.classList.add('cycle-dialogue');
+		}
 		choicesUl.append(choiceLi);
 
 		const choiceContentDiv = createElement('div');
@@ -104,11 +104,8 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 		textSpan.title = title;
 		choiceContentDiv.append(textSpan);
 
-		const choiceBtnLink = createElement('button');
-		choiceBtnLink.className = 'link';
-		choiceBtnLink.type = 'button';
+		const choiceBtnLink = createButton('link', 'Link');
 		choiceBtnLink.title = 'Link choice to dialogue';
-		choiceBtnLink.textContent = 'Link';
 		if (!editorState.tree.linking.finalized && editorState.tree.linking.choiceID === c.id) {
 			choiceBtnLink.classList.add('active');
 		}
@@ -116,18 +113,12 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 
 		// end choice-branch if choice doesn't point to a dialogue
 		if (c.targetDialogueID === null) {
-			const choiceBtnCreateDialogue = createElement('button');
-			choiceBtnCreateDialogue.className = 'create-dialogue';
-			choiceBtnCreateDialogue.type = 'button';
-			choiceBtnCreateDialogue.textContent = '+ Dialogue';
+			const choiceBtnCreateDialogue = createButton('create-dialogue', '+ Dialogue');
 			choiceContentDiv.append(choiceBtnCreateDialogue);
 			continue;
 		} else {
-			const choiceBtnUnlink = createElement('button');
-			choiceBtnUnlink.className = 'unlink';
-			choiceBtnUnlink.type = 'button';
+			const choiceBtnUnlink = createButton('unlink', 'Unlink');
 			choiceBtnUnlink.title = 'Remove dialogue link';
-			choiceBtnUnlink.textContent = 'Unlink';
 			choiceContentDiv.append(choiceBtnUnlink);
 		}
 
@@ -136,4 +127,10 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 		choiceLi.append(dUl);
 		makeDialogueBranch(cd, dUl);
 	}
+
+	// if (!isCycleDialogue) {
+	// 	const btnCreateChoice = createButton('create-choice', '+ Choice');
+	// 	btnCreateChoice.textContent = '+ Choice';
+	// 	choicesUl.append(btnCreateChoice);
+	// }
 }

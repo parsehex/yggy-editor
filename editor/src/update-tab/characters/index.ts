@@ -2,7 +2,7 @@ import * as morph from 'nanomorph';
 import editorElements from 'editor-elements';
 import data from 'game/data';
 import { createElement } from 'dom-util';
-import select from 'update-tab/common/select';
+import createSelect from 'update-tab/common/select';
 import getData from 'game/data/get';
 
 export default function updateCharactersTab() {
@@ -59,7 +59,7 @@ export default function updateCharactersTab() {
 			frameName.className = 'name';
 			fDiv.append(frameName);
 
-			const imageSelect = select('image', imageOptions, f.imageID);
+			const imageSelect = createSelect('image', imageOptions, f.imageID);
 			fDiv.append(imageSelect);
 
 			// skip delete button on default frame

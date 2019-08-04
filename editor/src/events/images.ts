@@ -45,7 +45,7 @@ export default function initImagesTabEvents() {
 	});
 
 	// change preview image
-	_editorDelegate(`${tab} select#image-file-preview-select`, 'change', (e, t: HTMLSelectElement) => {
+	_editorDelegate(`${tab} select.image-file-preview-select`, 'change', (e, t: HTMLSelectElement) => {
 		let val = t.value;
 		if (val === 'None') {
 			val = '';

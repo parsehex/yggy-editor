@@ -2,15 +2,18 @@ import * as morph from 'nanomorph';
 import editorElements from 'editor-elements';
 import data from 'game/data';
 import { createElement } from 'dom-util';
-import select from 'update-tab/common/select';
+import createSelect from 'update-tab/common/select';
+import createButton from 'update-tab/common/button';
 
 export default async function updateImagesTab() {
 	const r = await fetch('/api/get-images');
-	const imageList: string[] = await r.json();
+	const imageFiles: string[] = await r.json();
 
 	const tmp = <HTMLDivElement>editorElements.imagesTab.list.cloneNode();
 	const imgs = data.images;
 	tmp.innerHTML = '';
+
+	const fileOptions = imageFiles.map(f => ({ text: f }));
 
 	for (const img of imgs) {
 		const div = createElement('div');
@@ -28,17 +31,11 @@ export default async function updateImagesTab() {
 		inputName.value = img.name;
 		div.append(inputName);
 
-		// TODO convert to common select
-		const fileOptions = imageList.map(f => ({ text: f }));
-
-		const fileSelect = select('image-file', fileOptions, img.filename);
+		const fileSelect = createSelect('image-file', fileOptions, img.filename);
 		div.append(fileSelect);
 
 		if (imgs.length > 1) {
-			const btnDelete = createElement('button');
-			btnDelete.className = 'delete';
-			btnDelete.type = 'button';
-			btnDelete.textContent = 'X';
+			const btnDelete = createButton('delete', 'X');
 			btnDelete.title = 'Delete image';
 			div.append(btnDelete);
 		}
@@ -46,25 +43,21 @@ export default async function updateImagesTab() {
 		tmp.append(div);
 	}
 
-	const oldPreviewVal = editorElements.imagesTab.previewSelect.value;
-	editorElements.imagesTab.previewSelect.innerHTML = '';
+	const oldPreviewVal = editorElements.imagesTab.previewSelect.value || 'None';
 
 	const noneOption = createElement('option');
 	noneOption.value = 'None';
 	noneOption.textContent = 'None';
-	editorElements.imagesTab.previewSelect.append(noneOption);
 
-	for (const i of imageList) {
-		const option = createElement('option');
-		option.value = i;
-		option.textContent = i;
-		editorElements.imagesTab.previewSelect.append(option);
-	}
+	const previewSelect = createSelect('image-file-preview-select', fileOptions);
+	previewSelect.prepend(noneOption);
 
-	if (imageList.indexOf(oldPreviewVal) > -1) {
-		editorElements.imagesTab.previewSelect.value = oldPreviewVal;
+	editorElements.imagesTab.previewSelect.replaceWith(previewSelect);
+
+	if (imageFiles.indexOf(oldPreviewVal) > -1) {
+		previewSelect.value = oldPreviewVal;
 	} else {
-		editorElements.imagesTab.previewSelect.value = 'None';
+		previewSelect.value = 'None';
 	}
 
 	morph(editorElements.imagesTab.list, tmp);
