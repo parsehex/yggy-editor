@@ -16,10 +16,17 @@ interface SaveBody {
 	data: any;
 }
 
-export default async function routeAPI(req: http.IncomingMessage, res: http.ServerResponse) {
-	if (req.url.indexOf('api') === -1) return;
+export default async function routeAPI(
+	endpoint: string,
+	query: URLSearchParams,
+	req: http.IncomingMessage,
+	res: http.ServerResponse
+) {
+	if (endpoint.indexOf('/api') !== 0) return;
 
-	if (/api\/save/i.test(req.url)) {
+	// writing conditions backwards to be easier to spot
+
+	if ('/api/save' === endpoint) {
 		const body: SaveBody = await parseBody(req, true);
 		const p = path.join(editorAssetsBase, `data/${body.type}.json`);
 		const c = JSON.stringify(body.data);
@@ -29,10 +36,9 @@ export default async function routeAPI(req: http.IncomingMessage, res: http.Serv
 		res.end();
 	}
 
-	if (/api\/get\?type/i.test(req.url)) {
+	if ('/api/get' === endpoint) {
 		// the api is fragile, please don't hurt it
-		const type = req.url.match(/type=(.+)$/i)[1];
-		const p = path.join(editorAssetsBase, `data/${type}.json`);
+		const p = path.join(editorAssetsBase, `data/${query.get('type')}.json`);
 		const c = await fs.readFile(p, 'utf8');
 		res.writeHead(200, { 'content-type': 'application/json' });
 		res.write(c);
@@ -40,7 +46,7 @@ export default async function routeAPI(req: http.IncomingMessage, res: http.Serv
 	}
 
 	// return list of images present in default and editor assets directories
-	if (/api\/get-images/i.test(req.url)) {
+	if ('/api/get-images' === endpoint) {
 		const imagesDir = path.join(assetsBase, 'images');
 		const imagesDir2 = path.join(editorAssetsBase, 'images');
 
@@ -59,10 +65,9 @@ export default async function routeAPI(req: http.IncomingMessage, res: http.Serv
 		res.end();
 	}
 
-	if (/api\/upload-image/i.test(req.url)) {
+	if ('/api/upload-image' === endpoint) {
 		// the api is fragile, please don't hurt it
-		const filename = req.url.match(/filename=(.+)$/i)[1];
-		const p = path.join(editorAssetsBase, 'images/' + filename);
+		const p = path.join(editorAssetsBase, 'images/' + query.get('filename'));
 		const ws = fs.createWriteStream(p);
 		req.pipe(ws);
 		res.writeHead(200);
@@ -70,7 +75,7 @@ export default async function routeAPI(req: http.IncomingMessage, res: http.Serv
 		res.end();
 	}
 
-	if (/api\/version/i.test(req.url)) {
+	if ('/api/version' === endpoint) {
 		res.writeHead(200, { 'content-type': 'text/plain' });
 		res.write(version);
 		res.end();

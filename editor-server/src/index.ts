@@ -1,6 +1,7 @@
 import * as http from 'http';
 import routeStatic from './static-router';
 import routeAPI from './api';
+import { URL } from 'url';
 
 let port: any = process.argv[2];
 if (!port) port = 8080;
@@ -20,10 +21,13 @@ const server = http.createServer(async (req, res) => {
 		return;
 	}
 
-	await routeStatic(req, res);
+	// the host doesn't really matter for routing these requests
+	const url = new URL('http://localhost' + req.url);
+
+	await routeStatic(url.pathname.toLowerCase(), url.searchParams, req, res);
 	if (res.finished) return;
 
-	await routeAPI(req, res);
+	await routeAPI(url.pathname.toLowerCase(), url.searchParams, req, res);
 	if (res.finished) return;
 
 	res.writeHead(404);
