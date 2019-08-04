@@ -105,7 +105,12 @@ export function initEditorEvents() {
 	// clear localstorage
 	_editorDelegate('button#clear', 'click', async (e, t: HTMLButtonElement) => {
 		noAutoSave = true;
+
+		// don't clear which tab is open
+		const openedTab = localStorage.getItem('editor-opened-tab');
 		localStorage.clear();
+		if (openedTab) localStorage.setItem('editor-opened-tab', openedTab);
+
 		t.textContent = 'Cleared';
 		setTimeout(() => {
 			location.reload();
