@@ -1,6 +1,10 @@
 div#tree-tab {
 	font-family: sans-serif;
 	
+	// TODO i think each li is going to need a header to store its controls and stuff
+	// that way the buttons are always in a predictable area
+	// and MAYBE that would also fix the text cut off issue
+	
 	$headerHeight: 30px;
 	& > div {
 		position: fixed;
@@ -53,6 +57,7 @@ div#tree-tab {
 		div.content {
 			display: flex;
 			margin: 0 2px;
+			// min-width: 350px;
 			
 			* {
 				// required to be able to set span width (which is required for text overflow)
@@ -63,7 +68,9 @@ div#tree-tab {
 				text-overflow: ellipsis;
 				white-space: nowrap;
 				overflow: hidden;
+				min-width: 225px;
 				max-width: 275px;
+				// max-width: 275px;
 				padding: 2px;
 			}
 		}
