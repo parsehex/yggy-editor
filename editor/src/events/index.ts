@@ -73,28 +73,28 @@ export function initEditorEvents() {
 	});
 
 	// pull from server
-	_editorDelegate('button#pull', 'click', async (e, t: HTMLButtonElement) => {
-		t.classList.add('active');
-		t.disabled = true;
-		t.textContent = 'Pulling...';
+	// _editorDelegate('button#pull', 'click', async (e, t: HTMLButtonElement) => {
+	// 	t.classList.add('active');
+	// 	t.disabled = true;
+	// 	t.textContent = 'Pulling...';
 
-		const keys = Object.keys(data);
-		for (const k of keys) {
-			const r = await fetch('/api/get?type=' + k);
-			const d = await r.json();
-			data[k] = d;
-		}
+	// 	const keys = Object.keys(data);
+	// 	for (const k of keys) {
+	// 		const r = await fetch('/api/get?type=' + k);
+	// 		const d = await r.json();
+	// 		data[k] = d;
+	// 	}
 
-		save(editorElements.btnSave);
-		draw();
+	// 	save(editorElements.btnSave);
+	// 	draw();
 
-		t.classList.remove('active');
-		t.textContent = 'Pulled';
-		setTimeout(() => {
-			t.disabled = false;
-			t.textContent = 'Pull changes';
-		}, 750);
-	});
+	// 	t.classList.remove('active');
+	// 	t.textContent = 'Pulled';
+	// 	setTimeout(() => {
+	// 		t.disabled = false;
+	// 		t.textContent = 'Pull changes';
+	// 	}, 750);
+	// });
 
 	// save to localstorage
 	_editorDelegate('button#save', 'click', async (e, t: HTMLButtonElement) => {
