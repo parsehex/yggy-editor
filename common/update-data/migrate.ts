@@ -23,6 +23,30 @@ export default function migrate(oldData: any, version: number) {
 			data.meta = {
 				version: 1,
 			};
+
+			if (data.frames) break;
+			// add frames
+			data.frames = [];
+
+			// create new frame from character image
+			// start ids from 0 since it doesn't really matter
+			let currentID = 0;
+			for (const ch of data.characters) {
+				const frame = {
+					id: currentID++,
+					name: 'Default frame',
+					imageID: ch.imageID,
+				};
+				data.frames.push(frame);
+				ch.frames = [frame.id];
+				delete ch.imageID;
+			}
+
+			// set default frame to 0
+			for (const d of data.dialogue) {
+				d.characterFrameIndex = 0;
+			}
+
 			break;
 		}
 	}
