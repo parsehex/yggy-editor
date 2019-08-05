@@ -2,10 +2,7 @@ import * as http from 'http';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { URLSearchParams } from 'url';
-
-// running @ editor-server/main.js
-const base = path.resolve(__dirname, '../editor');
-const editorAssets = path.resolve(__dirname, '../editor-assets');
+import { editorBase, editorAssetsBase } from 'const';
 
 export default async function routeStatic(
 	endpoint: string,
@@ -19,7 +16,7 @@ export default async function routeStatic(
 
 	if ('/' === endpoint) {
 		fileType = 'text/html';
-		content = await fs.readFile(path.join(base, 'index.html'), 'utf8');
+		content = await fs.readFile(path.join(editorBase, 'index.html'), 'utf8');
 	}
 
 	if ('/favicon.ico' === endpoint) {
@@ -28,8 +25,8 @@ export default async function routeStatic(
 	}
 
 	if (endpoint.indexOf('/assets') === 0 || endpoint === '/game.html') {
-		const p = path.join(base, endpoint.substr(1)); // path to default assets
-		const p2 = path.join(editorAssets, endpoint.replace(/^\/assets\//, '')); // path to editor-assets
+		const p = path.join(editorBase, endpoint.substr(1)); // path to default assets
+		const p2 = path.join(editorAssetsBase, endpoint.replace(/^\/assets\//, '')); // path to editor-assets
 
 		fileType = mimeFromExtension(endpoint.match(/\.(.+)$/)[1]);
 

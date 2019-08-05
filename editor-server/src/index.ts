@@ -2,6 +2,7 @@ import * as http from 'http';
 import routeStatic from './static-router';
 import routeAPI from './api';
 import { URL } from 'url';
+import updateDataAssets from 'update-assets';
 
 let port: any = process.argv[2];
 if (!port) port = 8080;
@@ -35,4 +36,8 @@ const server = http.createServer(async (req, res) => {
 	res.end();
 });
 
-server.listen(port, () => console.log(`Editor server running on ${port}`));
+(async () => {
+	await updateDataAssets();
+
+	server.listen(port, () => console.log(`Editor server running on ${port}`));
+})();

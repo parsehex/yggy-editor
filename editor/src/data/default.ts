@@ -1,7 +1,9 @@
 import data, { GameData } from 'game/data';
 
 // not 100% that this will actually be helpful
-export default function getDefault<T extends keyof GameData>(type: T): GameData[T][0] {
+export default function getDefault<T extends Exclude<keyof GameData, 'meta'>>(
+	type: T
+): GameData[T][0] {
 	switch (type) {
 		case 'backgrounds': {
 			return data.backgrounds[0];

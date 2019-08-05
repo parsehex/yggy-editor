@@ -1,15 +1,13 @@
 import * as http from 'http';
 import * as fs from 'fs-extra';
 import * as path from 'path';
+import { editorAssetsBase, assetsBase } from 'const';
 
 let version = 'Error';
 (async () => {
 	const pkg = await fs.readFile(path.resolve(__dirname, '../package.json'), 'utf8');
 	version = JSON.parse(pkg).version;
 })();
-
-const assetsBase = path.resolve(__dirname, '../assets');
-const editorAssetsBase = path.resolve(__dirname, '../editor-assets');
 
 interface SaveBody {
 	type: 'dialogue' | 'characters' | 'images' | 'choices';

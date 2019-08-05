@@ -31,7 +31,7 @@ module.exports = (env, { script, mode }) => {
     devtool: mode === 'production' ? 'source-map' : 'cheap-source-map',
   };
 
-  if (script === 'editor') {
+  if (script !== 'game') {
     config.resolve.plugins.push(new TsconfigPathsPlugin({ configFile: tsconfigPath }));
   }
 

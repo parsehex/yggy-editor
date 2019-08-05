@@ -1,4 +1,4 @@
-import { Dialogue, Image, Choice, Character, Background, Frame } from '../types';
+import { Dialogue, Image, Choice, Character, Background, Frame, Meta } from '../types';
 
 export interface GameData {
 	dialogue: Dialogue[];
@@ -7,6 +7,7 @@ export interface GameData {
 	characters: Character[];
 	backgrounds: Background[];
 	frames: Frame[];
+	meta: Meta,
 }
 
 const data: GameData = {
@@ -16,6 +17,7 @@ const data: GameData = {
 	characters: null,
 	backgrounds: null,
 	frames: null,
+	meta: null,
 };
 
 export default data;

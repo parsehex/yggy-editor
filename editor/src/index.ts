@@ -8,12 +8,15 @@ import editorState from './state';
 import { initIDService } from './id-service';
 import { initTabs } from 'tabs';
 import _editorLoadData from 'data/load';
+import updateLocalData from 'data/update';
 
 window.addEventListener('load', async () => {
 	if (window !== window.top) {
 		// the game in the iframe is trying to run; do nothing
 		return;
 	}
+
+	updateLocalData();
 
 	await _editorLoadData();
 	initIDService();

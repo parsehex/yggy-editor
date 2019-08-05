@@ -1,10 +1,12 @@
 import data, { GameData } from 'game/data';
 
-type IDs = { [D in keyof GameData]: number[] };
+// meta is an object, has no ids
+type IDs = { [D in Exclude<keyof GameData, 'meta'>]: number[] };
 
 const ids: IDs = <any>{};
 (() => {
 	const keys = Object.keys(data);
+	keys.splice(keys.indexOf('meta'), 1);
 	for (const k of keys) {
 		ids[k] = [];
 	}

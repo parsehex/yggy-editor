@@ -34,3 +34,6 @@ export interface Background {
 	imageID: number;
 	bgColor: string;
 }
+export interface Meta {
+	version: number;
+}
