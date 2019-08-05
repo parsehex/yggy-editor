@@ -1,4 +1,4 @@
-now=$(date +"%Y%m%d%H%M")
+now=$(date +"%Y%m%d-%H%M")
 
 echo Stop editor server service
 sudo systemctl stop title-22-editor.service 2>/dev/null
@@ -20,15 +20,15 @@ git clone -b master git@github.com:parsehex/title-22.git
 mv $HOME/title-22-backup/editor-assets_temp $HOME/title-22/editor-assets
 
 echo Script setup
-cd $HOME/title-22
-chmod +x $HOME/start-server.sh
-chmod +x $HOME/update.sh
+chmod +x $HOME/title-22/start-server.sh
+chmod +x $HOME/title-22/update.sh
 
 echo Updating systemd service file
-sudo cp $HOME/systemd.service /etc/systemd/system/title-22-editor.service
+sudo cp $HOME/title-22/systemd.service /etc/systemd/system/title-22-editor.service
 sudo systemctl daemon-reload
 
 echo npm install
+cd $HOME/title-22
 pnpm install
 
 echo Building game
