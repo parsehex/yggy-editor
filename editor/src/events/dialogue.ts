@@ -108,6 +108,18 @@ export function initDialogueTabEvents() {
 			d.ownerCharacterID = null;
 		}
 
+		if (
+			charId === 'none' && d.ownerCharacterID === null &&
+			(d.character1ID !== null || d.character2ID !== null)
+		) {
+			// don't allow there to be no owner if there's a character in the dialogue
+			if (d.character1ID !== null) {
+				d.ownerCharacterID = d.character1ID;
+			} else if (d.character2ID !== null) {
+				d.ownerCharacterID = d.character2ID;
+			}
+		}
+
 		draw();
 	});
 
