@@ -38,6 +38,14 @@ export default function initCharactersTabEvents() {
 		draw();
 	});
 
+	// change frame name
+	_editorDelegate(`${tab} div.frame > input.name`, 'input', (e, t: HTMLInputElement) => {
+		const id = +t.closest('div.frame').dataset.id;
+		const f = getData('frames', id);
+		f.name = t.value;
+		draw();
+	});
+
 	// change frame image
 	_editorDelegate(`${tab} div.frame > select.image`, 'change', (e, t: HTMLSelectElement) => {
 		const fId = +t.closest('div.frame').dataset.id;

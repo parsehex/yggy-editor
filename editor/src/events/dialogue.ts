@@ -121,7 +121,7 @@ export function initDialogueTabEvents() {
 		if (frameIndex === 'none') {
 			characterFrameIndexVal = null;
 		} else {
-			characterFrameIndexVal = 0; // default frame index
+			characterFrameIndexVal = +frameIndex;
 		}
 
 		if (isFirst) {
