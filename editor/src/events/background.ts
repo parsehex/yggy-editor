@@ -7,7 +7,7 @@ import updateActiveTab from 'update-tab';
 import remove from 'data/remove';
 
 export default function initBackgroundsTabEvents() {
-	const tab = '#background-tab';
+	const tab = '#backgrounds-tab';
 
 	// create background
 	_editorDelegate(`${tab} button.create`, 'click', () => {
