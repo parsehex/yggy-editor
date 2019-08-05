@@ -9,7 +9,6 @@
 	{
 		"id": 1,
 		"name": "Red Man",
-		"imageID": 5,
 		"frames": [
 			1
 		]

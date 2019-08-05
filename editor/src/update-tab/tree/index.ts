@@ -50,7 +50,8 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 	dialogueSpan.title = title;
 	contentDiv.append(dialogueSpan);
 
-	const ch = getData('characters', d.characterID);
+	// TODO add second character
+	const ch = getData('characters', d.character1ID);
 	const charSpan = createElement('span');
 	charSpan.className = 'character';
 	charSpan.textContent = ch.name;

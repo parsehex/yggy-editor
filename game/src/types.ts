@@ -7,8 +7,12 @@ export interface Dialogue {
 	id: number;
 	text: string;
 	backgroundID: number;
-	characterID: number;
-	characterFrameIndex: number;
+	character1ID: number;
+	character1FrameIndex: number;
+	character2ID: number;
+	character2FrameIndex: number;
+	/** The ID of the character that's "saying" this Dialogue */
+	ownerCharacterID: number;
 	/** Array of choice IDs */
 	choices: number[];
 }

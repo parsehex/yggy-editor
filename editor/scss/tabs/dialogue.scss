@@ -1,6 +1,14 @@
 #dialogue-tab {
 	div.characters {
-		margin-bottom: 5px;
+		margin-bottom: 10px;
+		
+		.character {
+			margin: 5px 0;
+			
+			label.owner {
+				margin-left: 4px;
+			}
+		}
 	}
 	
 	textarea.dialogue {

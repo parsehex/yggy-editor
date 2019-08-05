@@ -2,6 +2,7 @@ import getData from 'game/data/get';
 import data from 'game/data';
 import editorState from 'state';
 import { Character } from 'game/types';
+import getDefault from './default';
 
 function choice(id: number) {
 	const c = getData('choices', id);
@@ -22,12 +23,17 @@ function character(id: number) {
 	const ch = getData('characters', id);
 	data.characters.splice(data.characters.indexOf(ch), 1);
 
-	const defaultID = data.characters[0].id;
+	const defaultChar = getDefault('characters');
 
 	// remove id from all dialogue
 	for (const d of data.dialogue) {
-		if (d.characterID === id) {
-			d.characterID = defaultID;
+		if (d.character1ID === id) {
+			d.character1ID = defaultChar.id;
+			d.character1FrameIndex = 0;
+		}
+		if (d.character2ID === id) {
+			d.character2ID = defaultChar.id;
+			d.character2FrameIndex = 0;
 		}
 	}
 }

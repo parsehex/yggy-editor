@@ -1,0 +1,8 @@
+This isn't necessarily a full list of changes. Noteworthy behavior of new features will be listed here.
+
+v0.2.0
+- Add the ability for multiple (2) character to appear at once.
+	- The editor (intentionally) won't allow you to set the same character for both characters.
+	- With this you now must set which character "owns" the dialogue (i.e. who is talking).
+		- For convenience the label in the editor is called "Talking:"
+		- If you go from having no characters in the dialogue (and therefore no owner), setting a character will make that character the owner.

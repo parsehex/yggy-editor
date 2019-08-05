@@ -138,7 +138,7 @@ export default function initTreeTabEvents() {
 		const thisChoice = getData('choices', choiceId);
 
 		// use same background and character as parent dialogue by default
-		const newD = createData.dialogue(parentDialogue.backgroundID, parentDialogue.characterID);
+		const newD = createData.dialogue(parentDialogue);
 		thisChoice.targetDialogueID = newD.id;
 		draw();
 	});

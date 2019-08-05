@@ -5,6 +5,19 @@ export default function migrate(oldData: any, version: number) {
 	const nextVersion = version + 1;
 
 	switch (nextVersion) {
+		case 2: {
+			for (const d of data.dialogue) {
+				// add "owner character", defaults to (currently) only character
+				d.ownerCharacterID = d.characterID;
+
+				// add second character (none by default)
+				rename(d, 'characterID', 'character1ID');
+				rename(d, 'characterFrameIndex', 'character1FrameIndex');
+				d.character2ID = null;
+				d.character2FrameIndex = null;
+			}
+			break;
+		}
 		case 1: {
 			// add data.meta(.version)
 			data.meta = {

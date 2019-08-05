@@ -1,37 +1,61 @@
-import { Dialogue } from 'game/types';
+import { Dialogue, Character } from 'game/types';
 import getData from 'game/data/get';
 import data from 'game/data';
 import editorElements from 'editor-elements';
 import { createElement } from 'dom-util';
 import * as morph from 'nanomorph';
-import createSelect from 'update-tab/common/select';
+import createSelect, { SelectOptions } from 'update-tab/common/select';
 
 export default function updateCharacter(d: Dialogue) {
 	const tmp = <HTMLDivElement>editorElements.dialogueTab.characters.cloneNode();
-	const c = getData('characters', d.characterID);
 
-	const char1 = character(c.id, d.characterFrameIndex);
+	const ch1 = getData('characters', d.character1ID);
+	const char1 = character(ch1, d.character1FrameIndex, d.ownerCharacterID);
 	tmp.append(char1);
+
+	const ch2 = getData('characters', d.character2ID);
+	const char2 = character(ch2, d.character2FrameIndex, d.ownerCharacterID);
+	tmp.append(char2);
 
 	morph(editorElements.dialogueTab.characters, tmp);
 }
 
-function character(characterID: number, selectedFrameIndex: number) {
-	const ch = getData('characters', characterID);
+function character(ch: Character, selectedFrameIndex: number, dialogueOwner: number, excludeID?: number) {
+	const characterID: any = ch === null ? 'none' : ch.id;
 	const div = createElement('div');
 	div.className = 'character';
 	div.dataset.id = characterID.toString();
 
-	const charOptions = data.characters.map(ch => ({ text: ch.name, value: ch.id.toString() }));
+	const charOptions: SelectOptions = data.characters.map(ch => ({
+		text: ch.name,
+		value: ch.id.toString(),
+	}));
+	charOptions.unshift({ text: 'None' });
 	const charSelect = createSelect('name', charOptions, characterID);
 	div.append(charSelect);
 
-	const frameOptions = ch.frames.map((fid, i) => ({
+	if (ch === null) return div;
+
+	const frameOptions: SelectOptions = ch.frames.map((fid, i) => ({
 		text: getData('frames', fid).name,
 		value: i.toString(),
 	}));
+	frameOptions.unshift({ text: 'None' });
 	const frameSelect = createSelect('frame', frameOptions, selectedFrameIndex);
 	div.append(frameSelect);
+
+	const ownerLabel = createElement('label');
+	ownerLabel.className = 'owner';
+	ownerLabel.htmlFor = 'dialogue-owner-ch' + characterID;
+	ownerLabel.textContent = 'Talking:';
+	div.append(ownerLabel);
+
+	const ownerCheckbox = createElement('input');
+	ownerCheckbox.className = 'owner';
+	ownerCheckbox.type = 'checkbox';
+	ownerCheckbox.checked = dialogueOwner === characterID;
+	ownerCheckbox.id = 'dialogue-owner-ch' + characterID;
+	div.append(ownerCheckbox);
 
 	return div;
 }

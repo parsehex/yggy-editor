@@ -14,6 +14,9 @@ export default function updateLocalData() {
 		lsKeys.push(key);
 	}
 
+	// localStorage is empty
+	if (lsKeys.length === 0) return;
+
 	for (const k of lsKeys) {
 		const d = JSON.parse(localStorage.getItem(k));
 		const key = k.replace('editor-', '');

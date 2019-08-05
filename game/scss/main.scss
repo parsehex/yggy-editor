@@ -22,14 +22,24 @@ div#background {
 	background-size: contain;
 	background-position: center;
 }
-div#character {
+
+img#character1, 
+img#character2 {
 	position: absolute;
-	left: 0;
 	height: 100%;
-	width: 100%;
+	// width: 100%;
 	
 	background-size: contain;
 	background-repeat: no-repeat;
+}
+img#character1 {
+	left: 0;
+	background-position: left;
+}
+img#character2 {
+	right: 0;
+	background-position: right;
+	transform: scaleX(-1);
 }
 
 div#bottom {

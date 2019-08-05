@@ -4,14 +4,17 @@ import { Dialogue, Choice, Character, Frame } from 'game/types';
 import getDefault from './default';
 
 // TODO accept optional "defaultData" dialogue object
-function dialogue(defBackgroundID: number, defCharacterID: number) {
+function dialogue(templateDialogue?: Dialogue) {
 	const d: Dialogue = {
 		id: getFreeID('dialogue'),
 		text: 'Dialogue text',
 		choices: [],
-		backgroundID: defBackgroundID,
-		characterID: defCharacterID,
-		characterFrameIndex: 0, // always start at 0 which always exists
+		backgroundID: templateDialogue.backgroundID || getDefault('backgrounds').id,
+		character1ID: templateDialogue.character1ID || getDefault('characters').id,
+		character1FrameIndex: templateDialogue.character1FrameIndex || 0,
+		character2ID: templateDialogue.character2ID || null,
+		character2FrameIndex: templateDialogue.character2FrameIndex || null,
+		ownerCharacterID: templateDialogue.ownerCharacterID || getDefault('characters').id,
 	};
 	data.dialogue.push(d);
 	return d;

@@ -2,7 +2,7 @@ import * as morph from 'nanomorph';
 import editorElements from 'editor-elements';
 import data from 'game/data';
 import { createElement } from 'dom-util';
-import createSelect from 'update-tab/common/select';
+import createSelect, { SelectOptions } from 'update-tab/common/select';
 import createButton from 'update-tab/common/button';
 
 export default async function updateImagesTab() {
@@ -13,7 +13,7 @@ export default async function updateImagesTab() {
 	const imgs = data.images;
 	tmp.innerHTML = '';
 
-	const fileOptions = imageFiles.map(f => ({ text: f }));
+	const fileOptions: SelectOptions = imageFiles.map(f => ({ text: f }));
 
 	for (const img of imgs) {
 		const div = createElement('div');
@@ -43,14 +43,10 @@ export default async function updateImagesTab() {
 		tmp.append(div);
 	}
 
-	const oldPreviewVal = editorElements.imagesTab.previewSelect.value || 'None';
+	const oldPreviewVal = editorElements.imagesTab.previewSelect.value || 'none';
 
-	const noneOption = createElement('option');
-	noneOption.value = 'None';
-	noneOption.textContent = 'None';
-
+	fileOptions.unshift({ text: 'None' });
 	const previewSelect = createSelect('image-file-preview-select', fileOptions);
-	previewSelect.prepend(noneOption);
 
 	editorElements.imagesTab.previewSelect.replaceWith(previewSelect);
 

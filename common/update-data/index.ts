@@ -1,6 +1,6 @@
 import migrate from './migrate';
 
-export const CURRENT_GAME_DATA_VERSION = 1;
+export const CURRENT_GAME_DATA_VERSION = 2;
 
 /**
  * Given a `data` object, returns an update version of `data`.

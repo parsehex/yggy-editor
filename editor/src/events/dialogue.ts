@@ -7,8 +7,6 @@ import createData from 'data/create';
 
 export function initDialogueTabEvents() {
 	const tab = '#dialogue-tab';
-	const firstCharacter = `${tab} div.character:first-of-type`;
-	const secondCharacter = `${tab} div.character:last-of-type`;
 
 	// update dialogue
 	_editorDelegate(`${tab} textarea.dialogue`, 'input', (e, t: HTMLTextAreaElement) => {
@@ -47,25 +45,98 @@ export function initDialogueTabEvents() {
 		const choice = getData('choices', choiceId);
 
 		// use same background and character by default
-		const newD = createData.dialogue(d.backgroundID, d.characterID);
+		const newD = createData.dialogue(d);
 		choice.targetDialogueID = newD.id;
 		draw();
 	});
 
-	// change first (left) dialogue character
-	_editorDelegate(`${firstCharacter} select.name`, 'click', (e, t: HTMLSelectElement) => {
+	// change character
+	_editorDelegate(`${tab} div.characters .character select.name`, 'click', (e, t: HTMLSelectElement) => {
+		const isFirst = t.closest('div.character').matches(':first-of-type');
 		const d = getData('dialogue', gameState.currentDialogueID);
-		const charId = +t.value;
-		d.characterID = charId;
-		d.characterFrameIndex = 0; // default frame index
+		const oldCharId = +t.closest('div.character').dataset.id;
+		const charId = t.value;
+
+		let characterIDVal: number;
+		let characterFrameIndexVal: number;
+		if (charId === 'none') {
+			characterIDVal = null;
+			characterFrameIndexVal = null;
+		} else {
+			characterIDVal = +charId;
+			characterFrameIndexVal = 0; // default frame index
+		}
+
+		if (
+			// it's fine to not have any characters set
+			characterIDVal !== null &&
+			(
+				(isFirst && characterIDVal === d.character2ID) ||
+				(!isFirst && characterIDVal === d.character1ID)
+			)
+		) {
+			// don't allow setting the same character for both 1 and 2
+			// set this select value back
+			const val = isFirst ? d.character1ID : d.character2ID;
+			t.value = val === null ? 'none' : val.toString();
+			return;
+		}
+
+		// if dialogue had no characters but now it does:
+		// (this check must happen before changing character in dialogue)
+		if (
+			characterIDVal !== null &&
+			d.ownerCharacterID === null &&
+			d.character1ID === null &&
+			d.character2ID === null
+		) {
+			// set the owner to whatever the new character is
+			// (to avoid having no owner character when there's at least 1 character in the dialogue)
+			d.ownerCharacterID = characterIDVal;
+		}
+
+		if (isFirst) {
+			d.character1ID = characterIDVal;
+			d.character1FrameIndex = characterFrameIndexVal;
+		} else {
+			d.character2ID = characterIDVal;
+			d.character2FrameIndex = characterFrameIndexVal;
+		}
+
+		if (charId === 'none' && oldCharId === d.ownerCharacterID) {
+			// avoid having dialogue owner be a character that's not in the dialogue
+			d.ownerCharacterID = null;
+		}
+
 		draw();
 	});
 
-	// change first (left) dialogue character frame
-	_editorDelegate(`${firstCharacter} select.frame`, 'click', (e, t: HTMLSelectElement) => {
+	// change character frame
+	_editorDelegate(`${tab} div.characters .character select.frame`, 'click', (e, t: HTMLSelectElement) => {
+		const isFirst = t.closest('div.character').matches(':first-of-type');
 		const d = getData('dialogue', gameState.currentDialogueID);
-		const frameIndex = t.value === 'none' ? null : +t.value;
-		d.characterFrameIndex = frameIndex;
+		const frameIndex = t.value;
+
+		let characterFrameIndexVal: number;
+		if (frameIndex === 'none') {
+			characterFrameIndexVal = null;
+		} else {
+			characterFrameIndexVal = 0; // default frame index
+		}
+
+		if (isFirst) {
+			d.character1FrameIndex = characterFrameIndexVal;
+		} else {
+			d.character2FrameIndex = characterFrameIndexVal;
+		}
+		draw();
+	});
+
+	// change dialogue owner
+	_editorDelegate(`${tab} div.characters .character input.owner`, 'change', (e, t: HTMLSelectElement) => {
+		const d = getData('dialogue', gameState.currentDialogueID);
+		const charId = t.closest('.character').dataset.id;
+		d.ownerCharacterID = charId === 'none' ? null : +charId;
 		draw();
 	});
 
