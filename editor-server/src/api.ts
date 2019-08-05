@@ -65,7 +65,10 @@ export default async function routeAPI(
 
 	if ('/api/upload-image' === endpoint) {
 		// the api is fragile, please don't hurt it
-		const p = path.join(editorAssetsBase, 'images/' + query.get('filename').replace(/\s/g, '_'));
+		let fileName = query.get('filename');
+		if (fileName.indexOf('.png') === -1) fileName += '.png';
+
+		const p = path.join(editorAssetsBase, 'images/' + fileName);
 		const ws = fs.createWriteStream(p);
 		req.pipe(ws);
 		res.writeHead(200);
