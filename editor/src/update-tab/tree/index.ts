@@ -50,12 +50,20 @@ function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
 	dialogueSpan.title = title;
 	contentDiv.append(dialogueSpan);
 
-	// TODO add second character
-	const ch = getData('characters', d.character1ID);
-	const charSpan = createElement('span');
-	charSpan.className = 'character';
-	charSpan.textContent = ch.name;
-	contentDiv.append(charSpan);
+	if (d.character1ID !== null) {
+		const ch = getData('characters', d.character1ID);
+		const charSpan = createElement('span');
+		charSpan.className = 'character';
+		charSpan.textContent = ch.name;
+		contentDiv.append(charSpan);
+	}
+	if (d.character2ID !== null) {
+		const ch = getData('characters', d.character2ID);
+		const charSpan = createElement('span');
+		charSpan.className = 'character';
+		charSpan.textContent = ch.name;
+		contentDiv.append(charSpan);
+	}
 
 	// end branch on references
 	if (isReference) return;
