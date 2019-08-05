@@ -34,11 +34,11 @@ img#character2 {
 }
 img#character1 {
 	left: 0;
-	background-position: left;
 }
 img#character2 {
+	left: 0;
 	right: 0;
-	background-position: right;
+	margin: auto;
 	transform: scaleX(-1);
 }
 
