@@ -65,6 +65,7 @@ export default function initImagesTabEvents() {
 		const file = editorElements.imagesTab.fileInput.files[0];
 		let fileName = editorElements.imagesTab.uploadFileName.value;
 		if (!fileName) fileName = file.name;
+		if (fileName.indexOf('.png') === -1) fileName += '.png';
 
 		const url = '/api/upload-image?filename=' + fileName;
 
