@@ -20,7 +20,7 @@
     "build": "webpack --mode production --script",
     "game": "http-server ./game -p 8080 -c-1",
     "editor": "node editor-server/main.js",
-    "reset-editor": "rm -rf editor-assets && mkdir -p editor-assets/data editor-assets/images"
+    "reset-editor": "rm -rf editor-assets && cp -r assets editor-assets"
   },
   "repository": {
     "type": "git",
