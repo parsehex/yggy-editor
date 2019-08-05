@@ -35,11 +35,16 @@ module.exports = (env, { script, mode }) => {
     config.resolve.plugins.push(new TsconfigPathsPlugin({ configFile: tsconfigPath }));
   }
 
-  if (script) {
+  if (script === 'editor-server') {
     config.target = 'node';
     config.node = {
       __dirname: false,
     };
+    // config.plugins.push(new webpack.BannerPlugin({
+    //   banner: 'require("source-map-support").install();',
+    //   raw: true,
+    //   entryOnly: false,
+    // }));
   }
 
   return config;

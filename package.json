@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "fs-extra": "^8.1.0",
-    "nanomorph": "^5.4.0"
+    "nanomorph": "^5.4.0",
+    "source-map-support": "^0.5.13"
   }
 }

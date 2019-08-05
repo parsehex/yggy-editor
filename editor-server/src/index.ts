@@ -1,3 +1,5 @@
+import 'source-map-support/register';
+
 import * as http from 'http';
 import routeStatic from './static-router';
 import routeAPI from './api';
