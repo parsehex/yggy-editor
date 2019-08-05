@@ -7,6 +7,8 @@ export default async function updateDataAssets() {
 	const dataAssetsPath = path.join(editorAssetsBase, 'data');
 	const dataAssetFiles = await fs.readdir(dataAssetsPath);
 
+	if (dataAssetFiles.length === 0) return;
+
 	const data = <any>{};
 	for (const f of dataAssetFiles) {
 		const d = JSON.parse(await fs.readFile(path.join(dataAssetsPath, f), 'utf8'));
