@@ -1,32 +1,31 @@
 now=$(date +"%Y%m%d%H%M")
-cd $HOME
 
 echo Stop editor server service
 sudo systemctl stop title-22-editor.service 2>/dev/null
 
 echo Backup editor-assets
-mkdir -p ./title-22-backup
-cp -r ./title-22/editor-assets "./title-22-backup/editor-assets_$now"
+mkdir -p $HOME/title-22-backup
+cp -r $HOME/title-22/editor-assets "$HOME/title-22-backup/editor-assets_$now"
 
 # move assets out of repo directory
-mv ./title-22/editor-assets ./title-22-backup/editor-assets_temp
+mv $HOME/title-22/editor-assets $HOME/title-22-backup/editor-assets_temp
 
 echo Clear title-22 directory
-rm -rf ./title-22
+rm -rf $HOME/title-22
 
 echo Clone master branch of title-22
 git clone -b master git@github.com:parsehex/title-22.git
 
 # put editor assets back
-mv $HOME/title-22-backup/editor-assets_temp ./title-22/editor-assets
+mv $HOME/title-22-backup/editor-assets_temp $HOME/title-22/editor-assets
 
 echo Script setup
-cd ./title-22
-chmod +x ./start-server.sh
-chmod +x ./update.sh
+cd $HOME/title-22
+chmod +x $HOME/start-server.sh
+chmod +x $HOME/update.sh
 
 echo Updating systemd service file
-sudo cp ./systemd.service /etc/systemd/system/title-22-editor.service
+sudo cp $HOME/systemd.service /etc/systemd/system/title-22-editor.service
 sudo systemctl daemon-reload
 
 echo npm install

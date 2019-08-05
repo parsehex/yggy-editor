@@ -1,3 +1,5 @@
+cd $HOME/title-22
+
 mkdir -p ./editor-assets ./editor-assets/data ./editor-assets/images
 
 cd game
