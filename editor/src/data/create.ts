@@ -2,19 +2,21 @@ import { getFreeID } from 'id-service';
 import data from 'game/data';
 import { Dialogue, Choice, Character, Frame, Image } from 'game/types';
 import getDefault from './default';
+import { numOr } from 'common/utils';
 
 // TODO accept optional "defaultData" dialogue object
 function dialogue(templateDialogue?: Dialogue) {
+	console.log(templateDialogue);
 	const d: Dialogue = {
 		id: getFreeID('dialogue'),
 		text: 'Dialogue text',
 		choices: [],
-		backgroundID: templateDialogue.backgroundID || getDefault('backgrounds').id,
-		character1ID: templateDialogue.character1ID || getDefault('characters').id,
-		character1FrameIndex: templateDialogue.character1FrameIndex || 0,
-		character2ID: templateDialogue.character2ID || null,
-		character2FrameIndex: templateDialogue.character2FrameIndex || null,
-		ownerCharacterID: templateDialogue.ownerCharacterID || getDefault('characters').id,
+		backgroundID: numOr(templateDialogue.backgroundID, getDefault('backgrounds').id),
+		character1ID: numOr(templateDialogue.character1ID, getDefault('characters').id),
+		character1FrameIndex: numOr(templateDialogue.character1FrameIndex, 0),
+		character2ID: numOr(templateDialogue.character2ID, null),
+		character2FrameIndex: numOr(templateDialogue.character2FrameIndex, null),
+		ownerCharacterID: numOr(templateDialogue.ownerCharacterID, getDefault('characters').id),
 	};
 	data.dialogue.push(d);
 	return d;
