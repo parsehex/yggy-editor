@@ -9,7 +9,7 @@ export default function initCharactersTabEvents() {
 	const tab = '#characters-tab';
 
 	// create character
-	_editorDelegate(`${tab} div.character > button.create`, 'click', () => {
+	_editorDelegate(`${tab} button.create`, 'click', () => {
 		createData.character();
 		updateActiveTab();
 	});

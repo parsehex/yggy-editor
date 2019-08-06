@@ -1,6 +1,6 @@
 {
   "name": "title-22-game",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "devDependencies": {
     "@types/fs-extra": "^8.0.0",
     "awesome-typescript-loader": "^5.2.1",
