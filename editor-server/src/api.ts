@@ -72,7 +72,7 @@ export default async function routeAPI(
 		const ws = fs.createWriteStream(p);
 		req.pipe(ws);
 		res.writeHead(200);
-		res.write('OK');
+		res.write(fileName);
 		res.end();
 	}
 

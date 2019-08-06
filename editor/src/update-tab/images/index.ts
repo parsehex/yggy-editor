@@ -53,7 +53,7 @@ export default async function updateImagesTab() {
 	if (imageFiles.indexOf(oldPreviewVal) > -1) {
 		previewSelect.value = oldPreviewVal;
 	} else {
-		previewSelect.value = 'None';
+		previewSelect.value = 'none';
 	}
 
 	morph(editorElements.imagesTab.list, tmp);

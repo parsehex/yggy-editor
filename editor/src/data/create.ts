@@ -1,6 +1,6 @@
 import { getFreeID } from 'id-service';
 import data from 'game/data';
-import { Dialogue, Choice, Character, Frame } from 'game/types';
+import { Dialogue, Choice, Character, Frame, Image } from 'game/types';
 import getDefault from './default';
 
 // TODO accept optional "defaultData" dialogue object
@@ -51,5 +51,21 @@ function frame(name?: string) {
 	return f;
 }
 
-const createData = { dialogue, choice, character, frame };
+function image() {
+	const img: Image = {
+		id: getFreeID('images'),
+		name: 'New Image',
+		filename: '',
+	};
+	data.images.push(img);
+	return img;
+}
+
+const createData = {
+	dialogue,
+	choice,
+	character,
+	frame,
+	image,
+};
 export default createData;

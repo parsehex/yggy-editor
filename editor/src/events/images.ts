@@ -6,18 +6,14 @@ import data from 'game/data';
 import updateActiveTab from 'update-tab';
 import remove from 'data/remove';
 import editorElements from 'editor-elements';
+import createData from 'data/create';
 
 export default function initImagesTabEvents() {
 	const tab = '#images-tab';
 
 	// create image
 	_editorDelegate(`${tab} button.create`, 'click', () => {
-		const imgId = getFreeID('images');
-		data.images.push({
-			id: imgId,
-			name: 'New Image',
-			filename: '',
-		});
+		createData.image();
 		updateActiveTab();
 	});
 
@@ -33,7 +29,9 @@ export default function initImagesTabEvents() {
 		const id = +t.closest('div.image').dataset.id;
 		const img = getData('images', id);
 		img.name = t.value;
-		draw();
+		// i don't think the game needs to be redrawn here right?
+		updateActiveTab();
+		// draw();
 	});
 
 	// change image file
@@ -74,11 +72,17 @@ export default function initImagesTabEvents() {
 			method: 'POST',
 			body: file.slice(),
 		});
+		const serverFilename = await r.text();
 		if (r.status !== 200) {
 			console.log(r);
 			uploadError();
 		} else {
 			uploadSuccess();
+
+			// create a new image for convenience
+			const img = createData.image();
+			img.name = fileName.replace('.png', '');
+			img.filename = serverFilename;
 		}
 		updateActiveTab();
 	});
