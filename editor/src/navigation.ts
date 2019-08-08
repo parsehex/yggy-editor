@@ -20,9 +20,9 @@ export function goToPrev() {
 
 /**
  * Add a dialogue to the history.
- * 
+ *
  * If not at the end of history then all forward history is cleared.
- * 
+ *
  * You should `draw()` afterwards.
  */
 export function push(dialogueID: number) {

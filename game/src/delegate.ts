@@ -38,6 +38,7 @@ function init() {
 	elements.doc.body.addEventListener('mouseover', eventHandler.bind(null, 'mouseover'));
 	elements.doc.body.addEventListener('mousemove', eventHandler.bind(null, 'mousemove'));
 	elements.doc.body.addEventListener('mouseout', eventHandler.bind(null, 'mouseout'));
+	setup = true;
 }
 
 function eventHandler(type: Listener['eventName'], e: Event) {

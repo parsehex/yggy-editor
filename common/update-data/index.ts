@@ -5,7 +5,7 @@ export const CURRENT_GAME_DATA_VERSION = 2;
 /**
  * Given a `data` object, returns an update version of `data`.
  * Returns the same object if no updates are required.
- * 
+ *
  * `data` should be an object with a property for each data asset type, without any pre/suffix.
  * For example, the prop 'editor-dialogue' should be changed to 'dialogue' before calling this function.
  */

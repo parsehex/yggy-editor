@@ -6,12 +6,12 @@ editor="$base/editor"
 
 
 echo "Script setup"
-chmod +x $base/start-server.sh
-chmod +x $base/update.sh
+chmod +x $basescripts/sh/start-server.sh
+chmod +x $basescripts/sh/update.sh
 
 
 echo "Updating systemd service file"
-sudo cp $base/systemd.service /etc/systemd/system/title-22-editor.service
+sudo cp $base/scripts/sh/systemd.service /etc/systemd/system/title-22-editor.service
 sudo systemctl daemon-reload
 
 

@@ -12,3 +12,5 @@
 The `update.sh` is a convenience script for updating the (editor) server. It clones the master branch, backs up data (to `~/title-22-backup`), does whatever init is necessary and restarts the server.
 
 Since the update scrpt is part of the repo and the update script itself will be updated over time, it's recommended to manually overwrite the update script with the current version before running it (hint: `echo "" > update.sh`).
+
+As of now it shouldn't be as necessary to do this since the installation steps are split from the update script, but it still might be a good idea to update. **TODO**

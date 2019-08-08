@@ -24,4 +24,4 @@ mv /tmp/title-22-backup/editor-assets_temp $base/editor-assets
 
 # this way the installation can be updated automatically
 echo "Running install script..."
-sh $base/scripts/install.sh
+sh $base/scripts/sh/install.sh

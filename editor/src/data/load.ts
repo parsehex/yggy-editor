@@ -4,7 +4,7 @@ import editorState from 'state';
 
 export default async function _editorLoadData() {
 	const keys = Object.keys(data);
-	let loadedData: any = {};
+	const loadedData: any = {};
 
 	let broken = false;
 	for (const k of keys) {

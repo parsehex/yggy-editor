@@ -5,13 +5,13 @@ import loadData from './data/load';
 import { initEvents } from './events';
 
 window.addEventListener('load', async () => {
-  // draw the game
-  await loadData();
+	// draw the game
+	await loadData();
 
-  // TODO
-  state.currentDialogueID = 0;
-  initElements();
-  initEvents();
+	// TODO
+	state.currentDialogueID = 0;
+	initElements();
+	initEvents();
 
-  gameDraw();
+	gameDraw();
 });

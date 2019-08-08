@@ -25,7 +25,6 @@ export default function initBackgroundsTabEvents() {
 	_editorDelegate(`${tab} .list button.delete`, 'click', (e, t) => {
 		const bgId = +t.closest('div.background').dataset.id;
 		remove.background(bgId);
-		document.body.dataset
 		draw();
 	});
 

@@ -36,6 +36,7 @@ function init() {
 	document.body.addEventListener('mouseover', eventHandler.bind(null, 'mouseover'));
 	document.body.addEventListener('mousemove', eventHandler.bind(null, 'mousemove'));
 	document.body.addEventListener('mouseout', eventHandler.bind(null, 'mouseout'));
+	setup = true;
 }
 
 function eventHandler(type: Listener['eventName'], e: Event) {

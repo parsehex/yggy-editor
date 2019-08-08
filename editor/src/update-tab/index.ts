@@ -32,6 +32,6 @@ export default function updateActiveTab() {
 
 	if (editorState.devMode) {
 		const updateTime = performance.now() - updateStart;
-		document.getElementById('update-time').textContent = `${updateTime.toFixed(3)}ms`
+		document.getElementById('update-time').textContent = `${updateTime.toFixed(3)}ms`;
 	}
 }

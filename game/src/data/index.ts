@@ -7,7 +7,7 @@ export interface GameData {
 	characters: Character[];
 	backgrounds: Background[];
 	frames: Frame[];
-	meta: Meta,
+	meta: Meta;
 }
 
 const data: GameData = {

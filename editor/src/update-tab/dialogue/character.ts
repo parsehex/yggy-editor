@@ -26,9 +26,9 @@ function character(ch: Character, selectedFrameIndex: number, dialogueOwner: num
 	div.className = 'character';
 	div.dataset.id = characterID.toString();
 
-	const charOptions: SelectOptions = data.characters.map(ch => ({
-		text: ch.name,
-		value: ch.id.toString(),
+	const charOptions: SelectOptions = data.characters.map(char => ({
+		text: char.name,
+		value: char.id.toString(),
 	}));
 	charOptions.unshift({ text: 'None' });
 	const charSelect = createSelect('name', charOptions, characterID);

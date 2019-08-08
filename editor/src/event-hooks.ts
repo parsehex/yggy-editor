@@ -13,7 +13,7 @@ export function initEventHooks() {
 		2. Use setTimeout to wait for the game to do whatever it needs to do before
 		running these handlers.
 	*/
-	const delegate = function (sel: string, type: string, cb: (ev: Event, target: HTMLElement) => void) {
+	const delegate = (sel: string, type: string, cb: (ev: Event, target: HTMLElement) => void) => {
 		del(sel, <any>type, (e, t) => {
 			setTimeout(() => {
 				cb(e, t);

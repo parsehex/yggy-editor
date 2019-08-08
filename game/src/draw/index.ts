@@ -19,8 +19,7 @@ export default function drawScene() {
 
 	resetChoices();
 	let allHidden = true;
-	for (let i = 0; i < d.choices.length; i++) {
-		const choiceID = d.choices[i];
+	for (const choiceID of d.choices) {
 		const c = getData('choices', choiceID);
 		addChoice(c.text, choiceID);
 		if (c.text.length > 0) allHidden = false;
