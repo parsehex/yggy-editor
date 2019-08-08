@@ -12,7 +12,6 @@
     "webpack-cli": "3.3.5"
   },
   "scripts": {
-    "init": "sh symlinks.sh",
     "dev": "webpack --mode development -w --script",
     "sass-editor": "sass editor/scss/main.scss editor/assets/css/editor.css",
     "sass-game": "sass game/scss/main.scss game/assets/css/main.css",
