@@ -2,7 +2,7 @@ import * as http from 'http';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { URLSearchParams } from 'url';
-import { editorBase, editorAssetsBase } from 'const';
+import { editorBase, editorAssetsBase, gameBase } from 'const';
 
 export default async function routeStatic(
 	endpoint: string,
@@ -14,36 +14,69 @@ export default async function routeStatic(
 	let fileType = 'text/plain';
 	let content: any;
 
-	if ('/' === endpoint) {
+	// /index.html
+	if (endpoint === '/') {
 		fileType = 'text/html';
 		content = await fs.readFile(path.join(editorBase, 'index.html'), 'utf8');
 	}
 
-	if ('/favicon.ico' === endpoint) {
+	// /game.html
+	if (endpoint === '/game.html') {
+		fileType = 'text/html';
+		const p = path.join(gameBase, 'index.html');
+		content = await fs.readFile(p, 'utf8');
+	}
+
+	// /favicon.ico
+	if (endpoint === '/favicon.ico') {
 		status = 404;
 		content = '';
 	}
 
-	if (endpoint.indexOf('/assets') === 0 || endpoint === '/game.html') {
-		const p = path.join(editorBase, endpoint.substr(1)); // path to default assets
-		const p2 = path.join(editorAssetsBase, endpoint.replace(/^\/assets\//, '')); // path to editor-assets
+	// /assets/*
+	if (endpoint.indexOf('/assets') === 0) {
+		// TODO this isn't an amazing test:
+		const isGameAsset = endpoint.indexOf('game.') > -1;
 
-		fileType = mimeFromExtension(endpoint.match(/\.(.+)$/)[1]);
+		let filepath = endpoint.replace(/^\/assets\//, '');
+		let p: string;
+		if (!isGameAsset || filepath.indexOf('game.js') > -1) {
+			// the editor script acts as a no-op when the game tries to load it
+			if (filepath.indexOf('game.js')) filepath = filepath.replace('game', 'editor');
+
+			p = path.join(editorBase, 'assets', filepath);
+		} else {
+			p = path.join(gameBase, 'assets', filepath);
+		}
 
 		try {
-			// try to load from editor-assets first
-			if (/png|jpe?g$/i.test(endpoint)) {
-				content = await fs.readFile(p2);
-			} else {
-				content = await fs.readFile(p2, 'utf8');
-			}
-		} catch (e) {
-			// use defaults otherwise
-			if (/png|jpe?g$/i.test(endpoint)) {
+			if (/png|jpe?g|gif$/i.test(endpoint)) {
 				content = await fs.readFile(p);
 			} else {
+				// only load text files with utf8 encoding
 				content = await fs.readFile(p, 'utf8');
 			}
+			fileType = mimeFromFilename(endpoint);
+		} catch (e) {
+			status = 404;
+			content = '';
+		}
+	}
+
+	// /game-data/*
+	if (endpoint.indexOf('/game-data') === 0) {
+		const p = path.join(editorAssetsBase, endpoint.replace(/^\/game-data\//, ''));
+		try {
+			if (/png|jpe?g|gif$/i.test(endpoint)) {
+				content = await fs.readFile(p);
+			} else {
+				// only load text files with utf8 encoding
+				content = await fs.readFile(p, 'utf8');
+			}
+			fileType = mimeFromFilename(endpoint);
+		} catch (e) {
+			status = 404;
+			content = '';
 		}
 	}
 
@@ -54,7 +87,9 @@ export default async function routeStatic(
 	res.end();
 }
 
-function mimeFromExtension(ext: string) {
+function mimeFromFilename(filename: string) {
+	let ext = filename.match(/\.(.+)$/)[1];
+
 	if (ext === 'jpg') ext = 'jpeg';
 
 	switch (ext) {

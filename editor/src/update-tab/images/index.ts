@@ -22,7 +22,7 @@ export default async function updateImagesTab() {
 
 		const preview = createElement('img');
 		preview.className = 'image-preview';
-		preview.src = '/assets/images/' + img.filename;
+		preview.src = '/game-data/images/' + img.filename;
 		div.append(preview);
 
 		const inputName = createElement('input');

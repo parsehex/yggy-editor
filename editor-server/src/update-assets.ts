@@ -7,6 +7,7 @@ export default async function updateDataAssets() {
 	const dataAssetsPath = path.join(editorAssetsBase, 'data');
 	const dataAssetFiles = await fs.readdir(dataAssetsPath);
 
+	// TODO if there are no editor assets then copy from root/example-assets
 	if (dataAssetFiles.length === 0) return;
 
 	const data = <any>{};

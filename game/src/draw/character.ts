@@ -22,7 +22,7 @@ export default function drawCharacter(id: number, frameIndex: number, pos: 'left
 	} else {
 		const frame = getData('frames', ch.frames[frameIndex]);
 		const frameImg = getData('images', frame.imageID);
-		charImg.src = `/assets/images/${frameImg.filename}`;
+		charImg.src = `/game-data/images/${frameImg.filename}`;
 		charImg.classList.remove('hidden');
 	}
 }

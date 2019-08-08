@@ -6,14 +6,14 @@ export default async function loadData() {
 	const requests: Promise<Response>[] = [];
 
 	for (const k of keys) {
-		const p = fetch(`/assets/data/${k}.json`);
+		const p = fetch(`/game-data/data/${k}.json`);
 		requests.push(p);
 	}
 
 	const responses = await Promise.all(requests);
 
 	for (const res of responses) {
-		const name = res.url.match(/data\/(.+)\.json/)[1];
+		const name = res.url.match(/game-data\/data\/(.+)\.json$/)[1];
 		const d = await res.json();
 		data[name] = d;
 	}

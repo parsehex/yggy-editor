@@ -13,7 +13,7 @@ module.exports = (env, { script, mode }) => {
     entry,
     output: {
       path: outputPath,
-      filename: 'main.js',
+      filename: script + '.js',
     },
     module: {
       rules: [
@@ -40,6 +40,7 @@ module.exports = (env, { script, mode }) => {
     config.node = {
       __dirname: false,
     };
+    config.output.filename = 'main.js';
     // config.plugins.push(new webpack.BannerPlugin({
     //   banner: 'require("source-map-support").install();',
     //   raw: true,

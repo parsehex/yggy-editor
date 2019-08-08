@@ -13,8 +13,8 @@ export default async function _editorLoadData() {
 		loadedData[k] = JSON.parse(v);
 	}
 
-	// const devMode = editorState.devMode;
-	const devMode = editorState.devMode && false;
+	const devMode = editorState.devMode;
+	// const devMode = editorState.devMode && false;
 	if (broken || devMode) {
 		console.log('Allowing game to load data...');
 		await loadData();

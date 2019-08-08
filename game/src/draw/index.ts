@@ -9,7 +9,7 @@ export default function drawScene() {
 	const bg = getData('backgrounds', d.backgroundID);
 	const bgImg = getData('images', bg.imageID);
 
-	elements.bg.style.backgroundImage = `url(/assets/images/${bgImg.filename})`;
+	elements.bg.style.backgroundImage = `url(/game-data/images/${bgImg.filename})`;
 	elements.bg.style.backgroundColor = bg.bgColor;
 
 	drawCharacter(d.character1ID, d.character1FrameIndex, 'left');

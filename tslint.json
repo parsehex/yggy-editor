@@ -7,7 +7,8 @@
 	"rules": {
 		"no-console": false,
 		"no-angle-bracket-type-assertion": false,
-		"arrow-parens": false
+		"arrow-parens": false,
+		"no-empty": false
 	},
 	"rulesDirectory": []
 }

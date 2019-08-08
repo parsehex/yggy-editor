@@ -4,9 +4,11 @@ dependencies:
   pll: github.com/parsehex/pll/16884e9a714beade7fdafa41cd9e513b1a2d3ccd
   source-map-support: 0.5.13
 devDependencies:
+  '@types/faker': 4.1.5
   '@types/fs-extra': 8.0.0
   awesome-typescript-loader: 5.2.1_typescript@3.5.2
   chalk: 2.4.2
+  faker: 4.1.0
   http-server: 0.11.1
   ts-loader: 6.0.4_typescript@3.5.2
   ts-node: 8.3.0_typescript@3.5.2
@@ -32,6 +34,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-7dV4eu9gBxoM0dAnj/BCFDW9LFU0zvTrkq0ugM7pnHEgguOEeOz1so2ZghEdzviYzQEED0r4EAgpsBChKy1TRQ==
+  /@types/faker/4.1.5:
+    dev: true
+    resolution:
+      integrity: sha512-YSDqoBEWYGdNk53xSkkb6REaUaVSlIjxIAGjj/nbLzlZOit7kUU+nA2zC2qQkIVO4MQ+3zl4Sz7aw+kbpHHHUQ==
   /@types/fs-extra/8.0.0:
     dependencies:
       '@types/node': 12.7.1
@@ -1072,6 +1078,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-Nmb6QXkELsuBr24CJSkilo6UHHgbekK5UiZgfE6UHD3Eb27YC6oD+bhcT+tJ6cl8dmsgdQxnWlcry8ksBIBLpw==
+  /faker/4.1.0:
+    dev: true
+    resolution:
+      integrity: sha1-HkW7vsxndLPBlfrSg1EJxtdIzD8=
   /fast-deep-equal/2.0.1:
     dev: true
     resolution:
@@ -3238,9 +3248,11 @@ packages:
       tarball: 'https://codeload.github.com/parsehex/tslint-rules/tar.gz/7aa6faeed19248640afe0d53517ade2fc90860c5'
     version: 0.2.0
 specifiers:
+  '@types/faker': ^4.1.5
   '@types/fs-extra': ^8.0.0
   awesome-typescript-loader: ^5.2.1
   chalk: ^2.4.2
+  faker: ^4.1.0
   fs-extra: ^8.1.0
   http-server: ^0.11.1
   nanomorph: ^5.4.0
