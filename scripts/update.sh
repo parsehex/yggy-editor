@@ -1,3 +1,5 @@
+#!/bin/bash
+
 now=$(date +"%Y%m%d-%H%M")
 base="$HOME/title-22"
 

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 base="$HOME/title-22"
 game="$base/game"
 editor="$base/editor"
