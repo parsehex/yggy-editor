@@ -1,4 +1,4 @@
-# yggy-edditor
+# yggy-editor
 
 > yggdrasil editor
 
