@@ -1,40 +1,44 @@
 {
-  "name": "title-22-game",
+  "name": "yggy-editor",
+  "private": true,
   "version": "0.2.1",
   "devDependencies": {
-    "@types/faker": "^4.1.5",
-    "@types/fs-extra": "^8.0.0",
-    "awesome-typescript-loader": "^5.2.1",
+    "@types/faker": "^4.1.12",
+    "@types/fs-extra": "^8.1.5",
+    "@types/node": "^24.9.1",
     "chalk": "^2.4.2",
     "faker": "^4.1.0",
-    "http-server": "^0.11.1",
-    "ts-loader": "6.0.4",
-    "ts-node": "^8.3.0",
-    "tsconfig-paths-webpack-plugin": "^3.2.0",
-    "tslint": "^5.18.0",
+    "http-server": "^0.11.2",
+    "ts-loader": "^9.5.4",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths-webpack-plugin": "^4.2.0",
+    "tslint": "^5.20.1",
     "tslint-rules": "github:parsehex/tslint-rules",
-    "typescript": "3.5.2",
-    "webpack": "4.35.2",
-    "webpack-cli": "3.3.5"
+    "typescript": "^5.9.3",
+    "webpack": "^5.102.1",
+    "webpack-cli": "^6.0.1"
   },
   "scripts": {
     "generate-assets": "ts-node scripts/generate-assets",
-    "dev": "webpack --mode development -w --script",
+    "dev": "webpack --mode development -w --env script=",
     "lint": "node scripts/lint.js",
     "sass": "node scripts/sass.js",
-    "build": "webpack --mode production --script",
+    "build:editor": "webpack --mode production --env script=editor",
+    "build:server": "webpack --mode production --env script=editor-server",
+    "build:game": "webpack --mode production --env script=game",
+    "build": "npm run build:editor && && npm run sass build && npm run build:server && npm run build:game",
     "game": "http-server ./game -p 8080 -c-1",
     "editor": "node editor-server/main.js",
     "reset-editor": "rm -rf editor-assets && cp -r assets editor-assets"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/parsehex/title-22.git"
+    "url": "git+https://github.com/parsehex/yggy-editor.git"
   },
   "dependencies": {
     "fs-extra": "^8.1.0",
-    "nanomorph": "^5.4.0",
+    "nanomorph": "^5.4.3",
     "pll": "github:parsehex/pll",
-    "source-map-support": "^0.5.13"
+    "source-map-support": "^0.5.21"
   }
 }

@@ -17,5 +17,5 @@ module.exports = function (cmds) {
 		});
 	}
 
-	pll(c);
+	pll.default(c);
 }

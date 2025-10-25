@@ -18,9 +18,14 @@ export default function updateLocalData() {
 	if (lsKeys.length === 0) return;
 
 	for (const k of lsKeys) {
-		const d = JSON.parse(localStorage.getItem(k));
-		const key = k.replace('editor-', '');
-		localData[key] = d;
+		try {
+			const d = JSON.parse(localStorage.getItem(k));
+			const key = k.replace('editor-', '');
+			localData[key] = d;
+		} catch (e) {
+			// likely an error parsing json: probably not our data
+			return;
+		}
 	}
 
 	const newData = updateData(localData);

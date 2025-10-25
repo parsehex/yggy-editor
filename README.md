@@ -1,4 +1,10 @@
-# Title 22
+# yggy-edditor
+
+> yggdrasil editor
+
+This is a project to create and edit games that use dialogue trees.
+
+It's a renewed work in progress. The rest of this readme is from the original iteration.
 
 ## Setup
 

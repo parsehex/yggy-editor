@@ -1,7 +1,7 @@
 const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
-module.exports = (env, { script, mode }) => {
+module.exports = ({ script }, { mode }) => {
   const base = path.resolve(__dirname, script);
   const entry = path.join(base, 'src/index.ts');
   let outputPath = path.join(base, 'assets/js');

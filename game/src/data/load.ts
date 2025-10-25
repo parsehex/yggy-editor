@@ -6,6 +6,7 @@ export default async function loadData() {
 	const requests: Promise<Response>[] = [];
 
 	for (const k of keys) {
+		console.log('fetching game data', k);
 		const p = fetch(`/game-data/data/${k}.json`);
 		requests.push(p);
 	}
