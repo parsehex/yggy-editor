@@ -7,13 +7,13 @@
 > [!NOTE]
 > **See any potential here? Let me know / Spread the word!**
 >
-> I've been restoring + refurbishing my projects but I need users and feedback. If you have any interest in using this project, please get in touch via the **Issues** tab or one of the links under **Sponsor this project** to the right. [My profile](https://github.com/parsehex) may have updated contact info.
+> I've been restoring + refurbishing my projects but I need users and feedback. If you have any interest in using this project, please get in touch via the _**Issues**_ tab or one of the links under _**Sponsor this project**_ to the right. [My profile](https://github.com/parsehex) may have updated contact info.
 
 ## About
 
 I made this little game engine + editor in 2019 for a friend to be able to more easily make games that primarily use a dialogue tree. As is common, technical debt set in and I lost steam on the project.
 
-Now I'm working to get the editor running fully in the browser, ideally as a PWA that allows directly editing and building the game using the filesystem.
+Now I'm working to get the editor running fully in the browser, ideally as a PWA that allows directly editing and building the game using the filesystem. My goal is to eventually be able to download a zip file with a compiled/self-contained game 100% via the browser.
 
 You can use the app at <https://parsehex.github.io/yggy-editor/> which will let you edit the dialogue tree and use the built-in example image assets.
 
