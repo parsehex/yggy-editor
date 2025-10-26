@@ -4,7 +4,8 @@
 
 ![Yggy Editor preview screnshot](./yggy-editor-preview.png)
 
-> [!NOTE] See any potential here? Let me know / Spread the word!
+> [!NOTE]
+> **See any potential here? Let me know / Spread the word!**
 >
 > I've been restoring + refurbishing my projects but I need users and feedback. If you have any interest in using this project, please get in touch via the **Issues** tab or one of the links under **Sponsor this project** to the right. [My profile](https://github.com/parsehex) may have updated contact info.
 
