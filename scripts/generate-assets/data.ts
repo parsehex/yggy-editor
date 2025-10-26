@@ -31,15 +31,14 @@ export function find<T extends Exclude<keyof GameData, 'meta'>>(
 }
 
 const samplePath = path.resolve(__dirname, '../../sample-assets');
-const savePath = path.resolve(__dirname, '../../editor-assets');
+const savePath = path.resolve(__dirname, '../../editor/public/game-data');
 export async function save() {
 	// create savePath if it doesn't exist
 	try {
 		await fs.remove(savePath);
 	} catch (e) { }
-	await fs.mkdir(savePath);
-	await fs.mkdir(path.join(savePath, 'data'));
-	await fs.mkdir(path.join(savePath, 'images'));
+	await fs.mkdirp(path.join(savePath, 'data'));
+	await fs.mkdirp(path.join(savePath, 'images'));
 
 	console.log('Saving generated data');
 

@@ -1,7 +1,7 @@
 import editorElements from 'editor-elements';
 import getData from 'game/data/get';
 import { Dialogue } from 'game/types';
-import * as morph from 'nanomorph';
+import morph from 'nanomorph';
 import { createElement } from 'dom-util';
 
 export default function updateChoices(d: Dialogue) {

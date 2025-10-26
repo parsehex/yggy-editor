@@ -3,7 +3,7 @@ import getData from 'game/data/get';
 import data from 'game/data';
 import editorElements from 'editor-elements';
 import { createElement } from 'dom-util';
-import * as morph from 'nanomorph';
+import morph from 'nanomorph';
 import createSelect, { SelectOptions } from 'update-tab/common/select';
 
 export default function updateCharacter(d: Dialogue) {

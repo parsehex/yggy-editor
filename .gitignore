@@ -3,6 +3,10 @@ node_modules
 game/assets
 editor/assets
 editor-server/main.js
-editor-assets
+editor/public/game-data
 *.log
 *.map
+dist
+
+# symlink
+editor/game

@@ -1,4 +1,4 @@
-import * as morph from 'nanomorph';
+import morph from 'nanomorph';
 import editorElements from 'editor-elements';
 import data from 'game/data';
 import { createElement } from 'dom-util';
