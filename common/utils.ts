@@ -14,6 +14,10 @@ export function numOr(n: number, def: number) {
 	return n;
 }
 
+export function delay(ms: number) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export function getFullUrl(subPath: string) {
 	const host = window.location.protocol + '//' + window.location.host;
 	const baseUrl = new URL(host + __BASE__);
