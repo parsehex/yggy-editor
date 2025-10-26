@@ -1,0 +1,32 @@
+[
+	{
+		"id": 0,
+		"text": "Fine...",
+		"targetDialogueID": 1
+	},
+	{
+		"id": 1,
+		"text": "I'm doing fantastic!",
+		"targetDialogueID": 1
+	},
+	{
+		"id": 2,
+		"text": "I can't remember anything. I woke up today naked.",
+		"targetDialogueID": 1
+	},
+	{
+		"id": 3,
+		"text": "I am ambivalent.",
+		"targetDialogueID": 2
+	},
+	{
+		"id": 4,
+		"text": "I don't know.",
+		"targetDialogueID": 0
+	},
+	{
+		"id": 5,
+		"text": "It means not having any strong feelings one way or another.",
+		"targetDialogueID": 3
+	}
+]

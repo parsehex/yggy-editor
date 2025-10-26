@@ -1,0 +1,42 @@
+[
+	{
+		"id": 0,
+		"name": "bg - default",
+		"filename": "default-bg.png"
+	},
+	{
+		"id": 1,
+		"name": "char - default",
+		"filename": "default-char.png"
+	},
+	{
+		"id": 2,
+		"name": "bg - room",
+		"filename": "blank-room.png"
+	},
+	{
+		"id": 3,
+		"name": "bg - main menu",
+		"filename": "start-screen.png"
+	},
+	{
+		"id": 4,
+		"name": "char - Green Man",
+		"filename": "green-man.png"
+	},
+	{
+		"id": 5,
+		"name": "char - Red Man",
+		"filename": "red-man.png"
+	},
+	{
+		"id": 6,
+		"name": "char - Cat Guy",
+		"filename": "cat-guy.png"
+	},
+	{
+		"id": 7,
+		"name": "char - Angry Man",
+		"filename": "angry-man.png"
+	}
+]

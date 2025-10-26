@@ -1,0 +1,16 @@
+[
+	{
+		"id": 0,
+		"name": "Green Man",
+		"frames": [
+			0
+		]
+	},
+	{
+		"id": 1,
+		"name": "Red Man",
+		"frames": [
+			1
+		]
+	}
+]

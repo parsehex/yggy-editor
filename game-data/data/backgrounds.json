@@ -1,0 +1,14 @@
+[
+	{
+		"id": 0,
+		"name": "Room",
+		"imageID": 2,
+		"bgColor": "#7b7b7b"
+	},
+	{
+		"id": 1,
+		"name": "Main Menu",
+		"imageID": 3,
+		"bgColor": "#7b7b7b"
+	}
+]

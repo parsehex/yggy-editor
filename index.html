@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf8" />
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0" />
+
+	<title>Yggy Editor</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/editor.css" />
+
+  <script type="module" crossorigin src="./assets/editor-BXk0PY1Z.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/modulepreload-polyfill-B5Qt9EMX.js">
+</head>
+
+<body>
+
+	<iframe src="/game/index.html"></iframe>
+	<button type="button" id="game-size" title="Toggle the game full-size">
+		&gt;
+	</button>
+
+	<div id="editor">
+		<div id="header">
+			<div id="controls">
+				<button type="button" id="nav-back" title="Previously-viewed dialogue">&lt;</button>
+				<button type="button" id="nav-next">&gt;</button>
+				<button type="button" id="push">Push changes</button>
+				<!-- <button type="button" id="pull">Pull changes</button> -->
+				<button type="button" id="save">Save</button>
+				<button type="button" id="clear">Clear</button>
+			</div>
+			<div id="tabs-list">
+				<span class="link active" data-target="dialogue">Dialogue</span>
+				<span class="link" data-target="tree">Tree</span>
+				<span class="link" data-target="characters">Characters</span>
+				<span class="link" data-target="backgrounds">Backgrounds</span>
+				<span class="link" data-target="images">Images</span>
+				<span class="link" data-target="utilities">Utilities</span>
+			</div>
+		</div>
+
+		<div class="tab active" id="dialogue-tab">
+			<div class="characters"></div>
+			<select class="background"></select>
+			<textarea type="text" class="dialogue" cols="40" rows="3" placeholder="Dialogue text"></textarea>
+			<div class="choices"></div>
+		</div>
+		<div class="tab" id="tree-tab">
+			<div>
+				<button type="button" class="undo" disabled>Undo last link</button>
+			</div>
+			<ul></ul>
+		</div>
+		<div class="tab" id="characters-tab">
+			<button type="button" class="create">Create character</button>
+			<div class="list"></div>
+		</div>
+		<div class="tab" id="backgrounds-tab">
+			<button type="button" class="create">Create background</button>
+			<div class="list"></div>
+		</div>
+		<div class="tab" id="images-tab">
+			<div id="upload">
+				<div>
+					Upload image file
+					<br>
+					<input type="text" class="name" placeholder="Image file name (or leave blank)">
+					<input type="file">
+					<button type="button" class="submit">Upload</button>
+					<br><br>
+					Preview
+					<select class="image-file-preview-select"></select>
+				</div>
+				<div>
+					<img id="image-file-preview">
+				</div>
+			</div>
+			<button type="button" class="create">Create image</button>
+			<div class="list"></div>
+		</div>
+		<div class="tab" id="utilities-tab">
+			<button type="button" class="remove-orphans">Remove orphaned data</button>
+			<!-- TODO "Make deep dialogue tree" button -->
+		</div>
+	</div>
+
+	<div id="update-time" class="hidden"></div>
+	<div id="version" class="hidden"></div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+[
+	{
+		"id": 0,
+		"character1ID": 0,
+		"character1FrameIndex": 0,
+		"character2ID": null,
+		"character2FrameIndex": null,
+		"ownerCharacterID": 0,
+		"backgroundID": 0,
+		"text": "Hi, how are you?",
+		"choices": [
+			0,
+			1,
+			2,
+			3
+		]
+	},
+	{
+		"id": 1,
+		"character1ID": 0,
+		"character1FrameIndex": 0,
+		"character2ID": null,
+		"character2FrameIndex": null,
+		"ownerCharacterID": 0,
+		"backgroundID": 0,
+		"text": "I don't really have anything else to say to you.",
+		"choices": []
+	},
+	{
+		"id": 2,
+		"character1ID": 0,
+		"character1FrameIndex": 0,
+		"character2ID": null,
+		"character2FrameIndex": null,
+		"ownerCharacterID": 0,
+		"backgroundID": 0,
+		"text": "What does \"ambivalent\" mean?",
+		"choices": [
+			4,
+			5
+		]
+	},
+	{
+		"id": 3,
+		"character1ID": 0,
+		"character1FrameIndex": 0,
+		"character2ID": null,
+		"character2FrameIndex": null,
+		"ownerCharacterID": 0,
+		"backgroundID": 0,
+		"text": "Huh.",
+		"choices": []
+	}
+]
