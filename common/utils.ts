@@ -13,3 +13,11 @@ export function numOr(n: number, def: number) {
 	if (typeof n !== 'number') return def;
 	return n;
 }
+
+export function getFullUrl(subPath: string) {
+	const host = window.location.protocol + '//' + window.location.host;
+	// @ts-ignore
+	const baseUrl = new URL(host + window.__BASE__);
+  const fullUrl = new URL(subPath, baseUrl);
+	return fullUrl.href;
+}

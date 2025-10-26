@@ -1,6 +1,7 @@
 import { Character, Frame } from '../types';
 import getData from '../data/get';
 import elements from '../elements';
+import { getFullUrl } from 'common/utils';
 
 export default function drawCharacter(id: number, frameIndex: number, pos: 'left' | 'right') {
 	let ch: Character;
@@ -22,7 +23,7 @@ export default function drawCharacter(id: number, frameIndex: number, pos: 'left
 	} else {
 		const frame = getData('frames', ch.frames[frameIndex]);
 		const frameImg = getData('images', frame.imageID);
-		charImg.src = `/game-data/images/${frameImg.filename}`;
+		charImg.src = getFullUrl(`./game-data/images/${frameImg.filename}`);
 		charImg.classList.remove('hidden');
 	}
 }

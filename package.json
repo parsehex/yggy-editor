@@ -1,7 +1,7 @@
 {
   "name": "yggy-editor",
   "private": true,
-  "version": "0.2.1",
+  "version": "0.3.0",
   "devDependencies": {
     "@types/faker": "^4.1.12",
     "@types/fs-extra": "^8.1.5",
@@ -21,8 +21,7 @@
     "dev": "vite",
     "lint": "node scripts/lint.js",
     "sass": "node scripts/sass.js",
-    "build": "npm run sass build && npm run symlink && vite build",
-    "symlink": "cd editor ; rm -rf ./game ; ln -s ../game ./game",
+    "build": "npm run sass build && vite build",
     "editor": "vite preview",
     "generate-assets": "ts-node scripts/generate-assets",
     "hand-assets": "rm -rf editor/public/game-data && cp -r assets editor/public/game-data"

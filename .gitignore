@@ -7,6 +7,3 @@ editor/public/game-data
 *.log
 *.map
 dist
-
-# symlink
-editor/game

@@ -2,14 +2,16 @@ import state from '../state';
 import getData from '../data/get';
 import elements from '../elements';
 import drawCharacter from './character';
+import { getFullUrl } from 'common/utils';
 
 /** Draws whatever the current state is */
 export default function drawScene() {
 	const d = getData('dialogue', state.currentDialogueID);
 	const bg = getData('backgrounds', d.backgroundID);
 	const bgImg = getData('images', bg.imageID);
+	const bgUrl = getFullUrl(`./game-data/images/${bgImg.filename}`)
 
-	elements.bg.style.backgroundImage = `url(/game-data/images/${bgImg.filename})`;
+	elements.bg.style.backgroundImage = `url(${bgUrl})`;
 	elements.bg.style.backgroundColor = bg.bgColor;
 
 	drawCharacter(d.character1ID, d.character1FrameIndex, 'left');

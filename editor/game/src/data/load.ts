@@ -1,4 +1,5 @@
 import data from './index';
+import { getFullUrl } from 'common/utils';
 
 export default async function loadData() {
 	// console.log('Loading data...');
@@ -6,8 +7,7 @@ export default async function loadData() {
 	const requests: Promise<Response>[] = [];
 
 	for (const k of keys) {
-		console.log('fetching game data', k);
-		const p = fetch(`/game-data/data/${k}.json`);
+		const p = fetch(getFullUrl(`./game-data/data/${k}.json`));
 		requests.push(p);
 	}
 

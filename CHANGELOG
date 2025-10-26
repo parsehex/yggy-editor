@@ -1,10 +1,18 @@
+# Changes
+
 This isn't necessarily a full list of changes. Noteworthy behavior of new features will be listed here.
 
-v0.2.1
+## v0.3.0
+
+This is the first version that I've worked on to run the editor fully on the browser.
+
+## v0.2.1
+
 - After uploading an image file, the editor auto-creates a new Image data asset.
 	- Note that this created Image acts the same as it did. So if you Clear changes then it'll be lost but the image file will still be in the editor.
 
-v0.2.0
+## v0.2.0
+
 - Add the ability for multiple (2) character to appear at once.
 	- The editor (intentionally) won't allow you to set the same character for both characters.
 	- With this you now must set which character "owns" the dialogue (i.e. who is talking).
