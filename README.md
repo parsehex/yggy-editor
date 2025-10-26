@@ -1,10 +1,24 @@
 # yggy-editor
 
-> yggdrasil editor
+**yggdrasil editor** - web-based editor for dialogue tree games
 
-This is a project to create and edit games that use dialogue trees.
+![Yggy Editor preview screnshot](./yggy-editor-preview.png)
 
-It's a renewed work in progress. The rest of this readme is from the original iteration.
+> [!NOTE] See any potential here? Let me know / Spread the word!
+>
+> I've been restoring + refurbishing my projects but I need users and feedback. If you have any interest in using this project, please get in touch via the **Issues** tab or one of the links under **Sponsor this project** to the right. [My profile](https://github.com/parsehex) may have updated contact info.
+
+## About
+
+I made this little game engine + editor in 2019 for a friend to be able to more easily make games that primarily use a dialogue tree. As is common, technical debt set in and I lost steam on the project.
+
+Now I'm working to get the editor running fully in the browser, ideally as a PWA that allows directly editing and building the game using the filesystem.
+
+You can use the app at <https://parsehex.github.io/yggy-editor/> which will let you edit the dialogue tree and use the built-in example image assets.
+
+----
+
+Original readme follows:
 
 ## Setup
 
