@@ -5,15 +5,26 @@
 		.character {
 			margin: 5px 0;
 			
+			// .space-x-2
+			& > :not(template) ~ :not(template) {
+				margin-left: 0.5rem;
+			}
+			
 			label.owner {
 				margin-left: 4px;
 			}
 		}
 	}
 	
-	textarea.dialogue {
-		display: block;
+	div#dialogue-wrapper {
+		display: flex;
+		align-items: baseline;
+		gap: 0.25em;
 		margin: 10px 0;
+	}
+	
+	h3 {
+		border-bottom: 1px dashed gray;
 	}
 	
 	div.choices {
@@ -21,8 +32,7 @@
 		
 		& > div:not(:last-of-type) {
 			padding-bottom: 4px;
-			margin: 2px 0;
-			border-bottom: 1px solid lightgray;
+			margin: 0.25em 0;
 			
 			display: flex;
 		}

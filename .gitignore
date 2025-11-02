@@ -1,6 +1,6 @@
 .DS_STORE
 node_modules
-editor/public/assets
+editor/public/assets/***.css*
 editor/public/game-data
 *.log
 *.map

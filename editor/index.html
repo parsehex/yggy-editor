@@ -6,8 +6,10 @@
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0" />
 
 	<title>Yggy Editor</title>
+	<meta name="description" content="An app for editing dialogue tree-based games.">
 
 	<link rel="stylesheet" type="text/css" href="assets/editor.css" />
+	<link rel="icon" type="image/png" href="assets/icons/logo-48px.png" />
 
 </head>
 
@@ -26,7 +28,7 @@
 				<button type="button" id="push">Push changes</button>
 				<!-- <button type="button" id="pull">Pull changes</button> -->
 				<button type="button" id="save">Save</button>
-				<button type="button" id="clear">Clear</button>
+				<button type="button" id="clear">Reset Project</button>
 			</div>
 			<div id="tabs-list">
 				<span class="link active" data-target="dialogue">Dialogue</span>
@@ -40,8 +42,15 @@
 
 		<div class="tab active" id="dialogue-tab">
 			<div class="characters"></div>
-			<select class="background"></select>
-			<textarea type="text" class="dialogue" cols="40" rows="3" placeholder="Dialogue text"></textarea>
+			<div>
+				<span>Background: </span>
+				<select class="background"></select>
+			</div>
+			<div id="dialogue-wrapper">
+				<span>Dialogue: </span>
+				<textarea type="text" class="dialogue" cols="40" rows="3" placeholder="Dialogue text"></textarea>
+			</div>
+			<h3>Choices</h3>
 			<div class="choices"></div>
 		</div>
 		<div class="tab" id="tree-tab">

@@ -5,22 +5,23 @@ import editorElements from 'editor-elements';
 import { createElement } from 'dom-util';
 import morph from 'nanomorph';
 import createSelect, { SelectOptions } from 'update-tab/common/select';
+import createSpan from 'update-tab/common/span';
 
 export default function updateCharacter(d: Dialogue) {
 	const tmp = <HTMLDivElement>editorElements.dialogueTab.characters.cloneNode();
 
 	const ch1 = getData('characters', d.character1ID);
-	const char1 = character(ch1, d.character1FrameIndex, d.ownerCharacterID);
+	const char1 = character('1', ch1, d.character1FrameIndex, d.ownerCharacterID);
 	tmp.append(char1);
 
 	const ch2 = getData('characters', d.character2ID);
-	const char2 = character(ch2, d.character2FrameIndex, d.ownerCharacterID);
+	const char2 = character('2', ch2, d.character2FrameIndex, d.ownerCharacterID);
 	tmp.append(char2);
 
 	morph(editorElements.dialogueTab.characters, tmp);
 }
 
-function character(ch: Character, selectedFrameIndex: number, dialogueOwner: number, excludeID?: number) {
+function character(num: string, ch: Character, selectedFrameIndex: number, dialogueOwner: number, excludeID?: number) {
 	const characterID: any = ch === null ? 'none' : ch.id;
 	const div = createElement('div');
 	div.className = 'character';
@@ -31,7 +32,9 @@ function character(ch: Character, selectedFrameIndex: number, dialogueOwner: num
 		value: char.id.toString(),
 	}));
 	charOptions.unshift({ text: 'None' });
+	const label = createSpan('', 'Character ' + num + ':');
 	const charSelect = createSelect('name', charOptions, characterID);
+	div.append(label);
 	div.append(charSelect);
 
 	if (ch === null) return div;
