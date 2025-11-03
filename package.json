@@ -15,7 +15,8 @@
     "tslint-rules": "github:parsehex/tslint-rules",
     "typescript": "^5.9.3",
     "vite": "^7.1.12",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitepress": "^1.6.4"
   },
   "scripts": {
     "dev": "vite",
@@ -23,15 +24,21 @@
     "sass": "node scripts/sass.js",
     "build": "npm run sass build && vite build",
     "editor": "vite preview",
+    "image-list": "node scripts/image-list.js",
     "generate-assets": "ts-node scripts/generate-assets",
-    "hand-assets": "rm -rf editor/public/game-data && cp -r assets editor/public/game-data"
+    "hand-assets": "rm -rf editor/public/default-game-data && cp -r assets editor/public/default-game-data",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/parsehex/yggy-editor.git"
   },
   "dependencies": {
+    "idb": "^8.0.3",
     "nanomorph": "^5.4.3",
-    "pll": "github:parsehex/pll"
+    "pll": "github:parsehex/pll",
+    "register-service-worker": "^1.7.2"
   }
 }

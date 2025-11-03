@@ -37,6 +37,13 @@ export default function updateChoices(d: Dialogue) {
 			btnNewDialogue.textContent = '+ Dialogue';
 			btnNewDialogue.title = 'Attach a new dialogue to this choice';
 			div.append(btnNewDialogue);
+		} else {
+			const btnGoToDialogue = createElement('button');
+			btnGoToDialogue.className = 'go-to-dialogue';
+			btnGoToDialogue.type = 'button';
+			btnGoToDialogue.textContent = 'Go';
+			btnGoToDialogue.title = 'Go to linked dialogue';
+			div.append(btnGoToDialogue);
 		}
 
 		tmp.append(div);

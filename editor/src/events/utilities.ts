@@ -9,7 +9,7 @@ export default function initUtilitiesTabEvents() {
 	_editorDelegate(`${tab} button.remove-orphans`, 'click', () => {
 		// TODO this won't clear branches that aren't accessible
 		// without having to run multiple times
-		const orphanDialogueIds = data.dialogue.map(d => d.id);
+		const orphanDialogueIds = data.dialogue.map((d) => d.id);
 		orphanDialogueIds.splice(0, 1);
 		for (const c of data.choices) {
 			const di = orphanDialogueIds.indexOf(c.targetDialogueID);
@@ -19,7 +19,7 @@ export default function initUtilitiesTabEvents() {
 			remove.dialogue(oid);
 		}
 
-		const orphanChoiceIds = data.choices.map(c => c.id);
+		const orphanChoiceIds = data.choices.map((c) => c.id);
 		for (const d of data.dialogue) {
 			for (const c of d.choices) {
 				const ci = orphanChoiceIds.indexOf(c);
@@ -31,5 +31,18 @@ export default function initUtilitiesTabEvents() {
 		}
 
 		// TODO remove orphan frames
+	});
+
+	_editorDelegate(`${tab} button.reset-everything`, 'click', async () => {
+		if (
+			!confirm(
+				'Are you sure you want to reset everything? This cannot be undone.'
+			)
+		)
+			return;
+
+		localStorage.clear();
+		navigator.serviceWorker.controller.postMessage('clear-idb');
+		// location.reload();
 	});
 }

@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs-extra';
-import { GameData } from '../../game/src/data';
+import { GameData } from '../../editor/game/src/data';
 
 const data: GameData = {
 	characters: [],
@@ -31,7 +31,7 @@ export function find<T extends Exclude<keyof GameData, 'meta'>>(
 }
 
 const samplePath = path.resolve(__dirname, '../../sample-assets');
-const savePath = path.resolve(__dirname, '../../editor/public/game-data');
+const savePath = path.resolve(__dirname, '../../editor/public/default-game-data');
 export async function save() {
 	// create savePath if it doesn't exist
 	try {

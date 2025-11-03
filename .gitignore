@@ -1,7 +1,10 @@
 .DS_STORE
 node_modules
 editor/public/assets/***.css*
-editor/public/game-data
+editor/public/default-game-data
 *.log
 *.map
 dist
+dev-dist
+docs/.vitepress/cache
+docs/.vitepress/dist

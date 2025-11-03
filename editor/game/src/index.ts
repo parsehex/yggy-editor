@@ -5,7 +5,6 @@ import loadData from './data/load';
 import { initEvents } from './events';
 
 window.addEventListener('load', async () => {
-	// draw the game
 	await loadData();
 
 	// TODO

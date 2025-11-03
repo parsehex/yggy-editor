@@ -9,12 +9,14 @@ import { initIDService } from './id-service';
 import { initTabs } from 'tabs';
 import _editorLoadData from 'data/load';
 import updateLocalData from 'data/update';
+import { initServiceWorker } from 'worker-controller';
 
 window.addEventListener('load', async () => {
 	if (window !== window.top) {
 		// the game in the iframe is trying to run; do nothing
 		return;
 	}
+	await initServiceWorker();
 
 	updateLocalData();
 

@@ -17,6 +17,8 @@ Now I'm working to get the editor running fully in the browser, ideally as a PWA
 
 You can use the app at <https://parsehex.github.io/yggy-editor/> which will let you edit the dialogue tree and use the built-in example image assets.
 
+The start of [docs is available here](https://parsehex.github.io/yggy-editor/docs/).
+
 ----
 
 Original readme follows:
