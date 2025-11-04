@@ -6,6 +6,7 @@
     "@types/faker": "^4.1.12",
     "@types/fs-extra": "^8.1.5",
     "@types/node": "^24.9.1",
+    "@vitejs/plugin-vue": "^6.0.1",
     "chalk": "^2.4.2",
     "concurrently": "^9.2.1",
     "faker": "^4.1.0",
@@ -39,6 +40,7 @@
     "idb": "^8.0.3",
     "nanomorph": "^5.4.3",
     "pll": "github:parsehex/pll",
-    "register-service-worker": "^1.7.2"
+    "register-service-worker": "^1.7.2",
+    "vue": "^3.5.22"
   }
 }

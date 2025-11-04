@@ -10,35 +10,47 @@ import { initTabs } from 'tabs';
 import _editorLoadData from 'data/load';
 import updateLocalData from 'data/update';
 import { initServiceWorker } from 'worker-controller';
+import { createApp } from 'vue';
+import App from './App.vue';
 
-window.addEventListener('load', async () => {
-	if (window !== window.top) {
-		// the game in the iframe is trying to run; do nothing
-		return;
-	}
-	await initServiceWorker();
+const appDiv = document.getElementById('app');
 
-	updateLocalData();
+if (!appDiv) {
+	throw new Error('Could not find #app element');
+}
 
-	await _editorLoadData();
-	initIDService();
+const app = createApp(App);
 
-	gameState.currentDialogueID = 0;
-	editorState.history.push(0);
-	editorState.currentHistoryIndex = 0;
+app.mount(appDiv);
 
-	initElements();
-	initEventHooks();
-	initGameEvents();
-	initEditorEvents();
-	initTabs();
+// window.addEventListener('load', async () => {
+// 	if (window !== window.top) {
+// 		// the game in the iframe is trying to run; do nothing
+// 		return;
+// 	}
+// 	await initServiceWorker();
 
-	draw();
+// 	updateLocalData();
 
-	const editorVersion = await (await fetch('/api/version')).text();
-	document.getElementById('version').textContent = 'v' + editorVersion;
+// 	await _editorLoadData();
+// 	initIDService();
 
-	if (editorState.devMode) {
-		document.getElementById('update-time').classList.remove('hidden');
-	}
-});
+// 	gameState.currentDialogueID = 0;
+// 	editorState.history.push(0);
+// 	editorState.currentHistoryIndex = 0;
+
+// 	initElements();
+// 	initEventHooks();
+// 	initGameEvents();
+// 	initEditorEvents();
+// 	initTabs();
+
+// 	draw();
+
+// 	const editorVersion = await (await fetch('/api/version')).text();
+// 	document.getElementById('version').textContent = 'v' + editorVersion;
+
+// 	if (editorState.devMode) {
+// 		document.getElementById('update-time').classList.remove('hidden');
+// 	}
+// });

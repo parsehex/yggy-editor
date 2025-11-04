@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import tsconfigPaths from 'vite-tsconfig-paths';
+ import vue from '@vitejs/plugin-vue';
 
 function serviceWorkerPlugin() {
 	return {
@@ -32,7 +33,7 @@ export default defineConfig(({ mode }) => {
 	return {
 		root: resolve(__dirname, './editor'),
 		base,
-		plugins: [tsconfigPaths(), serviceWorkerPlugin()],
+		plugins: [tsconfigPaths(), serviceWorkerPlugin(), vue()],
 		define: {
 			__BASE__: JSON.stringify(base),
 		},
