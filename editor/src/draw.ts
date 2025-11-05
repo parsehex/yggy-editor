@@ -6,6 +6,6 @@ export default function draw() {
 	// without it the dom diffing i think acts strange
 	setTimeout(() => {
 		drawScene();
-		updateActiveTab();
+		// updateActiveTab();
 	}, 0);
 }

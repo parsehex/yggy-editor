@@ -8,6 +8,7 @@ export default function getData<T extends Exclude<keyof GameData, 'meta'>>(
 	id: number
 ): GameData[T][0] {
 	const list = data[type];
+	if (!list) return null;
 
 	// this is used a lot; use normal for loop
 	// tslint:disable-next-line

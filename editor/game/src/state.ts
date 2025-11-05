@@ -1,3 +1,5 @@
+import { reactive } from '@vue/reactivity';
+
 interface State {
 	currentDialogueID: number;
 }
@@ -5,4 +7,4 @@ interface State {
 const state: State = {
 	currentDialogueID: null,
 };
-export default state;
+export default reactive(state);

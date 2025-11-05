@@ -1,4 +1,13 @@
-import { Dialogue, Image, Choice, Character, Background, Frame, Meta } from '../types';
+import { reactive } from '@vue/reactivity';
+import {
+	Dialogue,
+	Image,
+	Choice,
+	Character,
+	Background,
+	Frame,
+	Meta,
+} from '../types';
 
 export interface GameData {
 	dialogue: Dialogue[];
@@ -20,4 +29,4 @@ const data: GameData = {
 	meta: null,
 };
 
-export default data;
+export default reactive(data);

@@ -3,6 +3,8 @@ import updateData from 'common/update-data';
 // keys that aren't part of the game data
 const keyBlacklist = ['editor-opened-tab'];
 
+// TODO i'm not able to follow exactly how the game's state is setup and controlled by the editor
+
 /** Should be run before loading. */
 export default function updateLocalData() {
 	const localData = <any>{};
@@ -11,6 +13,7 @@ export default function updateLocalData() {
 	for (let i = 0; i < localStorage.length; i++) {
 		const key = localStorage.key(i);
 		if (keyBlacklist.indexOf(key) > -1) continue;
+		if (key.startsWith('_')) continue;
 		lsKeys.push(key);
 	}
 

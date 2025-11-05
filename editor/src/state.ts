@@ -1,3 +1,5 @@
+import { reactive } from '@vue/reactivity';
+
 interface EditorState {
 	devMode: boolean;
 	/** History of dialogue navigation */
@@ -6,7 +8,7 @@ interface EditorState {
 	tree: {
 		collapsed: {
 			dialogue: number[];
-			choices: number[]
+			choices: number[];
 		};
 
 		// TODO link history
@@ -35,4 +37,4 @@ const editorState: EditorState = {
 	},
 };
 
-export default editorState;
+export default reactive(editorState);

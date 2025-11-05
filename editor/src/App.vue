@@ -11,6 +11,8 @@ import _editorLoadData from 'data/load';
 import updateLocalData from 'data/update';
 import { initServiceWorker } from 'worker-controller';
 
+import { toRefs, watch } from 'vue';
+import { useAppStore } from 'store';
 import Header from 'components/header/index.vue';
 import DialogueTab from 'components/tabs/dialogue/index.vue';
 import TreeTab from 'components/tabs/tree/index.vue';
@@ -18,6 +20,9 @@ import CharactersTab from 'components/tabs/characters/index.vue';
 import BackgroundsTab from 'components/tabs/backgrounds/index.vue';
 import ImagesTab from 'components/tabs/images/index.vue';
 import UtilitiesTab from 'components/tabs/utilities/index.vue';
+
+const store = useAppStore();
+const { currentDialogue } = toRefs(store);
 
 window.addEventListener('load', async () => {
 	if (window !== window.top) {
@@ -49,6 +54,15 @@ window.addEventListener('load', async () => {
 		document.getElementById('update-time').classList.remove('hidden');
 	}
 });
+
+// trigger game to redraw when the current dialogue is changed
+watch(
+	() => currentDialogue.value,
+	() => {
+		draw();
+	},
+	{ deep: true, immediate: true }
+);
 </script>
 <template>
 	<div id="editor">
