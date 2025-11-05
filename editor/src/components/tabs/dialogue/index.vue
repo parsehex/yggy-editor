@@ -4,7 +4,7 @@ import { computed, toRefs } from 'vue';
 import getData from 'game/data/get';
 import data from 'game/data';
 import Character from './Character.vue';
-import Choices from './Choices.vue';
+import ChoicesList from './ChoicesList.vue';
 
 const TAB_NAME = 'Dialogue';
 
@@ -53,6 +53,6 @@ const currentBGId = computed({
 			<textarea type="text" class="dialogue grow" cols="40" rows="3" placeholder="Dialogue text"
 				v-model="currentDialogueText"></textarea>
 		</div>
-		<Choices />
+		<ChoicesList />
 	</div>
 </template>

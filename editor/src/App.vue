@@ -20,6 +20,8 @@ import CharactersTab from 'components/tabs/characters/index.vue';
 import BackgroundsTab from 'components/tabs/backgrounds/index.vue';
 import ImagesTab from 'components/tabs/images/index.vue';
 import UtilitiesTab from 'components/tabs/utilities/index.vue';
+import { delay } from 'common/utils';
+import data from 'game/data';
 
 const store = useAppStore();
 const { currentDialogue } = toRefs(store);
@@ -45,19 +47,23 @@ window.addEventListener('load', async () => {
 	initGameEvents();
 	initEditorEvents();
 
-	draw();
-
 	const editorVersion = await (await fetch('/api/version')).text();
 	document.getElementById('version').textContent = 'v' + editorVersion;
 
 	if (editorState.devMode) {
 		document.getElementById('update-time').classList.remove('hidden');
 	}
+
+	// draw a few times to hopefully clear up any state issues
+	for (let i = 0; i < 3; i++) {
+		draw();
+		await delay(10);
+	}
 });
 
 // trigger game to redraw when the current dialogue is changed
 watch(
-	() => currentDialogue.value,
+	() => [currentDialogue.value, data, gameState],
 	() => {
 		draw();
 	},

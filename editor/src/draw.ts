@@ -9,3 +9,4 @@ export default function draw() {
 		// updateActiveTab();
 	}, 0);
 }
+(window as any).draw = draw;

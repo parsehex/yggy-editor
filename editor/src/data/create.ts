@@ -11,12 +11,21 @@ function dialogue(templateDialogue?: Dialogue) {
 		id: getFreeID('dialogue'),
 		text: 'Dialogue text',
 		choices: [],
-		backgroundID: numOr(templateDialogue.backgroundID, getDefault('backgrounds').id),
-		character1ID: numOr(templateDialogue.character1ID, getDefault('characters').id),
+		backgroundID: numOr(
+			templateDialogue.backgroundID,
+			getDefault('backgrounds').id
+		),
+		character1ID: numOr(
+			templateDialogue.character1ID,
+			getDefault('characters').id
+		),
 		character1FrameIndex: numOr(templateDialogue.character1FrameIndex, 0),
 		character2ID: numOr(templateDialogue.character2ID, null),
 		character2FrameIndex: numOr(templateDialogue.character2FrameIndex, null),
-		ownerCharacterID: numOr(templateDialogue.ownerCharacterID, getDefault('characters').id),
+		ownerCharacterID: numOr(
+			templateDialogue.ownerCharacterID,
+			getDefault('characters').id
+		),
 	};
 	data.dialogue.push(d);
 	return d;
@@ -24,7 +33,7 @@ function dialogue(templateDialogue?: Dialogue) {
 function choice() {
 	const c: Choice = {
 		id: getFreeID('choices'),
-		text: 'Choice text',
+		text: '',
 		targetDialogueID: null,
 	};
 	data.choices.push(c);

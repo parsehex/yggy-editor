@@ -7,6 +7,7 @@ import createData from 'data/create';
 
 export function initDialogueTabEvents() {
 	const tab = '#dialogue-tab';
+	return;
 
 	// update dialogue
 	_editorDelegate(
@@ -108,8 +109,7 @@ export function initDialogueTabEvents() {
 				return;
 			}
 
-			// if dialogue had no characters but now it does:
-			// (this check must happen before changing character in dialogue)
+			// if dialogue had no characters but now it does then set its owner/talking
 			if (
 				characterIDVal !== null &&
 				d.ownerCharacterID === null &&
