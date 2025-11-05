@@ -3,6 +3,7 @@ import { useAppStore } from 'store';
 import { computed, toRefs } from 'vue';
 import getData from 'game/data/get';
 import data from 'game/data';
+import Character from './Character.vue';
 
 const TAB_NAME = 'Dialogue';
 
@@ -36,7 +37,10 @@ const currentBGId = computed({
 </script>
 <template>
 	<div :class="['tab', isActive ? 'active' : '']" :id="TAB_NAME + '-tab'">
-		<div class="characters"></div>
+		<div class="characters">
+			<Character number="1" />
+			<Character number="2" />
+		</div>
 		<div>
 			<span>Background: </span>
 			<select v-if="currentBG" class="background" v-model="currentBGId">

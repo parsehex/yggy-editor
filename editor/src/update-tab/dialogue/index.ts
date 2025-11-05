@@ -8,7 +8,7 @@ import updateBackground from './background';
 export default function updateDialogueTab() {
 	const d = getData('dialogue', gameState.currentDialogueID);
 
-	editorElements.dialogueTab.dialogue.value = d.text;
+	// editorElements.dialogueTab.dialogue.value = d.text;
 	updateChoices(d);
 	updateCharacter(d);
 	updateBackground(d);

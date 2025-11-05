@@ -6,10 +6,12 @@ import { getFullUrl } from 'common/utils';
 
 /** Draws whatever the current state is */
 export default function drawScene() {
+	// make sure that dialogue id is a number
+	if (state.currentDialogueID === null) return;
 	const d = getData('dialogue', state.currentDialogueID);
 	const bg = getData('backgrounds', d.backgroundID);
 	const bgImg = getData('images', bg.imageID);
-	const bgUrl = getFullUrl(`./game-data/images/${bgImg.filename}`)
+	const bgUrl = getFullUrl(`./game-data/images/${bgImg.filename}`);
 
 	elements.bg.style.backgroundImage = `url(${bgUrl})`;
 	elements.bg.style.backgroundColor = bg.bgColor;

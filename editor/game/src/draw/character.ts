@@ -3,12 +3,16 @@ import getData from '../data/get';
 import elements from '../elements';
 import { getFullUrl } from 'common/utils';
 
-export default function drawCharacter(id: number, frameIndex: number, pos: 'left' | 'right') {
+export default function drawCharacter(
+	id: number | 'none',
+	frameIndex: number,
+	pos: 'left' | 'right'
+) {
 	let ch: Character;
 
 	const charImg = pos === 'left' ? elements.char1Img : elements.char2Img;
 
-	if (id === null) {
+	if (id === null || id === 'none') {
 		// hide name, etc.
 		elements.charName.classList.add('hidden');
 		charImg.classList.add('hidden');

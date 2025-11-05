@@ -19,13 +19,13 @@ export const useAppStore = defineStore('app', () => {
 
 	const currentDialogue = computed(() => {
 		const id = gameState.currentDialogueID;
-		if (!(id >= 0)) return undefined;
+		if (id === null) return undefined;
 		return getData('dialogue', id);
 	});
 	const currentBG = computed(() => {
 		if (!currentDialogue.value) return undefined;
 		const id = currentDialogue.value.backgroundID;
-		if (!(id >= 0)) return undefined;
+		if (id === null) return undefined;
 		return getData('backgrounds', id);
 	});
 
