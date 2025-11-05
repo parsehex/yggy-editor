@@ -37,6 +37,7 @@
     "url": "git+https://github.com/parsehex/yggy-editor.git"
   },
   "dependencies": {
+    "@vueuse/core": "^14.0.0",
     "idb": "^8.0.3",
     "nanomorph": "^5.4.3",
     "pll": "github:parsehex/pll",
