@@ -12,8 +12,9 @@ You can find these other pages in this section:
 
 - New iteration logs - When I make enough changes, I'll probably write a new one of these entries.
   - [#01](./logs/01.md)
-- [Plans](./plans.md)
+- [Plans](./plans.md) - Larger overall plans for the project. I don't expect to achieve any of these for quite a while.
 - [Task list](./task-list.md)
+- [Dev Planning](./planning/index.md) - So far this is a dump of what I want to do or know needs to be done at a development-level.
 
 ## Project organization
 
