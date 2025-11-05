@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import tsconfigPaths from 'vite-tsconfig-paths';
- import vue from '@vitejs/plugin-vue';
+import vue from '@vitejs/plugin-vue';
 
 function serviceWorkerPlugin() {
 	return {
@@ -10,7 +10,10 @@ function serviceWorkerPlugin() {
 			server.middlewares.use(async (req, res, next) => {
 				if (req.url === '/service-worker.js') {
 					try {
-						const filePath = resolve(__dirname, './editor/service-worker/index.ts');
+						const filePath = resolve(
+							__dirname,
+							'./editor/service-worker/index.ts'
+						);
 						const result = await server.transformRequest(filePath);
 						if (result) {
 							res.setHeader('Content-Type', 'application/javascript');
@@ -33,7 +36,7 @@ export default defineConfig(({ mode }) => {
 	return {
 		root: resolve(__dirname, './editor'),
 		base,
-		plugins: [tsconfigPaths(), serviceWorkerPlugin(), vue()],
+		plugins: [vue(), tsconfigPaths({ loose: true }), serviceWorkerPlugin()],
 		define: {
 			__BASE__: JSON.stringify(base),
 		},
@@ -47,11 +50,16 @@ export default defineConfig(({ mode }) => {
 				input: {
 					game: resolve(__dirname, './editor/game/index.html'),
 					editor: resolve(__dirname, './editor/index.html'),
-					'service-worker': resolve(__dirname, './editor/service-worker/index.ts'),
+					'service-worker': resolve(
+						__dirname,
+						'./editor/service-worker/index.ts'
+					),
 				},
 				output: {
 					entryFileNames: (chunkInfo) =>
-						chunkInfo.name === 'service-worker' ? 'service-worker.js' : '[name].js',
+						chunkInfo.name === 'service-worker'
+							? 'service-worker.js'
+							: '[name].js',
 				},
 			},
 		},
