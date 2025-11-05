@@ -1,5 +1,8 @@
 import { getDB } from './db';
 import workerSetup from './worker-setup';
+import pkg from '../../package.json';
+
+const APP_VERSION = pkg.version;
 
 workerSetup();
 
@@ -102,7 +105,7 @@ async function handleAPIRequest(request: Request): Promise<Response> {
 			}
 
 			case '/api/version': {
-				return new Response('1.0.0', {
+				return new Response(APP_VERSION, {
 					headers: { 'Content-Type': 'text/plain' },
 				});
 			}
