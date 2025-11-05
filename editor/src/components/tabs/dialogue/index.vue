@@ -36,23 +36,22 @@ const currentBGId = computed({
 });
 </script>
 <template>
-	<div :class="['tab', isActive ? 'active' : '']" :id="TAB_NAME + '-tab'">
-		<div class="characters">
+	<div :class="['tab space-y-2', isActive ? 'active' : '']" :id="TAB_NAME + '-tab'">
+		<div class="characters space-y-1">
 			<Character number="1" />
 			<Character number="2" />
 		</div>
-		<div>
-			<span>Background: </span>
+		<div class="flex gap-2">
+			<span>Background:</span>
 			<select v-if="currentBG" class="background" v-model="currentBGId">
 				<option v-for="bg in data.backgrounds" :key="bg.id.toString()" :value="bg.id.toString()">{{ bg.name }}</option>
 			</select>
 		</div>
-		<div id="dialogue-wrapper">
+		<div id="dialogue-wrapper" class="flex items-baseline gap-2 mr-6">
 			<span>Dialogue: </span>
-			<textarea type="text" class="dialogue" cols="40" rows="3" placeholder="Dialogue text"
+			<textarea type="text" class="dialogue grow" cols="40" rows="3" placeholder="Dialogue text"
 				v-model="currentDialogueText"></textarea>
 		</div>
-		<h3>Choices</h3>
-		<div class="choices"></div>
+		<Choices />
 	</div>
 </template>

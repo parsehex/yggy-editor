@@ -18,5 +18,6 @@ function handleClick(e: MouseEvent) {
 <template>
 	<div id="tabs-list">
 		<TabButton v-for="tab in tabs" :key="tab" @click="handleClick" :active="openedTab === tab" :target="tab" />
+		<a href="https://parsehex.github.io/yggy-editor/docs/" class="link text-blue-600" target="_blank">Docs</a>
 	</div>
 </template>

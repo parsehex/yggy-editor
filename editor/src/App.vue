@@ -76,3 +76,6 @@ watch(
 		<UtilitiesTab />
 	</div>
 </template>
+<style lang="scss">
+@import './index.css';
+</style>

@@ -83,7 +83,7 @@ const isTalking = computed({
 });
 </script>
 <template>
-	<div class="character">
+	<div class="character space-x-2">
 		<span>{{ charLabel }}</span>
 		<select v-model="charId">
 			<option value="none">None</option>
