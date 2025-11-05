@@ -10,10 +10,7 @@ if (cmd !== 'build' && cmd !== 'watch') {
 	process.exit(1);
 }
 
-const defaultEntries = [
-	'editor',
-	'editor/game',
-];
+const defaultEntries = ['editor/game'];
 const commands = defaultEntries.map(makeCmd);
 
 if (process.argv.length > 3) {
@@ -30,7 +27,7 @@ if (process.argv.length > 3) {
 
 function makeCmd(s) {
 	const pieces = s.split('/');
-	const name = pieces[pieces.length -1];
+	const name = pieces[pieces.length - 1];
 	const i = path.join(base, `${s}/scss/main.scss`);
 	const o = path.join(base, `editor/public/assets/${name}.css`);
 	const opt = cmd === 'watch' ? '--watch' : '--style=compressed';

@@ -78,4 +78,94 @@ watch(
 </template>
 <style lang="scss">
 @import './index.css';
+
+.hidden {
+	display: none;
+}
+
+.error {
+	background-color: #f44336;
+	color: white;
+}
+
+.success {
+	background-color: #4CAF50;
+	color: white;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+select {
+	font-size: 1em;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+}
+
+iframe {
+	width: 50%;
+	height: 100%;
+	border: 0;
+	float: left;
+}
+
+button#game-size {
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0.5;
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
+div#editor {
+	float: left;
+	width: 50%;
+	height: 100%;
+	overflow-y: auto;
+
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: auto 1fr;
+}
+
+div#editor>div.tab {
+	display: none;
+	height: 100%;
+	overflow: auto;
+	padding: 5px;
+
+	&.active {
+		display: block;
+	}
+}
+
+div#version,
+div#update-time {
+	position: absolute;
+	right: 0;
+	top: 0;
+	background-color: #ECEFF1;
+	padding: 7px;
+	font-size: 1.1em;
+	opacity: 0.5;
+	pointer-events: none;
+	cursor: default;
+	border-bottom-left-radius: 5px;
+}
+
+div#update-time {
+	opacity: 0.8;
+	padding: 7px;
+	font-size: 0.85em;
+}
 </style>

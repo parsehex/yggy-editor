@@ -4,6 +4,7 @@ import { computed, toRefs } from 'vue';
 import getData from 'game/data/get';
 import data from 'game/data';
 import Character from './Character.vue';
+import Choices from './Choices.vue';
 
 const TAB_NAME = 'Dialogue';
 

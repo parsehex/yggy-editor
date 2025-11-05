@@ -21,3 +21,24 @@ function handleClick(e: MouseEvent) {
 		<a href="https://parsehex.github.io/yggy-editor/docs/" class="link text-blue-600" target="_blank">Docs</a>
 	</div>
 </template>
+<style lang="scss">
+div#tabs-list {
+	margin: 9px 0;
+	cursor: default;
+
+	.link {
+		cursor: pointer;
+		margin: 0;
+		padding: 2px 5px;
+		border: 1px solid;
+
+		&:hover {
+			text-decoration: underline;
+		}
+
+		&.active {
+			font-weight: bold;
+		}
+	}
+}
+</style>
