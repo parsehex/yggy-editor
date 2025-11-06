@@ -1,10 +1,11 @@
+import { getFullUrl } from 'common/utils';
 import { register } from 'register-service-worker';
 
 export function initServiceWorker(): Promise<void> {
 	return new Promise((resolve, reject) => {
 		const log = console.log.bind(console);
 		const error = console.error.bind(console);
-		register('/service-worker.js', {
+		register(getFullUrl('./service-worker.js'), {
 			registrationOptions: { scope: './', type: 'module' },
 			registered(registration) { log('Service worker has been registered.') },
 			ready(registration) { log('Service worker is active.'); resolve(); },
