@@ -6,10 +6,13 @@
     "@types/faker": "^4.1.12",
     "@types/fs-extra": "^8.1.5",
     "@types/node": "^24.9.1",
+    "autoprefixer": "^10.4.21",
     "chalk": "^2.4.2",
     "concurrently": "^9.2.1",
     "faker": "^4.1.0",
     "fs-extra": "^8.1.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.18",
     "ts-node": "^10.9.2",
     "tslint": "^5.20.1",
     "tslint-rules": "github:parsehex/tslint-rules",
@@ -36,14 +39,11 @@
     "url": "git+https://github.com/parsehex/yggy-editor.git"
   },
   "dependencies": {
-    "@tailwindcss/postcss": "^4.1.17",
     "@tailwindcss/vite": "^4.1.17",
     "idb": "^8.0.3",
     "nanohtml": "^1.10.0",
     "nanomorph": "^5.4.3",
     "pll": "github:parsehex/pll",
-    "postcss": "^8.5.6",
-    "register-service-worker": "^1.7.2",
-    "tailwindcss": "^4.1.17"
+    "register-service-worker": "^1.7.2"
   }
 }

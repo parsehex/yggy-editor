@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import tailwindcss from '@tailwindcss/vite';
 
 function serviceWorkerPlugin() {
 	return {
@@ -36,7 +35,7 @@ export default defineConfig(({ mode }) => {
 	return {
 		root: resolve(__dirname, './editor'),
 		base,
-		plugins: [tsconfigPaths(), serviceWorkerPlugin(), tailwindcss()],
+		plugins: [tsconfigPaths(), serviceWorkerPlugin()],
 		define: {
 			__BASE__: JSON.stringify(base),
 		},

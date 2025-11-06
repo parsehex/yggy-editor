@@ -1,10 +1,4 @@
 div#tree-tab {
-	font-family: sans-serif;
-	
-	// TODO i think each li is going to need a header to store its controls and stuff
-	// that way the buttons are always in a predictable area
-	// and MAYBE that would also fix the text cut off issue
-	
 	$headerHeight: 30px;
 	& > div {
 		position: fixed;
@@ -15,50 +9,50 @@ div#tree-tab {
 		height: $headerHeight;
 	}
 	& > ul {
+		// first tree branch / root
 		margin-top: $headerHeight !important;
 		padding-left: 0 !important;
 		border-left: 0 !important;
 	}
-	
+
 	ul {
+		// apply styles for all the lists in the tree
 		list-style-type: none;
 		padding-left: 15px;
 		border-left: 1px solid gray;
 		margin: 6px 0;
-		
+
 		// makes it easier to pick a branch in devtools:
 		background-color: white;
 	}
-	
+
 	li.dialogue {
-		&.active > div.content > span.text {
-			font-weight: bold;
-		}
+		// &.active > div.content > span.text {
+		// 	font-weight: bold;
+		// }
 		&.highlight > div.content > span.text {
-			color: white;;
-			background-color: #1E88E5;
+			color: white;
+			background-color: #1e88e5;
 		}
-		&.reference > div.content > span.text {
-			font-style: italic;
-		}
+		// &.reference > div.content > span.text {
+		// 	font-style: italic;
+		// }
 	}
-	
-	li.choice {
-		&.cycle-dialogue > div.content > span.text {
-			font-style: italic;
-			color: #263238;
-		}
-	}
-	
+
+	// li.choice {
+	// 	&.cycle-dialogue > div.content > span.text {
+	// 		font-style: italic;
+	// 		color: #263238;
+	// 	}
+	// }
+
 	li {
 		white-space: nowrap;
 		background-color: white;
-		
+
 		div.content {
-			display: flex;
-			margin: 0 2px;
 			// min-width: 350px;
-			
+
 			* {
 				// required to be able to set span width (which is required for text overflow)
 				display: inline-block;
@@ -74,21 +68,21 @@ div#tree-tab {
 				padding: 2px;
 			}
 		}
-		
+
 		button {
 			margin: 0 7px;
 			font-size: 0.7em;
-			
+
 			// add some space to whichever button is last
 			&.create-dialogue {
 				margin-right: 15px;
 			}
-			
+
 			&.link.active {
 				background-color: lightblue;
 			}
 		}
-		
+
 		&.collapsed {
 			& > div.content > span.text {
 				border-bottom: 1px solid;
@@ -97,11 +91,11 @@ div#tree-tab {
 				display: none;
 			}
 		}
-		
+
 		&:not(.dialogue) > div.content > span.text {
-			color: #0D47A1;
+			color: #0d47a1;
 		}
-		
+
 		&.dialogue > div.content > span.character {
 			font-size: 0.85em;
 			padding: 2px;
