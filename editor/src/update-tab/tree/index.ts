@@ -1,145 +1,141 @@
+import html from 'nanohtml';
+import morph from 'nanomorph';
+
 import { Dialogue } from 'game/types';
 import data from 'game/data';
-import morph from 'nanomorph';
 import editorElements from 'editor-elements';
-import { createElement, disabled } from 'dom-util';
+import { disabled } from 'dom-util';
 import getData from 'game/data/get';
 import gameState from 'game/state';
 import editorState from 'state';
 import createButton from 'update-tab/common/button';
 
-let tmp: HTMLUListElement;
-export default function updateTreeTab() {
-	tmp = <HTMLUListElement>editorElements.tree.list.cloneNode();
+const title = 'Click to toggle collapse';
 
-	// TODO need a way to set certain dialogue as "first"
-	const d = data.dialogue[0];
-	makeDialogueBranch(d, tmp);
-	morph(editorElements.tree.list, tmp);
+export default function updateTreeTab() {
+	const root = data.dialogue[0]; // TODO: pick “first” dialogue explicitly
+	const seen = new Set<number>();
+
+	const view = html`<ul class="tree ml-2">
+		${DialogueNode(root, seen)}
+	</ul>`;
+
+	// morph existing list to new view
+	morph(editorElements.tree.list, view);
 
 	// enable undo only if finalized and dialogue/choice ids are set
-	disabled(editorElements.tree.btnUndo, (
+	disabled(
+		editorElements.tree.btnUndo,
 		!editorState.tree.linking.finalized ||
-		editorState.tree.linking.dialogueID === null ||
-		editorState.tree.linking.choiceID === null
-	));
+			editorState.tree.linking.dialogueID === null ||
+			editorState.tree.linking.choiceID === null
+	);
 }
 
-const title = 'Click to toggle collapse';
-let i = 0;
-function makeDialogueBranch(d: Dialogue, target: HTMLUListElement) {
-	if (i++ > 5000) return;
+function DialogueNode(d: Dialogue, seen: Set<number>) {
+	const isReference = seen.has(d.id);
+	seen.add(d.id);
 
-	// if dialogue has already been drawn then draw every new instance as shallow
-	const isReference = !!tmp.querySelector(`li.dialogue[data-id="${d.id}"]`);
+	const classes = [
+		'dialogue',
+		isReference ? 'reference' : '',
+		gameState.currentDialogueID === d.id && !isReference ? 'active' : '',
+		editorState.tree.collapsed.dialogue.includes(d.id) ? 'collapsed' : '',
+	]
+		.filter(Boolean)
+		.join(' ');
 
-	const li = createElement('li');
-	li.className = 'dialogue' + (isReference ? ' reference' : '');
-	li.dataset.id = d.id.toString();
-	if (gameState.currentDialogueID === d.id && !isReference) li.classList.add('active');
-	if (editorState.tree.collapsed.dialogue.indexOf(d.id) > -1) li.classList.add('collapsed');
-	target.append(li);
+	return html`
+		<li id=${`dialogue-${d.id}`} class=${classes} data-id=${d.id}>
+			<div class="content">
+				<span class="text" title=${title}>${d.text}</span>
+				${CharacterSpan(d.character1ID)} ${CharacterSpan(d.character2ID)}
+				${!isReference ? html` ${BtnGo()} ${BtnLinkDialogue(d.id)} ` : ''}
+			</div>
 
-	const contentDiv = createElement('div');
-	contentDiv.className = 'content';
-	li.append(contentDiv);
+			${!isReference && d.choices.length
+				? html`
+						<ul class="choices">
+							${d.choices.map((cId) =>
+								ChoiceNode(getData('choices', cId), seen)
+							)}
+						</ul>
+				  `
+				: ''}
+		</li>
+	`;
+}
 
-	const dialogueSpan = createElement('span');
-	dialogueSpan.className = 'text';
-	dialogueSpan.textContent = d.text;
-	dialogueSpan.title = title;
-	contentDiv.append(dialogueSpan);
+function CharacterSpan(charId: number | null) {
+	if (charId === null) return '';
+	const ch = getData('characters', charId);
+	return html`<span class="character">${ch.name}</span>`;
+}
 
-	if (d.character1ID !== null) {
-		const ch = getData('characters', d.character1ID);
-		const charSpan = createElement('span');
-		charSpan.className = 'character';
-		charSpan.textContent = ch.name;
-		contentDiv.append(charSpan);
+function ChoiceNode(c: any, seen: Set<number>) {
+	const cText = c.text.length ? c.text : '(cycle dialogue)';
+	const classes = [
+		'choice',
+		editorState.tree.collapsed.choices.includes(c.id) ? 'collapsed' : '',
+		c.text.length === 0 ? 'cycle-dialogue' : '',
+	]
+		.filter(Boolean)
+		.join(' ');
+
+	return html`
+		<li id=${`choice-${c.id}`} class=${classes} data-id=${c.id}>
+			<div class="content">
+				<span class="text" title=${title}>${cText}</span>
+				${BtnLinkChoice(c.id)}
+				${c.targetDialogueID === null
+					? Btn('create-dialogue', '+ Dialogue')
+					: Btn('unlink', 'Unlink', 'Remove dialogue link')}
+			</div>
+
+			${c.targetDialogueID !== null
+				? html`
+						<ul>
+							${DialogueNode(getData('dialogue', c.targetDialogueID), seen)}
+						</ul>
+				  `
+				: ''}
+		</li>
+	`;
+}
+
+// Button helpers: keep your existing utility to preserve behavior/styles
+function Btn(kind: string, text: string, title?: string) {
+	const el = createButton(kind, text);
+	if (title) el.title = title;
+	return el;
+}
+
+function BtnGo() {
+	const el = createButton('go-to', 'Go');
+	el.title = 'Go to dialogue in preview';
+	return el;
+}
+
+function BtnLinkDialogue(dialogueID: number) {
+	const el = createButton('link', 'Link');
+	el.title = 'Link dialogue to choice';
+	if (
+		!editorState.tree.linking.finalized &&
+		editorState.tree.linking.dialogueID === dialogueID
+	) {
+		el.classList.add('active');
 	}
-	if (d.character2ID !== null) {
-		const ch = getData('characters', d.character2ID);
-		const charSpan = createElement('span');
-		charSpan.className = 'character';
-		charSpan.textContent = ch.name;
-		contentDiv.append(charSpan);
+	return el;
+}
+
+function BtnLinkChoice(choiceID: number) {
+	const el = createButton('link', 'Link');
+	el.title = 'Link choice to dialogue';
+	if (
+		!editorState.tree.linking.finalized &&
+		editorState.tree.linking.choiceID === choiceID
+	) {
+		el.classList.add('active');
 	}
-
-	// end branch on references
-	if (isReference) return;
-
-	const btnGo = createButton('go-to', 'Go');
-	btnGo.title = 'Go to dialogue in preview';
-	contentDiv.append(btnGo);
-
-	const btnLink = createButton('link', 'Link');
-	btnLink.title = 'Link dialogue to choice';
-	// don't highlight button if link is already finalized
-	if (!editorState.tree.linking.finalized && editorState.tree.linking.dialogueID === d.id) {
-		btnLink.classList.add('active');
-	}
-	contentDiv.append(btnLink);
-
-	// end branch if there are no choices
-	// TODO remove if we use the "+ Choice" buttons
-	if (d.choices.length === 0) return;
-
-	const choicesUl = createElement('ul');
-	choicesUl.className = 'choices';
-	li.append(choicesUl);
-
-	// let isCycleDialogue = false;
-	for (const cId of d.choices) {
-		const c = getData('choices', cId);
-		const cText = c.text.length > 0 ? c.text : '(cycle dialogue)';
-
-		const choiceLi = createElement('li');
-		choiceLi.className = 'choice';
-		choiceLi.dataset.id = cId.toString();
-		if (editorState.tree.collapsed.choices.indexOf(c.id) > -1) choiceLi.classList.add('collapsed');
-		if (c.text.length === 0) {
-			// isCycleDialogue = true;
-			choiceLi.classList.add('cycle-dialogue');
-		}
-		choicesUl.append(choiceLi);
-
-		const choiceContentDiv = createElement('div');
-		choiceContentDiv.className = 'content';
-		choiceLi.append(choiceContentDiv);
-
-		const textSpan = createElement('span');
-		textSpan.className = 'text';
-		textSpan.textContent = cText;
-		textSpan.title = title;
-		choiceContentDiv.append(textSpan);
-
-		const choiceBtnLink = createButton('link', 'Link');
-		choiceBtnLink.title = 'Link choice to dialogue';
-		if (!editorState.tree.linking.finalized && editorState.tree.linking.choiceID === c.id) {
-			choiceBtnLink.classList.add('active');
-		}
-		choiceContentDiv.append(choiceBtnLink);
-
-		// end choice-branch if choice doesn't point to a dialogue
-		if (c.targetDialogueID === null) {
-			const choiceBtnCreateDialogue = createButton('create-dialogue', '+ Dialogue');
-			choiceContentDiv.append(choiceBtnCreateDialogue);
-			continue;
-		} else {
-			const choiceBtnUnlink = createButton('unlink', 'Unlink');
-			choiceBtnUnlink.title = 'Remove dialogue link';
-			choiceContentDiv.append(choiceBtnUnlink);
-		}
-
-		const cd = getData('dialogue', c.targetDialogueID);
-		const dUl = createElement('ul');
-		choiceLi.append(dUl);
-		makeDialogueBranch(cd, dUl);
-	}
-
-	// if (!isCycleDialogue) {
-	// 	const btnCreateChoice = createButton('create-choice', '+ Choice');
-	// 	btnCreateChoice.textContent = '+ Choice';
-	// 	choicesUl.append(btnCreateChoice);
-	// }
+	return el;
 }
