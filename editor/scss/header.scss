@@ -3,20 +3,20 @@ div#editor > div#header {
 	height: 100%;
 	padding-left: 5px;
 	padding-top: 3px;
-	
+
 	div#controls button {
 		font-size: 1em;
 	}
 	div#tabs-list {
 		margin: 9px 0;
 		cursor: default;
-		
-		span.link {
+
+		.link {
 			cursor: pointer;
 			margin: 0;
 			padding: 2px 5px;
 			border: 1px solid;
-			
+
 			&:hover {
 				text-decoration: underline;
 			}
@@ -32,18 +32,18 @@ div#header button#push {
 	margin-left: 10px;
 }
 
-div#header button#save, 
-div#header button#push, 
-div#header button#pull, 
+div#header button#save,
+div#header button#push,
+div#header button#pull,
 div#header button#clear {
 	border: 0;
-	
+
 	&.active {
 		background-color: #212121;
-		color: #9E9E9E;
+		color: #9e9e9e;
 	}
 	&[disabled] {
-		background-color: #EEEEEE;
-		color: #BDBDBD;
+		background-color: #eeeeee;
+		color: #bdbdbd;
 	}
 }
