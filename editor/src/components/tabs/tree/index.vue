@@ -1,45 +1,63 @@
 <script setup lang="ts">
 import { useAppStore } from 'store';
 import { computed, toRefs } from 'vue';
+import { querySelector } from 'dom-util';
+import data from 'game/data';
+import DialogueNode from './DialogueNode.vue';
+import _editorDelegate from 'delegate';
 
 const TAB_NAME = 'Tree';
 
 const store = useAppStore();
-const { openedTab } = toRefs(store);
+const { openedTab, editorState } = toRefs(store);
 
 const isActive = computed(() => openedTab.value === TAB_NAME.toLowerCase());
+
+const firstDialogue = computed(() => {
+	// don't really have a way to set any dialogue as the first or the root
+	// so we just use the first one
+	if (!data.dialogue) return;
+	return data.dialogue[0];
+});
+
+const isUndoDisabled = computed(() => (
+	!editorState.value.tree.linking.finalized ||
+	editorState.value.tree.linking.dialogueID === null ||
+	editorState.value.tree.linking.choiceID === null
+));
+
+function undoLink() {
+	// TODO: Implement undo link logic
+	console.log('Undo link');
+}
+
+_editorDelegate(`#tree-tab li.dialogue.reference > div.content > span.text`, 'mouseover', (e, t) => {
+	const id = +t.closest('li.dialogue').dataset.id;
+	// find original dialogue and highlight it
+	const dEl = querySelector(`#tree-tab li.dialogue:not(.reference)[data-id="${id}"]`);
+	dEl.classList.add('highlight');
+});
+_editorDelegate(`#tree-tab li.dialogue.reference > div.content > span.text`, 'mouseout', (e, t) => {
+	// find any highlighted dialogue (should only be one) and un-higlhight it
+	const dEl = querySelector(`#tree-tab li.dialogue:not(.reference).highlight`);
+	dEl.classList.remove('highlight');
+});
 </script>
 <template>
-	<div :class="['tab', isActive ? 'active' : '']" :id="TAB_NAME + '-tab'">
-		<div>
-			<button type="button" class="undo" disabled>Undo last link</button>
+	<div :class="['tab space-y-2', isActive ? 'active' : '']" :id="TAB_NAME + '-tab'">
+		<div class="controls bg-white/80 text-center fixed flex w-40 gap-2 p-1">
+			<button class="undo" :disabled="isUndoDisabled" @click="undoLink">Undo</button>
 		</div>
-		<ul></ul>
+		<ul class="tree-list list-none pt-6 pl-3 px-0">
+			<DialogueNode v-if="firstDialogue" :dialogue="firstDialogue" :renderedDialogueIDs="[]" />
+		</ul>
 	</div>
 </template>
 <style lang="scss">
 div#tree-tab {
-	font-family: sans-serif;
-
 	$headerHeight: 30px;
 
-	&>div {
-		position: fixed;
-		background-color: rgba(255, 255, 255, 0.8);
-		width: 10em;
-		text-align: center;
-		padding: 5px;
-		height: $headerHeight;
-	}
-
-	&>ul {
-		margin-top: $headerHeight !important;
-		padding-left: 0 !important;
-		border-left: 0 !important;
-	}
-
 	ul {
-		list-style-type: none;
 		padding-left: 15px;
 		border-left: 1px solid gray;
 		margin: 6px 0;

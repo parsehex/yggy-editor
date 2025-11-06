@@ -1,6 +1,7 @@
 import { useStorage } from '@vueuse/core';
 import { defineStore } from 'pinia';
 import stateFromGame from 'game/state';
+import stateFromEditor from 'state';
 import { computed } from 'vue';
 import getData from 'game/data/get';
 
@@ -16,6 +17,7 @@ export const useAppStore = defineStore('app', () => {
 	const openedTab = useStorage('editor-opened-tab', tabs[0]);
 
 	const gameState = stateFromGame;
+	const editorState = stateFromEditor;
 
 	const currentDialogue = computed(() => {
 		const id = gameState.currentDialogueID;
@@ -29,5 +31,12 @@ export const useAppStore = defineStore('app', () => {
 		return getData('backgrounds', id);
 	});
 
-	return { tabs, openedTab, gameState, currentDialogue, currentBG };
+	return {
+		tabs,
+		openedTab,
+		gameState,
+		editorState,
+		currentDialogue,
+		currentBG,
+	};
 });

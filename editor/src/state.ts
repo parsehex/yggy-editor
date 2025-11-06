@@ -18,6 +18,8 @@ interface EditorState {
 			choiceID: number;
 			finalized: boolean;
 		};
+		// To track all dialogue IDs rendered in the entire tree for reference detection
+		renderedDialogueIDs: Set<number>;
 	};
 }
 
@@ -34,6 +36,7 @@ const editorState: EditorState = {
 			choiceID: null,
 			finalized: false,
 		},
+		renderedDialogueIDs: new Set(),
 	},
 };
 
